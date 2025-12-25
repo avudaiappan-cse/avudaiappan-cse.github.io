@@ -1,19 +1,516 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Avudaiappan S - Frontend Engineer</title>
-    
-    <!-- Google Fonts -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Avudaiappan S - Senior Frontend Developer with 4+ years of expertise in building scalable, high-performance web applications using Vue.js, React.js, and modern web technologies.">
+    <title>Avudaiappan S - Senior Frontend Developer</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="/assets/index-l3FvKxFM.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Dp67vgVJ.css">
-  </head>
-  <body>
-    <div id="app"></div>
-  </body>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="#" class="logo">
+                    <span class="logo-icon">💻</span>
+                    <span>Avudai<span class="logo-highlight">appan</span></span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#work" class="nav-link">Work</a></li>
+                    <li><a href="resume.html" class="nav-link">Resume</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <a href="#contact" class="btn btn-secondary">Contact</a>
+                    <a href="#contact" class="btn btn-primary">Hire Me</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="availability-badge">
+                        <span class="status-dot"></span>
+                        <span>AVAILABLE FOR NEW PROJECTS</span>
+                    </div>
+                    <h1 class="hero-title">
+                        I build scalable, high-performance 
+                        <span class="highlight">web applications</span><span class="cursor">.</span>
+                    </h1>
+                    <p class="hero-description">
+                        Senior Frontend Developer with 4+ years of expertise in building scalable, high-performance web applications. 
+                        Proficient in <strong>Vue.js</strong>, <strong>React.js</strong>, and modern web technologies with strong experience in authentication systems, 
+                        real-time communication features, and comprehensive admin modules.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Vue.js</span>
+                        <span class="tech-badge">React.js</span>
+                        <span class="tech-badge">JavaScript/ES6+</span>
+                        <span class="tech-badge">Redux</span>
+                        <span class="tech-badge">Webpack</span>
+                    </div>
+                    <div class="hero-buttons">
+                        <a href="#work" class="btn btn-primary btn-large">
+                            View Selected Work
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <a href="resume.html" class="btn btn-secondary btn-large">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10 14L10 6M10 14L7 11M10 14L13 11M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            View Resume
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-value">4+</div>
+                            <div class="stat-label">YEARS EXP.</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">10+</div>
+                            <div class="stat-label">PROJECTS DELIVERED</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">95%</div>
+                            <div class="stat-label">LIGHTHOUSE SCORE</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-code">
+                    <div class="code-window">
+                        <div class="code-header">
+                            <div class="code-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <div class="code-title">App.vue</div>
+                        </div>
+                        <div class="code-content">
+                            <pre><code><span class="code-keyword">import</span> <span class="code-punctuation">{</span> <span class="code-function">defineComponent</span> <span class="code-punctuation">}</span> <span class="code-keyword">from</span> <span class="code-string">'vue'</span><span class="code-punctuation">;</span>
+
+<span class="code-keyword">export default</span> <span class="code-function">defineComponent</span><span class="code-punctuation">({</span>
+  <span class="code-property">name</span><span class="code-punctuation">:</span> <span class="code-string">'HeroSection'</span><span class="code-punctuation">,</span>
+  
+  <span class="code-function">setup</span><span class="code-punctuation">()</span> <span class="code-punctuation">{</span>
+    <span class="code-keyword">const</span> <span class="code-variable">skills</span> <span class="code-operator">=</span> <span class="code-function">ref</span><span class="code-punctuation">([</span>
+      <span class="code-string">'Performance'</span><span class="code-punctuation">,</span> <span class="code-string">'Scalability'</span><span class="code-punctuation">,</span>
+      <span class="code-string">'UX'</span>
+    <span class="code-punctuation">]);</span>
+    
+    <span class="code-comment">// Ready to build something</span>
+    <span class="code-comment">// amazing</span>
+    <span class="code-keyword">return</span> <span class="code-punctuation">{</span> <span class="code-variable">skills</span> <span class="code-punctuation">};</span>
+  <span class="code-punctuation">}</span>
+<span class="code-punctuation">});</span></code></pre>
+                        </div>
+                        <div class="performance-badge">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M13 10V3L4 14h7v7l9-11h-7z" fill="#10b981"/>
+                            </svg>
+                            <div>
+                                <div class="perf-label">PERFORMANCE</div>
+                                <div class="perf-score">99/100</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-badge">ABOUT ME</div>
+            <h2 class="section-title">More than just code.<br>Engineering with a product mindset.</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm a Senior Frontend Developer with 4+ years of expertise in building scalable, high-performance web applications. My experience spans across developing complex authentication systems, real-time communication features, and comprehensive admin modules with proven track record in performance optimization.</p>
+                    <p>Currently at Zoho Corporation, I've delivered 10+ features with 95%+ code coverage, optimized load times from 7 seconds to 2.5 seconds, and achieved Lighthouse scores of 95-98%. I specialize in Vue.js, React.js, and modern web technologies, with strong problem-solving abilities demonstrated through 5-star HackerRank rating and contributions to open-source projects.</p>
+                </div>
+                <div class="about-features">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 17L12 22L22 17" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 12L12 17L22 12" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Architecture</h3>
+                        <p>Clean, modular code designed for scale and maintainability.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon green">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" fill="#10b981"/>
+                            </svg>
+                        </div>
+                        <h3>Performance</h3>
+                        <p>Optimizing Core Web Vitals and load times for maximum retention.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon orange">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" stroke="#f59e0b" stroke-width="2"/>
+                                <path d="M12 6v6l4 2" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3>Leadership</h3>
+                        <p>Mentoring juniors and leading frontend initiatives.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon purple">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M20 7h-4V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2H4M10 12h4m-9 5h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2z" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>UX Focused</h3>
+                        <p>Collaborating closely with design to ensure fidelity and usability.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="experience-stats">
+                <div class="exp-stat">
+                    <div class="exp-value">4+</div>
+                    <div class="exp-label">YEARS EXPERIENCE</div>
+                </div>
+                <div class="exp-stat">
+                    <div class="exp-value">Zoho Corp</div>
+                    <div class="exp-label">CURRENT COMPANY</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills">
+        <div class="container">
+            <div class="section-badge">SKILL TECH</div>
+            <h2 class="section-title">Technical Arsenal</h2>
+            <p class="section-description">A curated stack of modern tools I use to build world-class digital products.</p>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="skill-icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <rect width="40" height="40" rx="8" fill="#1e293b"/>
+                            <path d="M10 15l10-5 10 5-10 5-10-5z" fill="#818cf8"/>
+                            <path d="M10 20l10 5 10-5" stroke="#818cf8" stroke-width="2"/>
+                            <path d="M10 25l10 5 10-5" stroke="#818cf8" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Frontend Engineering</h3>
+                    <p>Deep expertise in Vue.js and React.js ecosystems. Building reactive, high-performance applications with modern JavaScript and state management.</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Vue.js</span>
+                        <span class="skill-tag">React.js</span>
+                        <span class="skill-tag">Redux</span>
+                        <span class="skill-tag">JavaScript/ES6+</span>
+                        <span class="skill-tag">Flutter/Dart</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-icon purple">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <rect width="40" height="40" rx="8" fill="#1e293b"/>
+                            <path d="M20 10L12 18L20 26L28 18L20 10Z" fill="#a855f7"/>
+                            <circle cx="20" cy="18" r="3" fill="#1e293b"/>
+                        </svg>
+                    </div>
+                    <h3>System Architecture</h3>
+                    <p>Designing authentication systems, real-time features, and comprehensive admin modules. Focus on security, performance optimization, and scalable architecture.</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">OAuth2/OTP</span>
+                        <span class="skill-tag">WebSocket</span>
+                        <span class="skill-tag">Jenkins/CI-CD</span>
+                        <span class="skill-tag">Git/GitHub</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-icon green">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <rect width="40" height="40" rx="8" fill="#1e293b"/>
+                            <rect x="12" y="12" width="16" height="16" rx="2" stroke="#10b981" stroke-width="2"/>
+                            <path d="M16 20h8M20 16v8" stroke="#10b981" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Tooling & Performance</h3>
+                    <p>Optimizing application performance with proven results - reducing load times from 7s to 2.5s. Expertise in testing, bundling, and performance optimization.</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Webpack</span>
+                        <span class="skill-tag">Performance Optimization</span>
+                        <span class="skill-tag">Jest/Unit Testing</span>
+                        <span class="skill-tag">Bundle Analysis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="work">
+        <div class="container">
+            <div class="section-badge">PORTFOLIO</div>
+            <h2 class="section-title">Engineering Impact</h2>
+            <p class="section-description">Selected projects showcasing complex UI architecture, performance optimization, and scalable design systems in live production environments.</p>
+            
+            <div class="projects-list">
+                <!-- Project 1: Zoho Corporation -->
+                <div class="project-card">
+                    <div class="project-timeline"></div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-logo">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                    <rect width="40" height="40" rx="8" fill="#7c3aed"/>
+                                    <path d="M20 12L14 20h12l-6 8" stroke="white" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="project-title">Zoho Corporation Private Ltd</h3>
+                                <p class="project-subtitle">Enterprise SaaS Platform</p>
+                            </div>
+                        </div>
+                        <p class="project-role">Member Technical Staff</p>
+                        <p class="project-date">Dec 2022 — Present</p>
+                        
+                        <div class="project-details">
+                            <div class="project-problem">
+                                <span class="detail-badge red">THE CHALLENGE</span>
+                                <p>Enterprise products needed granular access control, enhanced performance, real-time communication features, and comprehensive admin modules with seamless user experience across multiple products.</p>
+                            </div>
+                            
+                            <div class="project-solution">
+                                <span class="detail-badge blue">KEY CONTRIBUTIONS</span>
+                                <ul>
+                                    <li>Owned end-to-end development of Roles & Permissions module enabling granular access control across product suite</li>
+                                    <li>Optimized application performance reducing initial page load time from 7 seconds to 2.5 seconds using webpack code-splitting</li>
+                                    <li>Implemented comprehensive search functionality improving content discoverability and user navigation efficiency</li>
+                                    <li>Developed custom tone feature for real-time communication analysis in chat and calling interfaces</li>
+                                    <li>Built resource sharing feature enabling seamless articles and FAQ distribution within chat windows</li>
+                                    <li>Implemented OTP verification system for secure user creation and authentication</li>
+                                    <li>Revamped Resource (Articles/FAQ) view page with pixel-perfect design implementation matching exact UI/UX specifications</li>
+                                    <li>Improved Lighthouse performance rating from 55 to 86 through comprehensive performance optimization</li>
+                                    <li>Successfully delivered 10+ features on schedule in rapid development environment with zero production incidents</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="project-impact">
+                                <span class="detail-badge green">THE IMPACT</span>
+                                <div class="impact-metrics">
+                                    <div class="metric">
+                                        <div class="metric-value">65%</div>
+                                        <div class="metric-label">faster load time</div>
+                                    </div>
+                                    <div class="metric">
+                                        <div class="metric-value">86</div>
+                                        <div class="metric-label">Lighthouse score</div>
+                                    </div>
+                                    <div class="metric">
+                                        <div class="metric-value">10+</div>
+                                        <div class="metric-label">features delivered</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="project-tech">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">Webpack</span>
+                            <span class="tech-tag">WebSocket</span>
+                            <span class="tech-tag">Performance Optimization</span>
+                            <span class="tech-tag">OAuth2/OTP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: TCS Banking Application -->
+                <div class="project-card">
+                    <div class="project-timeline"></div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-logo blue">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                    <rect width="40" height="40" rx="8" fill="#3b82f6"/>
+                                    <path d="M12 20h16M20 12v16" stroke="white" stroke-width="3"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="project-title">Tata Consultancy Services</h3>
+                                <p class="project-subtitle">Banking Application | FinTech</p>
+                            </div>
+                        </div>
+                        <p class="project-role">Frontend Engineer</p>
+                        <p class="project-date">Oct 2021 — Dec 2022</p>
+                        
+                        <div class="project-details">
+                            <div class="project-problem">
+                                <span class="detail-badge red">THE CHALLENGE</span>
+                                <p>Banking application required secure authentication mechanisms, comprehensive test coverage to ensure reliability, and robust state management for complex banking workflows and user session handling.</p>
+                            </div>
+                            
+                            <div class="project-solution">
+                                <span class="detail-badge blue">KEY CONTRIBUTIONS</span>
+                                <ul>
+                                    <li>Developed banking application highlighting modules using React.js and Redux for state management</li>
+                                    <li>Implemented comprehensive test coverage (95%+) module ensuring 95%+ code coverage</li>
+                                    <li>Built secure OTP-based login/logout system with multi-factor authentication for banking application</li>
+                                    <li>Utilized Redux for complex state management across login workflows and user session handling</li>
+                                    <li>Implemented CI/CD pipelines using GitHub Actions for Jenkins for automated testing and deployment</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="project-impact">
+                                <span class="detail-badge green">THE IMPACT</span>
+                                <div class="impact-metrics">
+                                    <div class="metric">
+                                        <div class="metric-value">95%+</div>
+                                        <div class="metric-label">code coverage</div>
+                                    </div>
+                                    <div class="metric">
+                                        <div class="metric-value">Secure</div>
+                                        <div class="metric-label">authentication</div>
+                                    </div>
+                                    <div class="metric">
+                                        <div class="metric-value">Multi-factor</div>
+                                        <div class="metric-label">OTP system</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="project-tech">
+                            <span class="tech-tag">React.js</span>
+                            <span class="tech-tag">Redux</span>
+                            <span class="tech-tag">Jest</span>
+                            <span class="tech-tag">CI/CD</span>
+                            <span class="tech-tag">GitHub Actions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="projects-cta">
+                <p>Want to see more personal projects?</p>
+                <a href="https://github.com/avudaiappan-cse" class="btn btn-secondary" target="_blank">
+                    View GitHub Profile
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="section-badge">LET'S CONNECT</div>
+                <h2 class="section-title">Ready to build something great?</h2>
+                <p class="section-description">
+                    I'm always interested in hearing about new opportunities, especially ambitious projects where I can make an impact.
+                </p>
+                
+                <!-- Contact Form -->
+                <div class="contact-form-wrapper">
+                    <form id="contactForm" class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                        <!-- Web3Forms Access Key -->
+                        <input type="hidden" name="access_key" value="7539aac3-897b-42ce-b5be-c013578fb25e">
+                        
+                        <!-- Honeypot Spam Protection -->
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                        
+                        <!-- Form Fields -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Name *</label>
+                                <input type="text" id="name" name="name" required placeholder="Your Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <input type="text" id="subject" name="subject" required placeholder="What's this about?">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" rows="6" required placeholder="Tell me about your project..."></textarea>
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary btn-large submit-btn">
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-loading" style="display: none;">Sending...</span>
+                        </button>
+                        
+                        <!-- Success/Error Messages -->
+                        <div id="formMessage" class="form-message"></div>
+                    </form>
+                    
+                    <!-- Alternative Contact Methods -->
+                    <div class="alternative-contact">
+                        <p class="alt-contact-text">Or reach out directly:</p>
+                        <div class="contact-buttons">
+                            <a href="mailto:avudaiappan.cse@gmail.com" class="btn btn-secondary">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M2.5 6.66669L9.0755 11.0504C9.63533 11.4236 10.3647 11.4236 10.9245 11.0504L17.5 6.66669M4.16667 15.8334H15.8333C16.7538 15.8334 17.5 15.0872 17.5 14.1667V5.83335C17.5 4.91288 16.7538 4.16669 15.8333 4.16669H4.16667C3.24619 4.16669 2.5 4.91288 2.5 5.83335V14.1667C2.5 15.0872 3.24619 15.8334 4.16667 15.8334Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Email Me
+                            </a>
+                            <a href="https://linkedin.com/in/avudaiappan16" class="btn btn-secondary" target="_blank">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M16.25 0H3.75C1.68 0 0 1.68 0 3.75V16.25C0 18.32 1.68 20 3.75 20H16.25C18.32 20 20 18.32 20 16.25V3.75C20 1.68 18.32 0 16.25 0ZM6.25 15.625H3.75V6.875H6.25V15.625ZM5 5.625C4.31 5.625 3.75 5.065 3.75 4.375C3.75 3.685 4.31 3.125 5 3.125C5.69 3.125 6.25 3.685 6.25 4.375C6.25 5.065 5.69 5.625 5 5.625ZM16.875 15.625H14.375V11.25C14.375 10.215 13.535 9.375 12.5 9.375C11.465 9.375 10.625 10.215 10.625 11.25V15.625H8.125V6.875H10.625V8.03C11.155 7.28 12.09 6.875 13.125 6.875C14.985 6.875 16.875 8.39 16.875 10.94V15.625Z" fill="currentColor"/>
+                                </svg>
+                                LinkedIn
+                            </a>
+                            <a href="https://github.com/avudaiappan-cse" class="btn btn-secondary" target="_blank">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M10 0C4.477 0 0 4.477 0 10C0 14.42 2.865 18.17 6.839 19.49C7.339 19.582 7.521 19.275 7.521 19.008C7.521 18.771 7.513 18.145 7.508 17.317C4.726 17.919 4.139 15.977 4.139 15.977C3.685 14.821 3.029 14.515 3.029 14.515C2.121 13.895 3.098 13.907 3.098 13.907C4.101 13.977 4.629 14.937 4.629 14.937C5.521 16.466 6.97 16.023 7.539 15.767C7.631 15.121 7.889 14.679 8.175 14.431C5.955 14.178 3.62 13.32 3.62 9.49C3.62 8.399 4.01 7.509 4.649 6.809C4.546 6.557 4.203 5.54 4.747 4.16C4.747 4.16 5.587 3.891 7.497 5.216C8.31 4.998 9.16 4.889 10.01 4.884C10.86 4.889 11.71 4.998 12.523 5.216C14.433 3.891 15.273 4.16 15.273 4.16C15.817 5.54 15.474 6.557 15.371 6.809C16.01 7.509 16.397 8.399 16.397 9.49C16.397 13.33 14.057 14.175 11.831 14.42C12.191 14.729 12.509 15.338 12.509 16.271C12.509 17.607 12.497 18.682 12.497 19.008C12.497 19.275 12.677 19.585 13.184 19.49C17.16 18.168 20.02 14.418 20.02 10C20.02 4.477 15.543 0 10.02 0H10Z" fill="currentColor"/>
+                                </svg>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Avudaiappan S. Built with HTML, CSS, and JavaScript.</p>
+                <div class="footer-links">
+                    <a href="#about">About</a>
+                    <a href="#work">Work</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
 </html>
