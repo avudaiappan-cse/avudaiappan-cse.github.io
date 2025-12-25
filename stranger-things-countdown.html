@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Gate Opens | A Fan-Made Countdown</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blood-red: #b11226;
+            --dark-bg: #050505;
+            --fog-grey: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Cinzel', serif;
+            background: var(--dark-bg);
+            color: #fff;
+            overflow: hidden;
+            cursor: crosshair;
+        }
+
+        /* MAIN CONTAINER */
+        .world-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: 
+                url('bg.png') center center / cover no-repeat,
+                radial-gradient(ellipse at 50% 30%, rgba(139, 0, 0, 0.4) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 50%, rgba(80, 0, 20, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(80, 0, 20, 0.3) 0%, transparent 50%),
+                linear-gradient(180deg, #0b0b0b 0%, #050505 50%, #0a0505 100%);
+        }
+
+        /* Overlay for depth */
+        .world-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 50% 20%, rgba(255, 50, 50, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 25% 35%, rgba(200, 30, 30, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 75% 35%, rgba(200, 30, 30, 0.15) 0%, transparent 30%);
+            animation: skyPulse 8s ease-in-out infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes skyPulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Mind Flayer Silhouette */
+        .world-container::after {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 300px;
+            background: 
+                radial-gradient(ellipse at 50% 50%, rgba(255, 100, 100, 0.2) 0%, transparent 70%);
+            filter: blur(60px);
+            opacity: 0.3;
+            animation: mindFlayerGlow 6s ease-in-out infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes mindFlayerGlow {
+            0%, 100% { 
+                opacity: 0.2;
+                transform: translateX(-50%) scale(1);
+            }
+            50% { 
+                opacity: 0.4;
+                transform: translateX(-50%) scale(1.1);
+            }
+        }
+
+        /* REAL WORLD */
+        .real-world {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            overflow: hidden;
+            z-index: 2;
+            background: 
+                radial-gradient(ellipse at 50% 0%, rgba(139, 0, 0, 0.2) 0%, transparent 50%),
+                linear-gradient(180deg, rgba(15, 5, 5, 0.9) 0%, rgba(11, 3, 3, 0.8) 100%);
+        }
+
+        /* Apocalyptic Clouds */
+        .real-world::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            background: 
+                radial-gradient(ellipse at 30% 30%, rgba(100, 20, 20, 0.6) 0%, transparent 40%),
+                radial-gradient(ellipse at 70% 35%, rgba(120, 25, 25, 0.5) 0%, transparent 35%),
+                radial-gradient(circle at 50% 40%, rgba(80, 15, 15, 0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 60%, rgba(90, 18, 18, 0.5) 0%, transparent 45%),
+                radial-gradient(ellipse at 80% 65%, rgba(110, 22, 22, 0.5) 0%, transparent 40%);
+            filter: blur(40px);
+            animation: cloudDrift 20s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes cloudDrift {
+            0%, 100% { transform: translateX(0) translateY(0) scale(1); }
+            50% { transform: translateX(-20px) translateY(10px) scale(1.05); }
+        }
+
+        /* UPSIDE DOWN */
+        .upside-down {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            overflow: hidden;
+            z-index: 1;
+            background: 
+                radial-gradient(ellipse at 50% 100%, rgba(139, 0, 0, 0.3) 0%, transparent 50%),
+                linear-gradient(0deg, #0a0000 0%, #0d0505 100%);
+            filter: blur(1px) saturate(1.3);
+            transform: scaleY(-1);
+            opacity: 0.85;
+        }
+
+        /* Apocalyptic Ground/Horizon Effect */
+        .upside-down::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: 
+                radial-gradient(ellipse at 50% 100%, rgba(200, 40, 40, 0.3) 0%, transparent 60%),
+                radial-gradient(circle at 30% 90%, rgba(150, 20, 20, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 70% 90%, rgba(150, 20, 20, 0.2) 0%, transparent 40%);
+            animation: groundGlow 10s ease-in-out infinite;
+        }
+
+        @keyframes groundGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        /* BOUNDARY / PORTAL */
+        .boundary {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: linear-gradient(180deg, 
+                transparent 0%, 
+                rgba(177, 18, 38, 0.2) 30%, 
+                rgba(177, 18, 38, 0.4) 50%, 
+                rgba(177, 18, 38, 0.2) 70%, 
+                transparent 100%
+            );
+            box-shadow: 
+                0 0 40px rgba(177, 18, 38, 0.5),
+                0 0 80px rgba(177, 18, 38, 0.3),
+                inset 0 0 40px rgba(177, 18, 38, 0.2);
+            animation: portalPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes portalPulse {
+            0%, 100% { opacity: 0.6; height: 60px; }
+            50% { opacity: 1; height: 80px; }
+        }
+
+        /* TITLE */
+        .title {
+            position: absolute;
+            top: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            text-align: center;
+        }
+
+        .title h1 {
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            font-weight: 900;
+            letter-spacing: 8px;
+            color: #fff;
+            text-shadow: 
+                0 0 20px rgba(177, 18, 38, 0.8),
+                0 0 40px rgba(177, 18, 38, 0.5),
+                2px 2px 0 rgba(0, 0, 0, 0.8);
+            animation: titleFlicker 3s ease-in-out infinite;
+        }
+
+        .title p {
+            font-size: clamp(0.7rem, 2vw, 1rem);
+            letter-spacing: 4px;
+            color: #888;
+            margin-top: 10px;
+            opacity: 0.7;
+        }
+
+        @keyframes titleFlicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.85; }
+            51% { opacity: 1; }
+            52% { opacity: 0.9; }
+            53% { opacity: 1; }
+        }
+
+        /* COUNTDOWN TIMER */
+        .countdown-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 15;
+            text-align: center;
+        }
+
+        .countdown {
+            display: flex;
+            gap: clamp(20px, 5vw, 60px);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .time-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .time-value {
+            font-size: clamp(3rem, 12vw, 8rem);
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 
+                0 0 30px var(--blood-red),
+                0 0 60px var(--blood-red),
+                0 0 90px rgba(177, 18, 38, 0.5),
+                4px 4px 0 rgba(0, 0, 0, 0.8);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .time-value:hover {
+            text-shadow: 
+                0 0 40px var(--blood-red),
+                0 0 80px var(--blood-red),
+                0 0 120px var(--blood-red);
+            transform: scale(1.05);
+        }
+
+        .time-label {
+            font-size: clamp(0.6rem, 2vw, 1rem);
+            letter-spacing: 3px;
+            color: #666;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        .separator {
+            font-size: clamp(2rem, 8vw, 5rem);
+            color: var(--blood-red);
+            opacity: 0.6;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 49%, 100% { opacity: 0.6; }
+            50%, 99% { opacity: 0; }
+        }
+
+        /* UPSIDE DOWN COUNTDOWN (MIRROR) */
+        .upside-down .countdown-container {
+            filter: blur(2px) hue-rotate(-10deg);
+            opacity: 0.7;
+            animation: upsideDownGlitch 5s ease-in-out infinite;
+        }
+
+        .upside-down .time-value {
+            animation: numberDistort 3s ease-in-out infinite;
+        }
+
+        @keyframes upsideDownGlitch {
+            0%, 100% { transform: translate(-50%, -50%) translateX(0); }
+            20% { transform: translate(-50%, -50%) translateX(2px); }
+            40% { transform: translate(-50%, -50%) translateX(-2px); }
+            60% { transform: translate(-50%, -50%) translateX(1px); }
+            80% { transform: translate(-50%, -50%) translateX(-1px); }
+        }
+
+        @keyframes numberDistort {
+            0%, 100% { transform: scaleX(1); }
+            25% { transform: scaleX(1.02); }
+            50% { transform: scaleX(0.98); }
+            75% { transform: scaleX(1.01); }
+        }
+
+        /* PARTICLES */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: floatUp 8s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        /* FOG LAYERS */
+        .fog {
+            position: absolute;
+            width: 200%;
+            height: 100%;
+            top: 0;
+            left: -50%;
+            background: 
+                radial-gradient(ellipse at 30% 50%, rgba(177, 18, 38, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 50%, rgba(177, 18, 38, 0.03) 0%, transparent 50%);
+            animation: fogMove 30s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes fogMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(25%); }
+        }
+
+        .fog-2 {
+            animation: fogMove 40s linear infinite reverse;
+        }
+
+        /* VHS SCANLINES */
+        .scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent 0px,
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 2px,
+                transparent 4px
+            );
+            pointer-events: none;
+            opacity: 0.15;
+            z-index: 30;
+            animation: scanlineMove 8s linear infinite;
+        }
+
+        @keyframes scanlineMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100px); }
+        }
+
+        /* CHROMATIC ABERRATION */
+        .chromatic {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 25;
+            mix-blend-mode: screen;
+            opacity: 0;
+            animation: chromaticPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes chromaticPulse {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 0.05; }
+        }
+
+        /* LIGHTNING FLASH */
+        .lightning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--blood-red);
+            opacity: 0;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .lightning.flash {
+            animation: lightningFlash 0.4s ease-out;
+        }
+
+        @keyframes lightningFlash {
+            0%, 100% { opacity: 0; }
+            10% { opacity: 0.8; }
+            20% { opacity: 0; }
+            30% { opacity: 0.6; }
+            40%, 100% { opacity: 0; }
+        }
+
+        /* SCREEN RIPPLE */
+        .ripple {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        .ripple.active {
+            animation: rippleEffect 1s ease-out;
+        }
+
+        @keyframes rippleEffect {
+            0% { 
+                transform: scale(1);
+                filter: blur(0px);
+            }
+            50% { 
+                transform: scale(1.02);
+                filter: blur(2px);
+            }
+            100% { 
+                transform: scale(1);
+                filter: blur(0px);
+            }
+        }
+
+        /* END SEQUENCE */
+        .end-sequence {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .end-sequence.active {
+            display: flex;
+            animation: endReveal 3s ease-out forwards;
+        }
+
+        @keyframes endReveal {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .crack-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 49%, var(--blood-red) 50%, transparent 51%),
+                linear-gradient(0deg, transparent 0%, rgba(177, 18, 38, 0.3) 50%, transparent 100%);
+            opacity: 0;
+            animation: crackReveal 2s ease-out 1s forwards;
+        }
+
+        @keyframes crackReveal {
+            0% { opacity: 0; transform: scaleY(0); }
+            50% { opacity: 1; transform: scaleY(1); }
+            100% { opacity: 0.5; transform: scaleY(1); }
+        }
+
+        .end-text {
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: 900;
+            letter-spacing: 12px;
+            color: #fff;
+            text-shadow: 
+                0 0 30px var(--blood-red),
+                0 0 60px var(--blood-red),
+                0 0 90px var(--blood-red);
+            opacity: 0;
+            animation: textFadeIn 2s ease-out 2s forwards;
+        }
+
+        @keyframes textFadeIn {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .upside-down-takeover {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: radial-gradient(ellipse at center, #0d0505 0%, #0a0000 100%);
+            animation: takeoverScreen 4s ease-out 3s forwards;
+        }
+
+        @keyframes takeoverScreen {
+            0% { height: 0%; }
+            100% { height: 100%; }
+        }
+
+        /* FOOTER */
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 40;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #444;
+            letter-spacing: 2px;
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+
+        /* HEARTBEAT PULSE */
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            10% { transform: scale(1.02); }
+            20% { transform: scale(1); }
+            30% { transform: scale(1.02); }
+            40%, 100% { transform: scale(1); }
+        }
+
+        .countdown-container:hover ~ .world-container {
+            animation: heartbeat 1s ease-in-out infinite;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .title h1 {
+                letter-spacing: 4px;
+            }
+            .countdown {
+                gap: 20px;
+            }
+            .time-label {
+                font-size: 0.6rem;
+            }
+        }
+
+        /* MICRO GLITCH */
+        @keyframes microGlitch {
+            0%, 90%, 100% { transform: translate(0, 0); opacity: 1; }
+            91% { transform: translate(2px, -2px); opacity: 0.8; }
+            92% { transform: translate(-2px, 2px); opacity: 0.9; }
+            93% { transform: translate(0, 0); opacity: 1; }
+        }
+
+        .glitch-element {
+            animation: microGlitch 5s ease-in-out infinite;
+        }
+
+        /* THUNDERSTORM */
+        .thunderstorm {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .lightning-bolt {
+            position: absolute;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                rgba(255, 50, 50, 0) 0%,
+                rgba(255, 150, 150, 1) 15%,
+                rgba(255, 255, 255, 1) 40%,
+                rgba(255, 255, 255, 1) 60%,
+                rgba(255, 100, 100, 0.9) 85%,
+                rgba(255, 50, 50, 0) 100%
+            );
+            opacity: 0;
+            filter: blur(3px);
+            box-shadow: 
+                0 0 30px rgba(255, 100, 100, 1),
+                0 0 60px rgba(255, 50, 50, 0.8),
+                0 0 90px rgba(200, 0, 0, 0.6),
+                inset 0 0 20px rgba(255, 255, 255, 0.8);
+            transform-origin: top center;
+            z-index: 100;
+        }
+
+        .lightning-bolt::before,
+        .lightning-bolt::after {
+            content: '';
+            position: absolute;
+            background: linear-gradient(to bottom, 
+                rgba(255, 255, 255, 1),
+                rgba(255, 150, 150, 0.9),
+                rgba(255, 100, 100, 0.5),
+                rgba(255, 50, 50, 0)
+            );
+            filter: blur(2px);
+            box-shadow: 
+                0 0 20px rgba(255, 100, 100, 0.8),
+                0 0 40px rgba(255, 50, 50, 0.5);
+        }
+
+        .lightning-bolt::before {
+            width: 4px;
+            height: 45%;
+            top: 25%;
+            left: -18px;
+            transform: rotate(-30deg) skewY(-10deg);
+        }
+
+        .lightning-bolt::after {
+            width: 4px;
+            height: 50%;
+            top: 45%;
+            right: -22px;
+            transform: rotate(35deg) skewY(8deg);
+        }
+
+        .lightning-bolt.strike {
+            animation: lightningStrike 0.4s ease-in-out;
+        }
+
+        @keyframes lightningStrike {
+            0% { opacity: 0; transform: scaleY(0); }
+            3% { opacity: 1; transform: scaleY(1); }
+            6% { opacity: 0.3; }
+            9% { opacity: 1; }
+            12% { opacity: 0.5; }
+            18% { opacity: 1; }
+            25% { opacity: 0.7; }
+            32% { opacity: 1; }
+            40% { opacity: 0; }
+            50% { opacity: 0.8; }
+            60% { opacity: 0; }
+            100% { opacity: 0; transform: scaleY(1); }
+        }
+
+        .rain-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .raindrop {
+            position: absolute;
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(180deg, transparent, rgba(177, 18, 38, 0.3));
+            animation: rainFall linear infinite;
+        }
+
+        @keyframes rainFall {
+            0% { 
+                transform: translateY(-100px);
+                opacity: 0.7;
+            }
+            100% { 
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        /* VECNA SILHOUETTE */
+        .vecna-container {
+            position: fixed;
+            bottom: -10%;
+            right: 5%;
+            width: clamp(200px, 30vw, 400px);
+            height: clamp(300px, 45vw, 600px);
+            z-index: 8;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            filter: blur(2px);
+            pointer-events: none;
+        }
+
+        .vecna-container.visible {
+            opacity: 0.15;
+            animation: vecnaBreathing 6s ease-in-out infinite;
+        }
+
+        @keyframes vecnaBreathing {
+            0%, 100% { transform: scale(1) translateY(0); }
+            50% { transform: scale(1.03) translateY(-10px); }
+        }
+
+        .vecna-silhouette {
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 50% 20%, #1a0000 0%, transparent 40%),
+                radial-gradient(ellipse at 40% 40%, #0d0000 0%, transparent 30%),
+                radial-gradient(ellipse at 60% 40%, #0d0000 0%, transparent 30%),
+                radial-gradient(ellipse at 50% 60%, #1a0000 0%, transparent 50%),
+                linear-gradient(180deg, #0a0000 0%, transparent 100%);
+            position: relative;
+            filter: drop-shadow(0 0 40px rgba(177, 18, 38, 0.6));
+        }
+
+        /* Vecna's glowing eyes */
+        .vecna-eyes {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 30px;
+        }
+
+        .vecna-eye {
+            width: 8px;
+            height: 8px;
+            background: var(--blood-red);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 20px var(--blood-red),
+                0 0 40px var(--blood-red),
+                0 0 60px rgba(177, 18, 38, 0.5);
+            animation: eyeGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes eyeGlow {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Vecna's tendrils */
+        .vecna-tendril {
+            position: absolute;
+            width: 2px;
+            height: 60%;
+            background: linear-gradient(180deg, 
+                rgba(177, 18, 38, 0.3) 0%, 
+                rgba(177, 18, 38, 0.1) 50%, 
+                transparent 100%
+            );
+            transform-origin: top center;
+        }
+
+        .tendril-1 {
+            left: 20%;
+            top: 40%;
+            animation: tendrilSway 4s ease-in-out infinite;
+        }
+
+        .tendril-2 {
+            right: 20%;
+            top: 40%;
+            animation: tendrilSway 4.5s ease-in-out infinite reverse;
+        }
+
+        .tendril-3 {
+            left: 40%;
+            top: 50%;
+            animation: tendrilSway 5s ease-in-out infinite;
+        }
+
+        @keyframes tendrilSway {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        /* Thunder Sound Visual */
+        .thunder-indicator {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            font-size: 0.8rem;
+            color: var(--blood-red);
+            letter-spacing: 2px;
+            opacity: 0;
+            z-index: 50;
+            text-shadow: 0 0 10px var(--blood-red);
+        }
+
+        .thunder-indicator.active {
+            animation: thunderPulse 0.5s ease-out;
+        }
+
+        @keyframes thunderPulse {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- LIGHTNING FLASH -->
+    <div class="lightning" id="lightning"></div>
+
+    <!-- RIPPLE EFFECT -->
+    <div class="ripple" id="ripple"></div>
+
+    <!-- THUNDERSTORM -->
+    <div class="thunderstorm" id="thunderstorm">
+        <div class="rain-container" id="rainContainer"></div>
+        <div class="lightning-bolt" id="bolt1" style="left: 20%; top: 0;"></div>
+        <div class="lightning-bolt" id="bolt2" style="left: 50%; top: 0;"></div>
+        <div class="lightning-bolt" id="bolt3" style="left: 80%; top: 0;"></div>
+    </div>
+
+    <!-- VECNA SILHOUETTE -->
+    <div class="vecna-container" id="vecnaContainer">
+        <div class="vecna-silhouette">
+            <div class="vecna-eyes">
+                <div class="vecna-eye"></div>
+                <div class="vecna-eye"></div>
+            </div>
+            <div class="vecna-tendril tendril-1"></div>
+            <div class="vecna-tendril tendril-2"></div>
+            <div class="vecna-tendril tendril-3"></div>
+        </div>
+    </div>
+
+    <!-- THUNDER INDICATOR -->
+    <div class="thunder-indicator" id="thunderIndicator">⚡ THUNDER</div>
+
+    <!-- MAIN WORLD CONTAINER -->
+    <div class="world-container" id="worldContainer">
+        <!-- REAL WORLD -->
+        <div class="real-world">
+            <div class="fog fog-1"></div>
+            <div class="fog fog-2"></div>
+            <div class="particles" id="realParticles"></div>
+        </div>
+
+        <!-- BOUNDARY / PORTAL -->
+        <div class="boundary"></div>
+
+        <!-- UPSIDE DOWN -->
+        <div class="upside-down" id="upsideDown">
+            <div class="fog fog-1"></div>
+            <div class="fog fog-2"></div>
+            <div class="particles" id="upsideParticles"></div>
+            <div class="countdown-container">
+                <div class="countdown" id="upsideCountdown">
+                    <div class="time-unit">
+                        <div class="time-value" id="upsideHours">00</div>
+                        <div class="time-label">HOURS</div>
+                    </div>
+                    <div class="separator">:</div>
+                    <div class="time-unit">
+                        <div class="time-value" id="upsideMinutes">00</div>
+                        <div class="time-label">MINUTES</div>
+                    </div>
+                    <div class="separator">:</div>
+                    <div class="time-unit">
+                        <div class="time-value" id="upsideSeconds">00</div>
+                        <div class="time-label">SECONDS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TITLE -->
+        <div class="title glitch-element">
+            <h1>THE GATE IS OPENING</h1>
+            <p>DARKNESS AWAITS</p>
+        </div>
+
+        <!-- COUNTDOWN -->
+        <div class="countdown-container">
+            <div class="countdown" id="realCountdown">
+                <div class="time-unit">
+                    <div class="time-value" id="hours">00</div>
+                    <div class="time-label">HOURS</div>
+                </div>
+                <div class="separator">:</div>
+                <div class="time-unit">
+                    <div class="time-value" id="minutes">00</div>
+                    <div class="time-label">MINUTES</div>
+                </div>
+                <div class="separator">:</div>
+                <div class="time-unit">
+                    <div class="time-value" id="seconds">00</div>
+                    <div class="time-label">SECONDS</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCANLINES -->
+        <div class="scanlines"></div>
+
+        <!-- CHROMATIC ABERRATION -->
+        <div class="chromatic"></div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <p>NON-COMMERCIAL FAN PROJECT</p>
+        <p>NO AFFILIATION WITH NETFLIX</p>
+    </div>
+
+    <!-- END SEQUENCE -->
+    <div class="end-sequence" id="endSequence">
+        <div class="crack-overlay"></div>
+        <h1 class="end-text">THE GATE OPENS.</h1>
+        <div class="upside-down-takeover"></div>
+    </div>
+
+    <!-- BACKGROUND MUSIC -->
+    <audio id="bgMusic" loop autoplay>
+        <source src="stranger-things-theme.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // TARGET TIME: Tomorrow 6:30 AM IST
+        const targetDate = new Date();
+        targetDate.setDate(targetDate.getDate() + 1);
+        targetDate.setHours(6, 30, 0, 0);
+
+        // Elements
+        const realHours = document.getElementById('hours');
+        const realMinutes = document.getElementById('minutes');
+        const realSeconds = document.getElementById('seconds');
+        const upsideHours = document.getElementById('upsideHours');
+        const upsideMinutes = document.getElementById('upsideMinutes');
+        const upsideSeconds = document.getElementById('upsideSeconds');
+        const lightning = document.getElementById('lightning');
+        const ripple = document.getElementById('ripple');
+        const upsideDown = document.getElementById('upsideDown');
+        const worldContainer = document.getElementById('worldContainer');
+        const endSequence = document.getElementById('endSequence');
+        const vecnaContainer = document.getElementById('vecnaContainer');
+        const thunderIndicator = document.getElementById('thunderIndicator');
+        const bolt1 = document.getElementById('bolt1');
+        const bolt2 = document.getElementById('bolt2');
+        const bolt3 = document.getElementById('bolt3');
+        const bgMusic = document.getElementById('bgMusic');
+
+        let previousMinute = null;
+        let vecnaAppeared = false;
+
+        // Auto-play background music
+        bgMusic.volume = 0.3; // Set to 30% volume for background ambience
+        
+        // Attempt autoplay on user interaction (browsers block autoplay without interaction)
+        document.addEventListener('click', () => {
+            bgMusic.play().catch(() => {
+                // Autoplay was prevented
+            });
+        }, { once: true });
+
+        // Update Countdown
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                triggerEndSequence();
+                return;
+            }
+
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Update Real World
+            realHours.textContent = String(hours).padStart(2, '0');
+            realMinutes.textContent = String(minutes).padStart(2, '0');
+            realSeconds.textContent = String(seconds).padStart(2, '0');
+
+            // Update Upside Down (with delay)
+            setTimeout(() => {
+                upsideHours.textContent = String(hours).padStart(2, '0');
+                upsideMinutes.textContent = String(minutes).padStart(2, '0');
+                upsideSeconds.textContent = String(seconds).padStart(2, '0');
+            }, 350);
+
+            // Lightning on minute change
+            if (previousMinute !== null && previousMinute !== minutes) {
+                triggerLightning();
+                triggerRipple();
+                triggerThunderstorm();
+            }
+            previousMinute = minutes;
+
+            // Show Vecna after 30 seconds
+            if (!vecnaAppeared && seconds <= 30) {
+                showVecna();
+                vecnaAppeared = true;
+            }
+        }
+
+        // Lightning Flash
+        function triggerLightning() {
+            lightning.classList.add('flash');
+            setTimeout(() => lightning.classList.remove('flash'), 400);
+        }
+
+        // Ripple Effect
+        function triggerRipple() {
+            ripple.classList.add('active');
+            setTimeout(() => ripple.classList.remove('active'), 1000);
+        }
+
+        // End Sequence
+        function triggerEndSequence() {
+            endSequence.classList.add('active');
+            worldContainer.style.display = 'none';
+            vecnaContainer.style.opacity = '0.5';
+        }
+
+        // Thunderstorm Effect
+        function triggerThunderstorm() {
+            // Random lightning bolt
+            const bolts = [bolt1, bolt2, bolt3];
+            const randomBolt = bolts[Math.floor(Math.random() * bolts.length)];
+            
+            randomBolt.classList.add('strike');
+            setTimeout(() => randomBolt.classList.remove('strike'), 300);
+
+            // Thunder indicator
+            thunderIndicator.classList.add('active');
+            setTimeout(() => thunderIndicator.classList.remove('active'), 500);
+
+            // Screen flash
+            lightning.classList.add('flash');
+            setTimeout(() => lightning.classList.remove('flash'), 200);
+        }
+
+        // Show Vecna
+        function showVecna() {
+            vecnaContainer.classList.add('visible');
+            
+            // Vecna pulses stronger as time passes
+            setInterval(() => {
+                if (Math.random() > 0.7) {
+                    vecnaContainer.style.opacity = '0.25';
+                    setTimeout(() => {
+                        vecnaContainer.style.opacity = '0.15';
+                    }, 300);
+                }
+            }, 4000);
+        }
+
+        // Random Thunderstorm Strikes
+        function randomThunderstorm() {
+            setInterval(() => {
+                if (Math.random() > 0.6) {
+                    triggerThunderstorm();
+                }
+            }, 8000);
+        }
+
+        // Create Rain
+        function createRain() {
+            const rainContainer = document.getElementById('rainContainer');
+            for (let i = 0; i < 100; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'raindrop';
+                drop.style.left = Math.random() * 100 + '%';
+                drop.style.animationDuration = (Math.random() * 0.5 + 0.5) + 's';
+                drop.style.animationDelay = Math.random() * 2 + 's';
+                rainContainer.appendChild(drop);
+            }
+        }
+
+        // Click to Flip
+        document.addEventListener('click', () => {
+            worldContainer.style.animation = 'none';
+            setTimeout(() => {
+                worldContainer.style.transform = 'rotateX(180deg)';
+                setTimeout(() => {
+                    worldContainer.style.transform = 'rotateX(0deg)';
+                    worldContainer.style.transition = 'transform 0.3s ease';
+                }, 300);
+            }, 10);
+        });
+
+        // Mouse Parallax on Upside Down
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+            upsideDown.style.transform = `scaleY(-1) translate(${x}px, ${y}px)`;
+        });
+
+        // Generate Particles
+        function createParticles(container, count) {
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 5 + 6) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        createParticles(document.getElementById('realParticles'), 30);
+        createParticles(document.getElementById('upsideParticles'), 30);
+        createRain();
+
+        // Start Countdown
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        randomThunderstorm();
+
+        // Random Micro Glitches
+        setInterval(() => {
+            if (Math.random() > 0.7) {
+                upsideDown.style.filter = 'blur(3px) saturate(1.3)';
+                setTimeout(() => {
+                    upsideDown.style.filter = 'blur(1px) saturate(1.3)';
+                }, 100);
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
