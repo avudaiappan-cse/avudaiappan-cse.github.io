@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message From Future You | Identity Sync</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e14;
+            --bg-secondary: #0d1117;
+            --accent-cyan: #64d2ff;
+            --accent-violet: #b794f6;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-whisper: #6e7681;
+            --transition-duration: 500ms;
+        }
+
+        /* Support for reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        body {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ===== ANIMATED GRAIN BACKGROUND ===== */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(100, 210, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(183, 148, 246, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+            animation: bgShift 20s ease-in-out infinite;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.5;
+            animation: grain 8s steps(10) infinite;
+        }
+
+        @keyframes grain {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-5%, -10%); }
+            20% { transform: translate(-15%, 5%); }
+            30% { transform: translate(7%, -25%); }
+            40% { transform: translate(-5%, 25%); }
+            50% { transform: translate(-15%, 10%); }
+            60% { transform: translate(15%, 0%); }
+            70% { transform: translate(0%, 15%); }
+            80% { transform: translate(3%, 35%); }
+            90% { transform: translate(-10%, 10%); }
+        }
+
+        @keyframes bgShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* ===== CONTAINER ===== */
+        .app {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.5s forwards;
+        }
+
+        .header-title {
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+        }
+
+        .header-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-whisper);
+            margin-top: 0.25rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* ===== STATUS INDICATOR ===== */
+        .status {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-whisper);
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1s forwards;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.9); }
+        }
+
+        /* ===== MAIN CONTENT AREA ===== */
+        .content {
+            max-width: 700px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* ===== STEP CONTAINER ===== */
+        .step {
+            display: none;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .step.active {
+            display: block;
+            animation: slideIn var(--transition-duration) ease-out forwards;
+        }
+
+        .step.exiting {
+            animation: slideOut var(--transition-duration) ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideOut {
+            to {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* ===== QUESTION TEXT ===== */
+        .question {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            margin-bottom: 3rem;
+            line-height: 1.3;
+            color: var(--text-primary);
+        }
+
+        .question-number {
+            font-size: 0.875rem;
+            color: var(--text-whisper);
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* ===== CHIP BUTTONS (Pills) ===== */
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .chip {
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50px;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.02em;
+            outline: none;
+        }
+
+        .chip:hover {
+            background: rgba(100, 210, 255, 0.08);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(100, 210, 255, 0.2);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        .chip.selected {
+            background: rgba(100, 210, 255, 0.12);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            box-shadow: 0 0 30px rgba(100, 210, 255, 0.3);
+        }
+
+        /* ===== TEXT INPUT ===== */
+        .input-wrapper {
+            margin-bottom: 3rem;
+        }
+
+        .text-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem 0;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .text-input:focus {
+            border-bottom-color: var(--accent-cyan);
+        }
+
+        .text-input::placeholder {
+            color: var(--text-whisper);
+        }
+
+        /* ===== WHISPER INPUT (Softer) ===== */
+        .whisper-input {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .helper-text {
+            font-size: 0.875rem;
+            color: var(--text-whisper);
+            margin-top: 0.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        /* ===== NAVIGATION BUTTONS ===== */
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 3rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .btn:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(100, 210, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: rgba(100, 210, 255, 0.1);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .btn-primary:hover {
+            background: rgba(100, 210, 255, 0.2);
+            box-shadow: 0 0 30px rgba(100, 210, 255, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn:disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* ===== LOADING SCREEN ===== */
+        .loading-screen {
+            display: none;
+            text-align: center;
+        }
+
+        .loading-screen.active {
+            display: block;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .loading-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 4rem;
+            position: relative;
+        }
+
+        /* Outer rotating ring */
+        .loading-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid transparent;
+            border-top-color: var(--accent-cyan);
+            border-right-color: var(--accent-cyan);
+            border-radius: 50%;
+            animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+            opacity: 0.8;
+        }
+
+        /* Middle counter-rotating ring */
+        .loading-icon::after {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 15%;
+            width: 70%;
+            height: 70%;
+            border: 2px solid transparent;
+            border-bottom-color: var(--accent-violet);
+            border-left-color: var(--accent-violet);
+            border-radius: 50%;
+            animation: spinReverse 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+            opacity: 0.6;
+        }
+
+        /* Inner pulsing core */
+        .loading-icon-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30%;
+            height: 30%;
+            background: radial-gradient(circle, var(--accent-cyan), transparent);
+            border-radius: 50%;
+            animation: corePulse 1.5s ease-in-out infinite;
+            filter: blur(8px);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        @keyframes spinReverse {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(-180deg) scale(0.9); }
+            100% { transform: rotate(-360deg) scale(1); }
+        }
+
+        @keyframes corePulse {
+            0%, 100% { 
+                opacity: 0.4;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% { 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.5);
+            }
+        }
+
+        /* Enhanced loading text with typing effect */
+        .loading-text {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            min-height: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading-text::after {
+            content: '';
+            position: absolute;
+            right: -2px;
+            bottom: 0.3rem;
+            width: 2px;
+            height: 1rem;
+            background: var(--accent-cyan);
+            animation: blink 0.8s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Progress bar for loading */
+        .loading-progress {
+            width: 300px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.05);
+            margin: 2rem auto 0;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loading-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet));
+            width: 0%;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        /* Scanning lines effect */
+        .loading-scan {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            pointer-events: none;
+        }
+
+        .loading-scan::before,
+        .loading-scan::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+            opacity: 0.3;
+        }
+
+        .loading-scan::before {
+            top: 30%;
+            animation: scanLine 2s ease-in-out infinite;
+        }
+
+        .loading-scan::after {
+            top: 70%;
+            animation: scanLine 2s ease-in-out infinite 1s;
+        }
+
+        @keyframes scanLine {
+            0%, 100% { 
+                transform: translateY(0) scaleX(0.5);
+                opacity: 0;
+            }
+            50% { 
+                transform: translateY(50px) scaleX(1);
+                opacity: 0.5;
+            }
+        }
+
+        /* Glitch effect on text change */
+        .loading-text.glitch {
+            animation: textGlitch 0.3s ease;
+        }
+
+        @keyframes textGlitch {
+            0%, 100% { 
+                transform: translateX(0);
+                opacity: 1;
+            }
+            20% { 
+                transform: translateX(-5px);
+                opacity: 0.8;
+            }
+            40% { 
+                transform: translateX(5px);
+                opacity: 0.6;
+            }
+            60% { 
+                transform: translateX(-3px);
+                opacity: 0.8;
+            }
+            80% { 
+                transform: translateX(2px);
+                opacity: 0.9;
+            }
+        }
+
+        /* ===== MESSAGE SCREEN ===== */
+        .message-screen {
+            display: none;
+            max-width: 800px;
+        }
+
+        .message-screen.active {
+            display: block;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .message-header {
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.5s forwards;
+        }
+
+        .message-content {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            letter-spacing: 0.02em;
+            color: var(--text-primary);
+        }
+
+        .message-line {
+            opacity: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .message-line.animate {
+            opacity: 1;
+        }
+
+        /* Typing cursor for message lines */
+        .message-line.typing::after {
+            content: '▊';
+            color: var(--accent-cyan);
+            animation: blink 0.8s step-end infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-anchor {
+            font-size: 1.5rem;
+            color: var(--accent-cyan);
+            margin-top: 3rem;
+            font-weight: 500;
+            opacity: 0;
+        }
+
+        .message-anchor.animate {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* ===== MESSAGE ACTIONS ===== */
+        .message-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 3rem;
+            opacity: 0;
+        }
+
+        .message-actions.animate {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: var(--text-whisper);
+            opacity: 0.5;
+            letter-spacing: 0.05em;
+            text-align: center;
+        }
+
+        /* ===== PROGRESS INDICATOR ===== */
+        .progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet));
+            transition: width var(--transition-duration) ease;
+            z-index: 1000;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .app {
+                padding: 1.5rem;
+            }
+
+            .header, .status {
+                position: static;
+                margin-bottom: 2rem;
+            }
+
+            .question {
+                font-size: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .chips {
+                gap: 0.75rem;
+            }
+
+            .chip {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.875rem;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .message-content {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* ===== BACKGROUND HUE SHIFTS (Per Step) ===== */
+        body.step-1 { background: linear-gradient(135deg, #0a0e14 0%, #0d1117 100%); }
+        body.step-2 { background: linear-gradient(135deg, #0a0e14 0%, #0e1219 100%); }
+        body.step-3 { background: linear-gradient(135deg, #0a0e14 0%, #0f131b 100%); }
+        body.step-4 { background: linear-gradient(135deg, #0a0e14 0%, #10141d 100%); }
+        body.step-5 { background: linear-gradient(135deg, #0a0e14 0%, #11151f 100%); }
+        body.loading { background: linear-gradient(135deg, #0a0e14 0%, #0c1016 100%); }
+        body.message { background: linear-gradient(135deg, #0a0e14 0%, #0d1117 100%); }
+    </style>
+</head>
+<body class="step-1">
+    <!-- Progress Bar -->
+    <div class="progress" id="progress"></div>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-title">Temporal Link</div>
+        <div class="header-subtitle">Protocol v3.1.4 Beta</div>
+    </div>
+
+    <!-- Status -->
+    <div class="status">
+        <div class="status-dot"></div>
+        <span>Signal Live</span>
+    </div>
+
+    <!-- Main App -->
+    <div class="app">
+        <div class="content">
+            <!-- STEP 1: Emotional Weight -->
+            <div class="step active" id="step1">
+                <div class="question-number">01 / Subject Name</div>
+                <div class="question">What drained you the most in 2025?</div>
+                <div class="chips">
+                    <button class="chip" data-value="work">Work pressure</button>
+                    <button class="chip" data-value="money">Money stress</button>
+                    <button class="chip" data-value="doubt">Self-doubt</button>
+                    <button class="chip" data-value="burnout">Burnout</button>
+                    <button class="chip" data-value="stuck">Feeling stuck</button>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-primary" id="continue1" disabled>Continue</button>
+                    <button class="btn" id="skip1">Skip</button>
+                </div>
+            </div>
+
+            <!-- STEP 2: Fear -->
+            <div class="step" id="step2">
+                <div class="question-number">02 / Current Focus</div>
+                <div class="question">What are you afraid won't change?</div>
+                <div class="input-wrapper">
+                    <input type="text" class="text-input" id="fearInput" placeholder="Type and press Enter..." />
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn" id="back2">Back</button>
+                    <button class="btn btn-primary" id="continue2">Continue</button>
+                    <button class="btn" id="skip2">Skip</button>
+                </div>
+            </div>
+
+            <!-- STEP 3: Almost Habit -->
+            <div class="step" id="step3">
+                <div class="question-number">03 / Pattern Analysis</div>
+                <div class="question">One habit you almost fixed</div>
+                <div class="chips">
+                    <button class="chip" data-value="sleep">Sleep</button>
+                    <button class="chip" data-value="exercise">Exercise</button>
+                    <button class="chip" data-value="focus">Focus</button>
+                    <button class="chip" data-value="consistency">Consistency</button>
+                    <button class="chip" data-value="spending">Spending</button>
+                    <button class="chip" data-value="learning">Learning</button>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn" id="back3">Back</button>
+                    <button class="btn btn-primary" id="continue3" disabled>Continue</button>
+                    <button class="btn" id="skip3">Skip</button>
+                </div>
+            </div>
+
+            <!-- STEP 4: Quiet Desire -->
+            <div class="step" id="step4">
+                <div class="question-number">04 / Hidden Variable</div>
+                <div class="question">One thing you secretly want in 2026</div>
+                <div class="input-wrapper">
+                    <input type="text" class="text-input whisper-input" id="desireInput" placeholder="..." />
+                    <div class="helper-text">You don't have to explain.</div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn" id="back4">Back</button>
+                    <button class="btn btn-primary" id="continue4">Continue</button>
+                    <button class="btn" id="skip4">Skip</button>
+                </div>
+            </div>
+
+            <!-- STEP 5: Tone Selector -->
+            <div class="step" id="step5">
+                <div class="question-number">05 / Transmission Tone</div>
+                <div class="question">How should I speak to you?</div>
+                <div class="chips">
+                    <button class="chip" data-value="calm">Calm</button>
+                    <button class="chip" data-value="gentle">Gentle</button>
+                    <button class="chip" data-value="honest">Brutally honest</button>
+                    <button class="chip" data-value="silent">Silent strength</button>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn" id="back5">Back</button>
+                    <button class="btn btn-primary" id="generate">Generate Message</button>
+                </div>
+            </div>
+
+            <!-- LOADING SCREEN -->
+            <div class="loading-screen" id="loading">
+                <div class="loading-scan"></div>
+                <div class="loading-icon">
+                    <div class="loading-icon-core"></div>
+                </div>
+                <div class="loading-text" id="loadingText">Aligning timelines...</div>
+                <div class="loading-progress">
+                    <div class="loading-progress-bar" id="loadingProgressBar"></div>
+                </div>
+            </div>
+
+            <!-- MESSAGE SCREEN -->
+            <div class="message-screen" id="message">
+                <div class="message-header">Incoming Message / Dec 31, 2026</div>
+                <div class="message-content" id="messageContent">
+                    <!-- Message will be inserted here -->
+                </div>
+                <div class="message-actions" id="messageActions">
+                    <button class="btn btn-primary" id="downloadBtn">Save Artifact</button>
+                    <button class="btn" id="restartBtn">Re-link</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        Processed locally. Nothing is stored.
+    </div>
+
+    <script>
+        // ===== STATE MANAGEMENT =====
+        const state = {
+            currentStep: 1,
+            totalSteps: 5,
+            responses: {
+                drain: '',
+                fear: '',
+                habit: '',
+                desire: '',
+                tone: ''
+            }
+        };
+
+        // ===== DOM ELEMENTS =====
+        const steps = document.querySelectorAll('.step');
+        const progress = document.getElementById('progress');
+        const body = document.body;
+
+        // ===== UTILITY FUNCTIONS =====
+        
+        /**
+         * Update progress bar based on current step
+         */
+        function updateProgress() {
+            const percentage = (state.currentStep / state.totalSteps) * 100;
+            progress.style.width = `${percentage}%`;
+        }
+
+        /**
+         * Navigate to a specific step with animation
+         */
+        function goToStep(stepNumber) {
+            const currentStepEl = document.getElementById(`step${state.currentStep}`);
+            const nextStepEl = document.getElementById(`step${stepNumber}`);
+
+            // Exit animation for current step
+            currentStepEl.classList.add('exiting');
+            
+            setTimeout(() => {
+                currentStepEl.classList.remove('active', 'exiting');
+                
+                // Enter animation for next step
+                state.currentStep = stepNumber;
+                nextStepEl.classList.add('active');
+                
+                // Update body class for background hue shift
+                body.className = `step-${stepNumber}`;
+                
+                // Update progress bar
+                updateProgress();
+            }, 500);
+        }
+
+        /**
+         * Show loading screen with animated text
+         */
+        async function showLoading() {
+            const loadingScreen = document.getElementById('loading');
+            const loadingText = document.getElementById('loadingText');
+            const loadingProgressBar = document.getElementById('loadingProgressBar');
+            const currentStepEl = document.getElementById(`step${state.currentStep}`);
+
+            currentStepEl.classList.add('exiting');
+            
+            setTimeout(() => {
+                currentStepEl.classList.remove('active', 'exiting');
+                loadingScreen.classList.add('active');
+                body.className = 'loading';
+            }, 500);
+
+            const messages = [
+                'Aligning timelines...',
+                'Extracting memory fragments...',
+                'Signal stabilizing...'
+            ];
+
+            for (let i = 0; i < messages.length; i++) {
+                // Add glitch effect on text change
+                loadingText.classList.add('glitch');
+                
+                await new Promise(resolve => setTimeout(resolve, 300));
+                loadingText.classList.remove('glitch');
+                loadingText.textContent = messages[i];
+                
+                // Animate progress bar
+                const targetProgress = ((i + 1) / messages.length) * 100;
+                loadingProgressBar.style.width = `${targetProgress}%`;
+                
+                await new Promise(resolve => setTimeout(resolve, 1200));
+            }
+
+            // Complete progress bar
+            loadingProgressBar.style.width = '100%';
+            await new Promise(resolve => setTimeout(resolve, 800));
+            
+            showMessage();
+        }
+
+        /**
+         * Generate message based on user responses
+         */
+        function generateMessage() {
+            const { drain, fear, habit, desire, tone } = state.responses;
+
+            // Acknowledgement block
+            const acknowledgements = {
+                work: "The weight of deadlines, meetings that could've been emails, the endless push to prove yourself — I know.",
+                money: "The constant math in your head. Checking balances. Delaying things you deserve. I know.",
+                doubt: "That voice that says you're not enough, not ready, not worthy — I know.",
+                burnout: "The exhaustion that sleep doesn't fix. The numbness. The going-through-motions — I know.",
+                stuck: "The frustration of spinning wheels. Watching others move while you stay still — I know."
+            };
+
+            // Truth blocks based on tone
+            const truths = {
+                calm: fear ? `You're afraid ${fear} will stay the same. But here's the truth: patterns only repeat when we're too tired to notice them. You're noticing now.` : "You're afraid things won't change. But here's the truth: patterns only repeat when we're too tired to notice them. You're noticing now.",
+                gentle: fear ? `I see you carrying the fear that ${fear}. That's heavy. But you're still here. That's not weakness — that's defiance.` : "I see you carrying fear about what won't change. That's heavy. But you're still here. That's not weakness — that's defiance.",
+                honest: fear ? `${fear}? Maybe it won't change. Or maybe you've been waiting for permission that'll never come. Stop asking. Start moving.` : "Maybe things won't change. Or maybe you've been waiting for permission that'll never come. Stop asking. Start moving.",
+                silent: fear ? `${fear}. You know what needs to happen. The knowing is enough.` : "You know what needs to happen. The knowing is enough."
+            };
+
+            // Evidence block
+            const evidence = {
+                sleep: "You almost fixed your sleep. Almost. That means you know what good rest feels like. You've tasted it. Go back for it.",
+                exercise: "You almost made exercise stick. Almost. Your body remembers what it felt like to move with purpose. It's waiting.",
+                focus: "You almost found your focus. Almost. That muscle exists. It just needs reps. No apps. No hacks. Just reps.",
+                consistency: "You almost built consistency. Almost. You know the version of you that shows up. Become that person for one more day. Then another.",
+                spending: "You almost got control of spending. Almost. You know what it's like to say no and feel powerful. Do it again.",
+                learning: "You almost committed to learning. Almost. Your brain is sharper than you think. Feed it. Watch what happens."
+            };
+
+            // Assurance block
+            const assurances = {
+                default: desire ? `You want ${desire}. I can't promise it. But I can promise this: the version of you reading this in 2027 will thank you for not giving up in 2026.` : "I can't promise everything will work out. But I can promise this: the version of you reading this in 2027 will thank you for not giving up in 2026."
+            };
+
+            return {
+                acknowledgement: acknowledgements[drain] || acknowledgements.stuck,
+                truth: truths[tone] || truths.calm,
+                evidence: evidence[habit] || evidence.focus,
+                assurance: assurances.default
+            };
+        }
+
+        /**
+         * Type text character by character with streaming effect
+         */
+        async function typeText(element, text, speed = 30) {
+            element.classList.add('typing');
+            
+            for (let i = 0; i < text.length; i++) {
+                element.textContent = text.substring(0, i + 1);
+                
+                // Variable speed for more natural typing
+                const charSpeed = text[i] === ' ' ? speed * 0.5 : 
+                                 text[i] === '.' || text[i] === ',' || text[i] === '?' ? speed * 3 : 
+                                 speed;
+                
+                await new Promise(resolve => setTimeout(resolve, charSpeed));
+            }
+            
+            element.classList.remove('typing');
+        }
+
+        /**
+         * Display the final message with line-by-line animation
+         */
+        async function showMessage() {
+            const loadingScreen = document.getElementById('loading');
+            const messageScreen = document.getElementById('message');
+            const messageContent = document.getElementById('messageContent');
+            const messageActions = document.getElementById('messageActions');
+
+            loadingScreen.classList.remove('active');
+            
+            setTimeout(() => {
+                messageScreen.classList.add('active');
+                body.className = 'message';
+            }, 300);
+
+            const generatedMessage = generateMessage();
+            const messageParts = [
+                generatedMessage.acknowledgement,
+                generatedMessage.truth,
+                generatedMessage.evidence,
+                generatedMessage.assurance
+            ];
+
+            // Animate message lines with typing effect
+            for (let i = 0; i < messageParts.length; i++) {
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                const line = document.createElement('div');
+                line.className = 'message-line animate';
+                messageContent.appendChild(line);
+                
+                // Type out the text character by character
+                await typeText(line, messageParts[i]);
+                
+                // Small pause between lines
+                await new Promise(resolve => setTimeout(resolve, 300));
+            }
+
+            // Show anchor line with typing effect
+            await new Promise(resolve => setTimeout(resolve, 800));
+            const anchor = document.createElement('div');
+            anchor.className = 'message-anchor animate';
+            messageContent.appendChild(anchor);
+            
+            await typeText(anchor, "If you're reading this — you made it here. That matters.", 25);
+
+            // Show actions
+            await new Promise(resolve => setTimeout(resolve, 600));
+            messageActions.classList.add('animate');
+        }
+
+        /**
+         * Download message as image (simplified version - creates a text file)
+         */
+        function downloadMessage() {
+            const messageText = Array.from(document.querySelectorAll('.message-line, .message-anchor'))
+                .map(el => el.textContent)
+                .join('\n\n');
+
+            const blob = new Blob([`MESSAGE FROM FUTURE YOU\nDec 31, 2026\n\n${messageText}`], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'message-from-future-you.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        /**
+         * Restart the experience
+         */
+        function restart() {
+            // Reset state
+            state.currentStep = 1;
+            state.responses = {
+                drain: '',
+                fear: '',
+                habit: '',
+                desire: '',
+                tone: ''
+            };
+
+            // Reset UI
+            document.getElementById('message').classList.remove('active');
+            document.getElementById('messageContent').innerHTML = '';
+            document.getElementById('step1').classList.add('active');
+            body.className = 'step-1';
+            
+            // Clear selections
+            document.querySelectorAll('.chip').forEach(chip => chip.classList.remove('selected'));
+            document.querySelectorAll('.text-input').forEach(input => input.value = '');
+            
+            updateProgress();
+        }
+
+        // ===== STEP 1: EMOTIONAL WEIGHT =====
+        const step1Chips = document.querySelectorAll('#step1 .chip');
+        const continue1 = document.getElementById('continue1');
+        const skip1 = document.getElementById('skip1');
+
+        step1Chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                step1Chips.forEach(c => c.classList.remove('selected'));
+                chip.classList.add('selected');
+                state.responses.drain = chip.dataset.value;
+                continue1.disabled = false;
+            });
+        });
+
+        continue1.addEventListener('click', () => goToStep(2));
+        skip1.addEventListener('click', () => {
+            state.responses.drain = 'stuck';
+            goToStep(2);
+        });
+
+        // ===== STEP 2: FEAR =====
+        const fearInput = document.getElementById('fearInput');
+        const back2 = document.getElementById('back2');
+        const continue2 = document.getElementById('continue2');
+        const skip2 = document.getElementById('skip2');
+
+        fearInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                state.responses.fear = fearInput.value;
+                goToStep(3);
+            }
+        });
+
+        continue2.addEventListener('click', () => {
+            state.responses.fear = fearInput.value;
+            goToStep(3);
+        });
+
+        skip2.addEventListener('click', () => {
+            state.responses.fear = '';
+            goToStep(3);
+        });
+
+        back2.addEventListener('click', () => goToStep(1));
+
+        // ===== STEP 3: ALMOST HABIT =====
+        const step3Chips = document.querySelectorAll('#step3 .chip');
+        const back3 = document.getElementById('back3');
+        const continue3 = document.getElementById('continue3');
+        const skip3 = document.getElementById('skip3');
+
+        step3Chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                step3Chips.forEach(c => c.classList.remove('selected'));
+                chip.classList.add('selected');
+                state.responses.habit = chip.dataset.value;
+                continue3.disabled = false;
+            });
+        });
+
+        continue3.addEventListener('click', () => goToStep(4));
+        skip3.addEventListener('click', () => {
+            state.responses.habit = 'focus';
+            goToStep(4);
+        });
+        back3.addEventListener('click', () => goToStep(2));
+
+        // ===== STEP 4: QUIET DESIRE =====
+        const desireInput = document.getElementById('desireInput');
+        const back4 = document.getElementById('back4');
+        const continue4 = document.getElementById('continue4');
+        const skip4 = document.getElementById('skip4');
+
+        desireInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                state.responses.desire = desireInput.value;
+                goToStep(5);
+            }
+        });
+
+        continue4.addEventListener('click', () => {
+            state.responses.desire = desireInput.value;
+            goToStep(5);
+        });
+
+        skip4.addEventListener('click', () => {
+            state.responses.desire = '';
+            goToStep(5);
+        });
+
+        back4.addEventListener('click', () => goToStep(3));
+
+        // ===== STEP 5: TONE SELECTOR =====
+        const step5Chips = document.querySelectorAll('#step5 .chip');
+        const back5 = document.getElementById('back5');
+        const generateBtn = document.getElementById('generate');
+
+        step5Chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                step5Chips.forEach(c => c.classList.remove('selected'));
+                chip.classList.add('selected');
+                state.responses.tone = chip.dataset.value;
+            });
+        });
+
+        generateBtn.addEventListener('click', () => {
+            if (!state.responses.tone) {
+                state.responses.tone = 'calm';
+            }
+            showLoading();
+        });
+
+        back5.addEventListener('click', () => goToStep(4));
+
+        // ===== MESSAGE ACTIONS =====
+        document.getElementById('downloadBtn').addEventListener('click', downloadMessage);
+        document.getElementById('restartBtn').addEventListener('click', restart);
+
+        // ===== INITIALIZE =====
+        updateProgress();
+
+        // Easter Egg: Konami Code
+        let konamiCode = [];
+        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.key);
+            konamiCode = konamiCode.slice(-10);
+            
+            if (konamiCode.join(',') === konamiSequence.join(',')) {
+                document.body.style.filter = 'hue-rotate(180deg)';
+                setTimeout(() => document.body.style.filter = '', 3000);
+            }
+        });
+    </script>
+</body>
+</html>
