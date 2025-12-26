@@ -526,6 +526,33 @@
                 0 0 90px var(--blood-red);
             opacity: 0;
             animation: textFadeIn 2s ease-out 2s forwards;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .greeting-text {
+            font-size: clamp(1.5rem, 6vw, 3.5rem);
+            font-weight: 700;
+            letter-spacing: 8px;
+            color: #fff;
+            text-shadow: 
+                0 0 20px var(--blood-red),
+                0 0 40px var(--blood-red);
+            opacity: 0;
+            margin-top: 40px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .greeting-text:first-of-type {
+            animation: textFadeIn 2s ease-out 4.5s forwards;
+        }
+
+        .greeting-text:last-of-type {
+            animation: textFadeIn 2s ease-out 6s forwards;
+            font-size: clamp(1.2rem, 5vw, 2.8rem);
         }
 
         @keyframes textFadeIn {
@@ -541,6 +568,7 @@
             height: 0%;
             background: radial-gradient(ellipse at center, #0d0505 0%, #0a0000 100%);
             animation: takeoverScreen 4s ease-out 3s forwards;
+            z-index: 1;
         }
 
         @keyframes takeoverScreen {
@@ -950,6 +978,8 @@
     <div class="end-sequence" id="endSequence">
         <div class="crack-overlay"></div>
         <h1 class="end-text">THE GATE OPENS.</h1>
+        <h2 class="greeting-text">MERRY CHRISTMAS</h2>
+        <h2 class="greeting-text">HAPPY NEW YEAR 2026</h2>
         <div class="upside-down-takeover"></div>
     </div>
 
@@ -959,10 +989,8 @@
     </audio>
 
     <script>
-        // TARGET TIME: Tomorrow 6:30 AM IST
-        const targetDate = new Date();
-        targetDate.setDate(targetDate.getDate() + 1);
-        targetDate.setHours(6, 30, 0, 0);
+        // TARGET TIME: December 26, 2025 6:30 AM IST
+        const targetDate = new Date('2025-12-26T06:30:00+05:30');
 
         // Elements
         const realHours = document.getElementById('hours');
