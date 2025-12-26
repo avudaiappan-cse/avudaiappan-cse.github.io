@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hawkins Lab - Friend Group Roles 2026</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0a0a0a;
+            --midnight: #0d1117;
+            --card-bg: #161b22;
+            --red: #ff1744;
+            --red-glow: rgba(255, 23, 68, 0.4);
+            --cyan: #00d9ff;
+            --text-primary: #e6e6e6;
+            --text-secondary: #9a9a9a;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        body {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--black) 0%, var(--midnight) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Noise overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Particles background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--red);
+            border-radius: 50%;
+            opacity: 0;
+            animation: float 8s infinite ease-in-out;
+            box-shadow: 0 0 10px var(--red-glow);
+        }
+
+        @keyframes float {
+            0%, 100% { opacity: 0; transform: translateY(0) translateX(0); }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) translateX(50px); }
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Header */
+        .header {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: var(--red);
+            text-transform: uppercase;
+        }
+
+        .header i {
+            font-size: 1.5rem;
+        }
+
+        /* Nav */
+        .nav {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            letter-spacing: 0.05em;
+        }
+
+        .nav a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 23, 68, 0.1);
+            border: 1px solid var(--red);
+            border-radius: 50px;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--red);
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 5px var(--red-glow); }
+            50% { box-shadow: 0 0 20px var(--red-glow); }
+        }
+
+        /* Screen */
+        .screen {
+            display: none;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .screen.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typography */
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .highlight {
+            color: var(--red);
+            text-shadow: 0 0 30px var(--red-glow);
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--red);
+            color: white;
+            box-shadow: 0 0 30px var(--red-glow);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 0 50px var(--red-glow);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .btn i {
+            margin-left: 0.5rem;
+            font-size: 1.1rem;
+            color: white;
+            opacity: 1;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--text-secondary);
+            color: var(--text-secondary);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-primary);
+            color: var(--text-primary);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Input Section */
+        .input-section {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .input-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 1rem 1rem 1rem 3.5rem;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--red);
+            box-shadow: 0 0 20px var(--red-glow);
+        }
+
+        input[type="text"]::placeholder {
+            color: var(--text-secondary);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .add-btn {
+            padding: 1rem 2rem;
+            background: var(--red);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-family: 'Space Grotesk', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .add-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .add-btn i {
+            font-size: 1.2rem;
+            color: white;
+            opacity: 1;
+        }
+
+        /* Friend chips */
+        .friends-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            min-height: 60px;
+        }
+
+        .friend-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: rgba(255, 23, 68, 0.1);
+            border: 1px solid var(--red);
+            border-radius: 50px;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            animation: chipIn 0.3s ease-out;
+        }
+
+        @keyframes chipIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .friend-chip button {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s;
+        }
+
+        .friend-chip button:hover {
+            color: var(--red);
+        }
+
+        .friend-count {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Transition screen */
+        .transition-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--black);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .transition-screen.active {
+            display: flex;
+            animation: flicker 0.5s ease-out;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .transition-text {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--red);
+            text-align: center;
+            animation: textGlow 1.5s infinite;
+        }
+
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 0 0 20px var(--red-glow); }
+            50% { text-shadow: 0 0 40px var(--red-glow); }
+        }
+
+        .progress {
+            width: 300px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--red);
+            animation: progress 2s ease-out;
+            box-shadow: 0 0 20px var(--red-glow);
+        }
+
+        @keyframes progress {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        /* Role cards */
+        .cards-container {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .role-card {
+            background: var(--card-bg);
+            border: 2px solid var(--red);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            animation: cardAppear 0.5s ease-out;
+            box-shadow: 0 0 30px var(--red-glow);
+        }
+
+        @keyframes cardAppear {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .role-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 50px var(--red-glow);
+        }
+
+        @keyframes cardFlicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.95; }
+        }
+
+        .role-card.rare {
+            border-color: var(--cyan);
+            box-shadow: 0 0 40px rgba(0, 217, 255, 0.4);
+            animation: rareGlow 2s infinite, cardAppear 0.5s ease-out;
+        }
+
+        @keyframes rareGlow {
+            0%, 100% { box-shadow: 0 0 40px rgba(0, 217, 255, 0.4); }
+            50% { box-shadow: 0 0 60px rgba(0, 217, 255, 0.6); }
+        }
+
+        .role-icon {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.2rem;
+            opacity: 0.3;
+        }
+
+        .role-card.rare .role-icon {
+            color: var(--cyan);
+            opacity: 0.6;
+        }
+
+        /* SVG Character Faces */
+        .character-face {
+            display: none;
+        }
+
+        .character-face svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Character-specific backgrounds */
+        .role-card[data-character="mike"] {
+            background: linear-gradient(135deg, var(--card-bg) 0%, #1a1520 100%),
+                        radial-gradient(circle at 20% 50%, rgba(255, 23, 68, 0.1) 0%, transparent 50%);
+        }
+
+        .role-card[data-character="eleven"] {
+            background: linear-gradient(135deg, var(--card-bg) 0%, #151a25 100%),
+                        radial-gradient(circle at 80% 20%, rgba(0, 217, 255, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 20% 80%, rgba(255, 23, 68, 0.1) 0%, transparent 50%);
+            position: relative;
+        }
+
+        .role-card[data-character="eleven"]::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 217, 255, 0.03) 2px,
+                rgba(0, 217, 255, 0.03) 4px
+            );
+            pointer-events: none;
+        }
+
+        .role-card[data-character="dustin"] {
+            background: linear-gradient(135deg, var(--card-bg) 0%, #1a1a15 100%),
+                        radial-gradient(circle at 50% 50%, rgba(255, 193, 7, 0.08) 0%, transparent 60%);
+        }
+
+        .role-card[data-character="lucas"] {
+            background: linear-gradient(135deg, var(--card-bg) 0%, #1a1515 100%),
+                        radial-gradient(circle at 30% 70%, rgba(76, 175, 80, 0.08) 0%, transparent 50%);
+        }
+
+        .role-card[data-character="will"] {
+            background: linear-gradient(135deg, var(--card-bg) 0%, #15171a 100%),
+                        radial-gradient(circle at 70% 30%, rgba(156, 39, 176, 0.08) 0%, transparent 50%);
+            position: relative;
+        }
+
+        .role-card[data-character="will"]::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(156, 39, 176, 0.05) 0%, transparent 70%);
+            animation: willGlow 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes willGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+
+        .role-card[data-character="max"] {
+            background: linear-gradient(135deg, var(--card-bg) 0%, #1a1517 100%),
+                        linear-gradient(45deg, transparent 30%, rgba(255, 87, 34, 0.05) 30%, rgba(255, 87, 34, 0.05) 70%, transparent 70%);
+        }
+
+        .role-card[data-character="steve"] {
+            background: linear-gradient(135deg, var(--card-bg) 0%, #18151a 100%),
+                        radial-gradient(circle at 40% 40%, rgba(233, 30, 99, 0.08) 0%, transparent 50%);
+        }
+
+        .role-card[data-character="eddie"] {
+            background: linear-gradient(135deg, var(--card-bg) 0%, #1a1515 100%),
+                        repeating-linear-gradient(
+                            45deg,
+                            transparent,
+                            transparent 20px,
+                            rgba(255, 23, 68, 0.03) 20px,
+                            rgba(255, 23, 68, 0.03) 40px
+                        );
+        }
+
+        .friend-name {
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .friend-name i {
+            font-size: 0.7rem;
+        }
+
+        .role-title {
+            font-size: 1.75rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .role-card.rare .role-title {
+            color: var(--cyan);
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+        }
+
+        .role-description {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.2);
+            text-align: center;
+            z-index: 2;
+        }
+
+        /* Audio toggle */
+        .audio-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--card-bg);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 3;
+        }
+
+        .audio-toggle:hover {
+            border-color: var(--red);
+            transform: scale(1.1);
+        }
+
+        .audio-toggle i {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .audio-toggle.active i {
+            color: var(--red);
+        }
+
+        /* Hidden */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Loading animation */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading {
+            animation: spin 1s linear infinite;
+        }
+
+        /* Share Modal */
+        .share-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .share-modal.active {
+            display: flex;
+        }
+
+        .share-modal-content {
+            background: var(--card-bg);
+            border: 2px solid var(--red);
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        .share-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .share-close:hover {
+            color: var(--red);
+        }
+
+        .share-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .share-btn {
+            padding: 1rem;
+            border: 2px solid;
+            border-radius: 0.5rem;
+            background: transparent;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .share-btn i {
+            font-size: 1.2rem;
+        }
+
+        .share-btn.whatsapp {
+            border-color: #25D366;
+        }
+
+        .share-btn.whatsapp:hover {
+            background: #25D366;
+        }
+
+        .share-btn.instagram {
+            border-color: #E4405F;
+        }
+
+        .share-btn.instagram:hover {
+            background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+        }
+
+        .share-btn.facebook {
+            border-color: #1877F2;
+        }
+
+        .share-btn.facebook:hover {
+            background: #1877F2;
+        }
+
+        .share-btn.twitter {
+            border-color: #1DA1F2;
+        }
+
+        .share-btn.twitter:hover {
+            background: #1DA1F2;
+        }
+
+        .share-btn.telegram {
+            border-color: #0088cc;
+        }
+
+        .share-btn.telegram:hover {
+            background: #0088cc;
+        }
+
+        .share-btn.download {
+            border-color: var(--cyan);
+            grid-column: 1 / -1;
+        }
+
+        .share-btn.download:hover {
+            background: var(--cyan);
+            color: var(--black);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Music -->
+    <audio id="bgMusic" loop>
+        <source src="stranger-things-theme.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <div class="header">
+        <i class="fas fa-flask"></i>
+        HAWKINS LAB
+    </div>
+
+    <!-- Container -->
+    <div class="container">
+        <!-- Landing Screen -->
+        <div class="screen active" id="landingScreen">
+            <div class="badge">◉ STRANGER THINGS PARTY</div>
+            <h1>Every friend group<br>belongs in <span class="highlight">Hawkins.</span></h1>
+            <p class="subtitle">The gate is opening again. Let's find out who is the Eleven, the Dustin, or the Demogorgon of your squad in 2026.</p>
+            <button class="btn btn-primary" onclick="app.goToAddFriends()">
+                ENTER HAWKINS
+            </button>
+            <button class="btn btn-secondary" onclick="app.watchTrailer()" style="margin-top: 1rem;">
+                <i class="fas fa-play"></i> Watch Trailer
+            </button>
+        </div>
+
+        <!-- Add Friends Screen -->
+        <div class="screen" id="addFriendsScreen">
+            <div class="badge">◉ STRANGER THINGS PARTY</div>
+            <h1>Assemble Your Party</h1>
+            <p class="subtitle">Add your squad. Nicknames work.</p>
+
+            <div class="input-section">
+                <div class="input-wrapper">
+                    <i class="fas fa-user-plus"></i>
+                    <input 
+                        type="text" 
+                        id="friendInput" 
+                        placeholder="Type a name + Enter..." 
+                        maxlength="20"
+                        onkeypress="if(event.key==='Enter') app.addFriend()"
+                    >
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <button class="add-btn" onclick="app.addFriend()">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+
+                <div class="friends-list" id="friendsList"></div>
+                
+                <div class="friend-count" id="friendCount">0/14 Friends Added</div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="app.startAdventure()" id="startBtn" disabled>
+                    Start Adventure <i class="fas fa-bolt"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div class="screen" id="resultsScreen">
+            <div class="badge">◉ SYSTEM SYNC COMPLETE</div>
+            <h1>ASSIGNMENTS <span class="highlight">CONFIRMED</span></h1>
+            <p class="subtitle">The party has been assembled. Review your roles below before entering the Upside Down.</p>
+
+            <div class="cards-container" id="cardsContainer"></div>
+
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="app.saveCards()">
+                    <i class="fas fa-download"></i> SAVE PARTY
+                </button>
+                <button class="btn btn-secondary" onclick="app.retakeQuiz()">
+                    <i class="fas fa-rotate"></i> RETAKE QUIZ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transition Screen -->
+    <div class="transition-screen" id="transitionScreen">
+        <div class="transition-text">
+            <div id="transitionText">
+                ◉ INTERDIMENSIONAL SIGNAL DETECTED<br><br>
+                THE UPSIDE DOWN<br>IS ASSIGNING ROLES...
+            </div>
+        </div>
+        <div class="progress">
+            <div class="progress-bar"></div>
+        </div>
+        <div style="font-size: 0.9rem; color: var(--text-secondary); letter-spacing: 0.1em;">
+            DON'T MOVE... CONNECTING TO HAWKINS LAB...
+        </div>
+        <div id="syncProgress" style="font-size: 1.2rem; color: var(--red); font-weight: 700; margin-top: 1rem;">
+            <i class="fas fa-link"></i> SYNCHRONIZING NEURO-LINK
+        </div>
+        <div id="targetSubject" style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">
+            TARGET: SUBJECT #011
+        </div>
+        <div id="analyzingText" style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">
+            ANALYZING...
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div class="share-modal" id="shareModal">
+        <div class="share-modal-content">
+            <button class="share-close" onclick="app.closeShareModal()">
+                <i class="fas fa-xmark"></i>
+            </button>
+            <h2 style="color: var(--red); margin-bottom: 1.5rem; text-align: center;">
+                <i class="fas fa-share-nodes"></i> SHARE YOUR PARTY
+            </h2>
+            <div class="share-options">
+                <button class="share-btn whatsapp" onclick="app.shareToSocial('whatsapp')">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </button>
+                <button class="share-btn instagram" onclick="app.shareToSocial('instagram')">
+                    <i class="fab fa-instagram"></i> Instagram Story
+                </button>
+                <button class="share-btn facebook" onclick="app.shareToSocial('facebook')">
+                    <i class="fab fa-facebook"></i> Facebook
+                </button>
+                <button class="share-btn twitter" onclick="app.shareToSocial('twitter')">
+                    <i class="fab fa-twitter"></i> Twitter
+                </button>
+                <button class="share-btn telegram" onclick="app.shareToSocial('telegram')">
+                    <i class="fab fa-telegram"></i> Telegram
+                </button>
+                <button class="share-btn download" onclick="app.shareToSocial('download')">
+                    <i class="fas fa-download"></i> Save to Photos
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        © 2026 Fan Project. Not affiliated with Netflix. Made for fans.
+    </div>
+
+    <!-- Audio Toggle -->
+    <div class="audio-toggle" onclick="app.toggleAudio()" id="audioToggle">
+        <i class="fas fa-volume-xmark"></i>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        // Application state and logic
+        const app = {
+            friends: [],
+            assignments: [],
+            audioEnabled: false,
+            rerollUsed: false,
+
+            roles: [
+                { 
+                    title: "MIKE WHEELER", 
+                    rarity: "normal",
+                    description: "The heart of the Party. Natural leader who never gives up on friends, even when things get weird.",
+                    strengths: "Loyal, brave, great at planning",
+                    weaknesses: "Stubborn, can be reckless, jealous at times",
+                    icon: "fa-users",
+                    character: "mike"
+                },
+                { 
+                    title: "ELEVEN", 
+                    rarity: "rare",
+                    description: "The powerhouse. You've seen the Upside Down and survived. Friends don't lie.",
+                    strengths: "Incredibly powerful, protective, honest",
+                    weaknesses: "Struggles with emotions, impulsive when angry",
+                    icon: "fa-bolt",
+                    character: "eleven"
+                },
+                { 
+                    title: "DUSTIN HENDERSON", 
+                    rarity: "normal",
+                    description: "The brain of the group. Lovable, curious, and always ready with a scientific explanation or obscure fact.",
+                    strengths: "Smart, funny, optimistic, great at making friends",
+                    weaknesses: "Overconfident, talks too much, sometimes naive",
+                    icon: "fa-atom",
+                    character: "dustin"
+                },
+                { 
+                    title: "LUCAS SINCLAIR", 
+                    rarity: "normal",
+                    description: "The realist who keeps everyone grounded. Loyal, brave, and always armed with a wrist rocket.",
+                    strengths: "Practical, honest, athletic, speaks his mind",
+                    weaknesses: "Skeptical, can be harsh with truth, cautious",
+                    icon: "fa-bullseye",
+                    character: "lucas"
+                },
+                { 
+                    title: "WILL BYERS", 
+                    rarity: "normal",
+                    description: "The artist with a connection to the unknown. Sensitive, creative, and braver than you think.",
+                    strengths: "Creative, empathetic, resilient, kind-hearted",
+                    weaknesses: "Shy, anxious, struggles to open up",
+                    icon: "fa-paintbrush",
+                    character: "will"
+                },
+                { 
+                    title: "MAX MAYFIELD", 
+                    rarity: "normal",
+                    description: "The fearless skater who doesn't take crap from anyone. Fast on your feet and fierce with your loyalty.",
+                    strengths: "Brave, independent, athletic, fiercely loyal",
+                    weaknesses: "Keeps emotions bottled up, pushes people away",
+                    icon: "fa-person-skating",
+                    character: "max"
+                },
+                { 
+                    title: "STEVE HARRINGTON", 
+                    rarity: "normal",
+                    description: "The babysitter turned hero. You've got the hair, the bat, and surprisingly great parenting instincts.",
+                    strengths: "Protective, caring, surprisingly wise, great with kids",
+                    weaknesses: "Not the smartest, tries too hard to be cool",
+                    icon: "fa-baseball-bat-ball",
+                    character: "steve"
+                },
+                { 
+                    title: "EDDIE MUNSON", 
+                    rarity: "normal",
+                    description: "The metalhead misfit with a heart of gold. You're the most metal person in Hawkins.",
+                    strengths: "Passionate, creative, protective, charismatic",
+                    weaknesses: "Dramatic, runs from problems, misunderstood",
+                    icon: "fa-guitar",
+                    character: "eddie"
+                },
+                { 
+                    title: "NANCY WHEELER", 
+                    rarity: "normal",
+                    description: "The investigative journalist. Determined, brave, and always ready to uncover the truth.",
+                    strengths: "Determined, intelligent, fearless, great investigator",
+                    weaknesses: "Workaholic, puts herself in danger, stubborn",
+                    icon: "fa-newspaper",
+                    character: "nancy"
+                },
+                { 
+                    title: "JONATHAN BYERS", 
+                    rarity: "normal",
+                    description: "The photographer with a protective heart. Quiet but fierce when defending those you love.",
+                    strengths: "Artistic, protective, observant, loyal",
+                    weaknesses: "Introverted, awkward, overprotective",
+                    icon: "fa-camera",
+                    character: "jonathan"
+                },
+                { 
+                    title: "JOYCE BYERS", 
+                    rarity: "normal",
+                    description: "The fierce protector. Nothing will stop you from saving your loved ones.",
+                    strengths: "Fiercely protective, intuitive, never gives up",
+                    weaknesses: "Anxious, paranoid, overreacts sometimes",
+                    icon: "fa-heart",
+                    character: "joyce"
+                },
+                { 
+                    title: "JIM HOPPER", 
+                    rarity: "rare",
+                    description: "The Chief. Tough exterior, soft heart. You'd go to hell and back for the people you care about.",
+                    strengths: "Strong, protective, resourceful, brave",
+                    weaknesses: "Grumpy, keeps emotions hidden, trust issues",
+                    icon: "fa-shield-halved",
+                    character: "hopper"
+                },
+                { 
+                    title: "ROBIN BUCKLEY", 
+                    rarity: "normal",
+                    description: "The sarcastic genius. Multilingual, quick-witted, and an expert at cracking codes.",
+                    strengths: "Brilliant, witty, loyal, multilingual",
+                    weaknesses: "Rambles when nervous, socially awkward",
+                    icon: "fa-language",
+                    character: "robin"
+                },
+                { 
+                    title: "ERICA SINCLAIR", 
+                    rarity: "normal",
+                    description: "The no-nonsense operator. Small but mighty, with a sharp tongue and sharper mind.",
+                    strengths: "Fearless, smart, sassy, brutally honest",
+                    weaknesses: "Blunt, demanding, loves ice cream too much",
+                    icon: "fa-ice-cream",
+                    character: "erica"
+                }
+            ],
+
+            init() {
+                this.createParticles();
+                this.updateFriendCount();
+            },
+
+            createParticles() {
+                const container = document.getElementById('particles');
+                for (let i = 0; i < 30; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 8 + 's';
+                    particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                    container.appendChild(particle);
+                }
+            },
+
+            goToAddFriends() {
+                this.switchScreen('addFriendsScreen');
+                document.getElementById('friendInput').focus();
+            },
+
+            addFriend() {
+                const input = document.getElementById('friendInput');
+                const name = input.value.trim();
+
+                if (!name) return;
+                if (this.friends.length >= 14) {
+                    alert('Maximum 14 friends allowed!');
+                    return;
+                }
+                if (this.friends.includes(name)) {
+                    alert('Friend already added!');
+                    return;
+                }
+
+                this.friends.push(name);
+                input.value = '';
+                this.renderFriendsList();
+                this.updateFriendCount();
+            },
+
+            removeFriend(name) {
+                this.friends = this.friends.filter(f => f !== name);
+                this.renderFriendsList();
+                this.updateFriendCount();
+            },
+
+            renderFriendsList() {
+                const container = document.getElementById('friendsList');
+                container.innerHTML = this.friends.map(friend => `
+                    <div class="friend-chip">
+                        ${friend}
+                        <button onclick="app.removeFriend('${friend}')">
+                            <i class="fas fa-xmark"></i>
+                        </button>
+                    </div>
+                `).join('');
+            },
+
+            updateFriendCount() {
+                const count = this.friends.length;
+                document.getElementById('friendCount').textContent = `${count}/14 Friends Added`;
+                document.getElementById('startBtn').disabled = count < 2;
+            },
+
+            startAdventure() {
+                if (this.friends.length < 2) {
+                    alert('Add at least 2 friends!');
+                    return;
+                }
+
+                this.showTransition();
+            },
+
+            showTransition() {
+                const transition = document.getElementById('transitionScreen');
+                transition.classList.add('active');
+
+                // Update sync progress text
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.random() * 15 + 5;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                    }
+                    document.getElementById('syncProgress').innerHTML = 
+                        `<i class="fas fa-link"></i> SYNCHRONIZING NEURO-LINK ${Math.round(progress)}%`;
+                }, 200);
+
+                setTimeout(() => {
+                    this.assignRoles();
+                    transition.classList.remove('active');
+                    this.switchScreen('resultsScreen');
+                }, 3000);
+            },
+
+            assignRoles() {
+                const shuffledRoles = [...this.roles].sort(() => Math.random() - 0.5);
+                
+                this.assignments = this.friends.map((friend, index) => {
+                    let role;
+                    if (index < shuffledRoles.length) {
+                        role = shuffledRoles[index];
+                    } else {
+                        const normalRoles = shuffledRoles.filter(r => r.rarity === 'normal');
+                        role = normalRoles[index % normalRoles.length];
+                    }
+                    return { friend, role };
+                });
+
+                this.renderCards();
+            },
+
+            renderCards() {
+                const container = document.getElementById('cardsContainer');
+                container.innerHTML = this.assignments.map((assignment, index) => `
+                    <div class="role-card ${assignment.role.rarity === 'rare' ? 'rare' : ''}" 
+                         data-character="${assignment.role.character}"
+                         style="animation-delay: ${index * 0.1}s"
+                         id="card-${index}">
+                        <div class="character-face face-${assignment.role.character}"></div>
+                        <div class="role-icon">
+                            <i class="fas ${assignment.role.icon}"></i>
+                        </div>
+                        <div class="friend-name">
+                            <i class="fas fa-user-circle"></i> ${assignment.friend}
+                        </div>
+                        <div class="role-title">${assignment.role.title}</div>
+                        <div class="role-description">${assignment.role.description}</div>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,23,68,0.2);">
+                            <div style="margin-bottom: 0.5rem;">
+                                <div style="color: var(--cyan); font-size: 0.75rem; font-weight: 600; margin-bottom: 0.25rem;">
+                                    <i class="fas fa-plus-circle"></i> STRENGTHS
+                                </div>
+                                <div style="color: var(--text-secondary); font-size: 0.8rem;">
+                                    ${assignment.role.strengths}
+                                </div>
+                            </div>
+                            <div>
+                                <div style="color: var(--red); font-size: 0.75rem; font-weight: 600; margin-bottom: 0.25rem;">
+                                    <i class="fas fa-exclamation-circle"></i> WEAKNESSES
+                                </div>
+                                <div style="color: var(--text-secondary); font-size: 0.8rem;">
+                                    ${assignment.role.weaknesses}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            },
+
+            saveCards() {
+                document.getElementById('shareModal').classList.add('active');
+            },
+
+            closeShareModal() {
+                document.getElementById('shareModal').classList.remove('active');
+            },
+
+            async shareToSocial(platform) {
+                // Show loading indicator
+                const loadingMsg = document.createElement('div');
+                loadingMsg.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: rgba(255, 23, 68, 0.95);
+                    color: white;
+                    padding: 20px 40px;
+                    border-radius: 10px;
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-weight: 600;
+                    z-index: 10001;
+                    box-shadow: 0 0 30px rgba(255, 23, 68, 0.5);
+                `;
+                loadingMsg.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating image...';
+                document.body.appendChild(loadingMsg);
+
+                const container = document.getElementById('cardsContainer');
+                
+                // Create a wrapper with padding and watermark
+                const wrapper = document.createElement('div');
+                wrapper.style.cssText = `
+                    background: #0a0a0a;
+                    padding: 40px;
+                    box-sizing: border-box;
+                    position: absolute;
+                    left: -9999px;
+                    top: 0;
+                `;
+                
+                // Clone the container
+                const clone = container.cloneNode(true);
+                clone.style.cssText = 'display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;';
+                wrapper.appendChild(clone);
+                
+                // Add watermark
+                const watermark = document.createElement('div');
+                watermark.style.cssText = `
+                    text-align: center;
+                    margin-top: 30px;
+                    padding-top: 20px;
+                    border-top: 2px solid rgba(255, 23, 68, 0.3);
+                    font-family: 'Space Grotesk', sans-serif;
+                `;
+                watermark.innerHTML = `
+                    <div style="font-size: 24px; font-weight: 700; color: #ff1744; margin-bottom: 10px;">
+                        ⚗️ HAWKINS LAB
+                    </div>
+                    <div style="font-size: 16px; color: #00d9ff; font-weight: 600;">
+                        Try Yours Now: avudaiappan-cse.github.io/hawkins-lab.html
+                    </div>
+                `;
+                wrapper.appendChild(watermark);
+                
+                document.body.appendChild(wrapper);
+                
+                try {
+                    const canvas = await html2canvas(wrapper, {
+                        backgroundColor: '#0a0a0a',
+                        scale: 2,
+                        useCORS: true,
+                        allowTaint: true,
+                        logging: false
+                    });
+                    
+                    document.body.removeChild(wrapper);
+                    
+                    // Convert canvas to blob
+                    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png', 1.0));
+                    
+                    // Remove loading message
+                    document.body.removeChild(loadingMsg);
+                    
+                    const messages = {
+                        whatsapp: 'Check out our Hawkins Party roles! 🎭 Try it: https://avudaiappan-cse.github.io/hawkins-lab.html',
+                        instagram: 'Check out our Hawkins Party roles! 🎭 Try it: https://avudaiappan-cse.github.io/hawkins-lab.html',
+                        facebook: 'Check out our Hawkins Party! Try it: https://avudaiappan-cse.github.io/hawkins-lab.html',
+                        twitter: 'Just assembled my Hawkins Party! 🎭 Find out your role at https://avudaiappan-cse.github.io/hawkins-lab.html',
+                        telegram: 'Check out our Hawkins Party roles! Try it: https://avudaiappan-cse.github.io/hawkins-lab.html'
+                    };
+
+                    // Try native share API first (works on mobile)
+                    if (navigator.share && navigator.canShare && platform !== 'download') {
+                        try {
+                            const file = new File([blob], 'hawkins-party.png', { type: 'image/png' });
+                            const shareData = {
+                                files: [file],
+                                title: 'My Hawkins Party Roles',
+                                text: messages[platform] || messages.whatsapp
+                            };
+                            
+                            // Check if sharing files is supported
+                            if (navigator.canShare(shareData)) {
+                                await navigator.share(shareData);
+                                this.closeShareModal();
+                                return;
+                            }
+                        } catch (shareError) {
+                            console.log('Web Share API failed, using fallback:', shareError);
+                            // Continue to fallback
+                        }
+                    }
+                    
+                    // Fallback: Download image and open social media
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    
+                    // Download with platform-specific name
+                    link.download = platform === 'download' 
+                        ? 'hawkins-party-roles.png' 
+                        : `hawkins-party-${platform}.png`;
+                    link.href = url;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    // Open social media after download (for platforms other than download)
+                    if (platform !== 'download') {
+                        setTimeout(() => {
+                            // Mobile-friendly URLs
+                            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                            
+                            const urls = {
+                                whatsapp: isMobile 
+                                    ? `whatsapp://send?text=${encodeURIComponent(messages.whatsapp)}`
+                                    : `https://wa.me/?text=${encodeURIComponent(messages.whatsapp)}`,
+                                instagram: isMobile
+                                    ? 'instagram://story-camera'
+                                    : 'https://www.instagram.com/',
+                                facebook: isMobile
+                                    ? `fb://facewebmodal/f?href=${encodeURIComponent('https://www.facebook.com/sharer/sharer.php?u=https://avudaiappan-cse.github.io/hawkins-lab.html')}`
+                                    : `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://avudaiappan-cse.github.io/hawkins-lab.html')}`,
+                                twitter: isMobile
+                                    ? `twitter://post?message=${encodeURIComponent(messages.twitter)}`
+                                    : `https://twitter.com/intent/tweet?text=${encodeURIComponent(messages.twitter)}`,
+                                telegram: isMobile
+                                    ? `tg://msg?text=${encodeURIComponent(messages.telegram)}`
+                                    : `https://t.me/share/url?url=${encodeURIComponent('https://avudaiappan-cse.github.io/hawkins-lab.html')}&text=${encodeURIComponent(messages.telegram)}`
+                            };
+                            
+                            if (platform === 'instagram') {
+                                alert('✅ Image saved to your device!\n\n📸 To share on Instagram:\n1. Open Instagram\n2. Tap + to create a Story\n3. Select the saved image\n4. Share it!');
+                            }
+                            
+                            // Try to open the app/url
+                            if (urls[platform]) {
+                                const socialWindow = window.open(urls[platform], '_blank');
+                                
+                                // For mobile deep links, they might return null
+                                if (!socialWindow && isMobile) {
+                                    // If deep link fails, try web version
+                                    const webUrls = {
+                                        whatsapp: `https://wa.me/?text=${encodeURIComponent(messages.whatsapp)}`,
+                                        instagram: 'https://www.instagram.com/',
+                                        facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://avudaiappan-cse.github.io/hawkins-lab.html')}`,
+                                        twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(messages.twitter)}`,
+                                        telegram: `https://t.me/share/url?url=${encodeURIComponent('https://avudaiappan-cse.github.io/hawkins-lab.html')}&text=${encodeURIComponent(messages.telegram)}`
+                                    };
+                                    window.open(webUrls[platform], '_blank');
+                                }
+                            }
+                        }, 500);
+                    }
+                    
+                    URL.revokeObjectURL(url);
+                    this.closeShareModal();
+                    
+                } catch (error) {
+                    console.error('Error generating image:', error);
+                    if (document.body.contains(wrapper)) {
+                        document.body.removeChild(wrapper);
+                    }
+                    if (document.body.contains(loadingMsg)) {
+                        document.body.removeChild(loadingMsg);
+                    }
+                    alert('❌ Error generating image. Please try again.');
+                }
+            },
+
+            retakeQuiz() {
+                if (confirm('Are you sure? Your current assignments will be lost.')) {
+                    this.friends = [];
+                    this.assignments = [];
+                    this.rerollUsed = false;
+                    this.switchScreen('addFriendsScreen');
+                }
+            },
+
+            switchScreen(screenId) {
+                document.querySelectorAll('.screen').forEach(screen => {
+                    screen.classList.remove('active');
+                });
+                document.getElementById(screenId).classList.add('active');
+            },
+
+            toggleAudio() {
+                const bgMusic = document.getElementById('bgMusic');
+                this.audioEnabled = !this.audioEnabled;
+                const toggle = document.getElementById('audioToggle');
+                const icon = toggle.querySelector('i');
+                
+                if (this.audioEnabled) {
+                    toggle.classList.add('active');
+                    icon.className = 'fas fa-volume-high';
+                    bgMusic.play().catch(err => {
+                        console.log('Audio playback failed:', err);
+                        // Auto-play might be blocked, user needs to interact first
+                    });
+                } else {
+                    toggle.classList.remove('active');
+                    icon.className = 'fas fa-volume-xmark';
+                    bgMusic.pause();
+                }
+            },
+
+            watchTrailer() {
+                alert('Easter egg! 🎃 The Mind Flayer is watching...');
+            }
+        };
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', () => {
+            app.init();
+        });
+    </script>
+</body>
+</html>
