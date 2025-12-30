@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear GoldSense Cache</title>
+</head>
+<body>
+    <h1>Clear GoldSense AI Cache</h1>
+    <button onclick="clearCache()">Clear All Cache</button>
+    <div id="status"></div>
+    
+    <script>
+        function clearCache() {
+            localStorage.removeItem('goldsense_data');
+            localStorage.removeItem('goldsense_exchange_rate');
+            localStorage.removeItem('goldsense_location');
+            localStorage.removeItem('goldsense_currency');
+            
+            document.getElementById('status').innerHTML = '<p style="color: green;">✅ Cache cleared! You can close this page and reload GoldSense AI.</p>';
+        }
+    </script>
+</body>
+</html>
