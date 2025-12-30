@@ -76,6 +76,14 @@
 .contact-item svg {
     flex-shrink: 0;
     color: var(--accent-primary);
+    fill: currentColor;
+}
+
+.contact-item svg path,
+.contact-item svg circle,
+.contact-item svg rect {
+    stroke: currentColor;
+    fill: currentColor;
 }
 
 .contact-item a {
@@ -111,6 +119,20 @@
 
 .section-icon {
     font-size: 2rem;
+}
+
+/* Section icons now use Material Symbols: align and size them consistently */
+.section-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    color: var(--accent-primary);
+}
+
+.section-icon .material-symbols-outlined {
+    font-size: 28px;
+    line-height: 1;
 }
 
 /* Skills Grid */
@@ -326,6 +348,27 @@
 .achievement-icon {
     font-size: 2rem;
     flex-shrink: 0;
+}
+
+.achievement-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: inline-grid;
+    place-items: center;
+    color: var(--accent-primary);
+    background: rgba(139, 92, 246, 0.12);
+    border: 1px solid rgba(139, 92, 246, 0.22);
+    border-radius: 14px;
+}
+
+.achievement-icon .material-symbols-outlined {
+    font-size: 24px;
+    line-height: 1;
+}
+
+html[data-theme="light"] .achievement-icon {
+    background: rgba(139, 92, 246, 0.10);
+    border-color: rgba(15, 23, 42, 0.10);
 }
 
 .achievement-item h4 {

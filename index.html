@@ -16,16 +16,22 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-content">
-                <a href="#" class="logo">
-                    <span class="logo-icon">💻</span>
+                <a href="index.html" class="logo">
+                    <span class="logo-icon" aria-hidden="true">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">developer_mode</span>
+                    </span>
                     <span>Avudai<span class="logo-highlight">appan</span></span>
                 </a>
                 <ul class="nav-links">
                     <li><a href="#about" class="nav-link">About</a></li>
                     <li><a href="#work" class="nav-link">Work</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
                     <li><a href="resume.html" class="nav-link">Resume</a></li>
                 </ul>
                 <div class="nav-buttons">
+                    <button class="theme-toggle" type="button" id="themeToggle" aria-label="Toggle theme">
+                        <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
+                    </button>
                     <a href="#contact" class="btn btn-secondary">Contact</a>
                     <a href="#contact" class="btn btn-primary">Hire Me</a>
                 </div>
@@ -511,6 +517,8 @@
         </div>
     </footer>
 
+    <script src="theme.js"></script>
     <script src="script.js"></script>
+    <script src="newsletter.js"></script>
 </body>
 </html>

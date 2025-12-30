@@ -18,15 +18,21 @@
         <div class="container">
             <div class="nav-content">
                 <a href="index.html" class="logo">
-                    <span class="logo-icon">💻</span>
+                    <span class="logo-icon" aria-hidden="true">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">developer_mode</span>
+                    </span>
                     <span>Avudai<span class="logo-highlight">appan</span></span>
                 </a>
                 <ul class="nav-links">
                     <li><a href="index.html#about" class="nav-link">About</a></li>
                     <li><a href="index.html#work" class="nav-link">Work</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
                     <li><a href="resume.html" class="nav-link active">Resume</a></li>
                 </ul>
                 <div class="nav-buttons">
+                    <button class="theme-toggle" type="button" id="themeToggle" aria-label="Toggle theme">
+                        <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
+                    </button>
                     <a href="index.html#contact" class="btn btn-secondary">Contact</a>
                     <a href="#" class="btn btn-primary" onclick="window.print(); return false;">Download PDF</a>
                 </div>
@@ -51,26 +57,20 @@
                     <div class="contact-avatar">AS</div>
                     <div class="contact-info">
                         <div class="contact-item">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M2.5 6.66669L9.0755 11.0504C9.63533 11.4236 10.3647 11.4236 10.9245 11.0504L17.5 6.66669M4.16667 15.8334H15.8333C16.7538 15.8334 17.5 15.0872 17.5 14.1667V5.83335C17.5 4.91288 16.7538 4.16669 15.8333 4.16669H4.16667C3.24619 4.16669 2.5 4.91288 2.5 5.83335V14.1667C2.5 15.0872 3.24619 15.8334 4.16667 15.8334Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <span class="material-symbols-outlined" style="font-size: 20px;">mail</span>
                             <span>avudaiappan.cse@gmail.com</span>
                         </div>
                         <div class="contact-item">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M2.5 4.16669H17.5M2.5 10H17.5M2.5 15.8334H17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
+                            <span class="material-symbols-outlined" style="font-size: 20px;">phone</span>
                             <span>+91 6374639924</span>
                         </div>
                         <div class="contact-item">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M10 0C6.75 0 4 2.75 4 6c0 5.25 6 14 6 14s6-8.75 6-14c0-3.25-2.75-6-6-6z" fill="currentColor"/>
-                            </svg>
+                            <span class="material-symbols-outlined" style="font-size: 20px;">location_on</span>
                             <span>Tirunelveli, Tamil Nadu</span>
                         </div>
                         <div class="contact-item">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M10 0C4.477 0 0 4.477 0 10c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0110 4.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C17.137 18.163 20 14.418 20 10c0-5.523-4.477-10-10-10z" fill="currentColor"/>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                             </svg>
                             <a href="https://linkedin.com/in/avudaiappan16" target="_blank">linkedin.com/in/avudaiappan16</a>
                         </div>
@@ -84,7 +84,9 @@
     <section class="resume-section">
         <div class="container">
             <h2 class="section-heading">
-                <span class="section-icon">⚡</span>
+                <span class="section-icon" aria-hidden="true">
+                    <span class="material-symbols-outlined">bolt</span>
+                </span>
                 Key Skills
             </h2>
             <div class="skills-grid-resume">
@@ -108,7 +110,9 @@
     <section class="resume-section">
         <div class="container">
             <h2 class="section-heading">
-                <span class="section-icon">💼</span>
+                <span class="section-icon" aria-hidden="true">
+                    <span class="material-symbols-outlined">work</span>
+                </span>
                 Work Experience
             </h2>
             
@@ -174,7 +178,9 @@
     <section class="resume-section">
         <div class="container">
             <h2 class="section-heading">
-                <span class="section-icon">🚀</span>
+                <span class="section-icon" aria-hidden="true">
+                    <span class="material-symbols-outlined">rocket_launch</span>
+                </span>
                 Technical Experience & Projects
             </h2>
             
@@ -216,7 +222,9 @@
     <section class="resume-section">
         <div class="container">
             <h2 class="section-heading">
-                <span class="section-icon">🎓</span>
+                <span class="section-icon" aria-hidden="true">
+                    <span class="material-symbols-outlined">school</span>
+                </span>
                 Education
             </h2>
             
@@ -258,13 +266,17 @@
     <section class="resume-section">
         <div class="container">
             <h2 class="section-heading">
-                <span class="section-icon">🏆</span>
+                <span class="section-icon" aria-hidden="true">
+                    <span class="material-symbols-outlined">emoji_events</span>
+                </span>
                 Achievements & Certifications
             </h2>
             
             <div class="achievements-grid">
                 <div class="achievement-item">
-                    <div class="achievement-icon">⭐</div>
+                    <div class="achievement-icon" aria-hidden="true">
+                        <span class="material-symbols-outlined">grade</span>
+                    </div>
                     <div>
                         <h4>5-star Problem Solving in HackerRank platform</h4>
                         <p>Demonstrated strong problem-solving skills with consistent 5-star rating</p>
@@ -272,15 +284,19 @@
                 </div>
 
                 <div class="achievement-item">
-                    <div class="achievement-icon">⭐</div>
+                    <div class="achievement-icon" aria-hidden="true">
+                        <span class="material-symbols-outlined">grade</span>
+                    </div>
                     <div>
-                        <h4>5-star Coder in LeetCode and solved 300+ problems</h4>
-                        <p>Achieved 5-star rating solving 300+ algorithmic challenges</p>
+                        <h4>Active Coder on LeetCode with 100+ problems solved</h4>
+                        <p>Consistent problem-solving practice with 100+ algorithmic challenges completed</p>
                     </div>
                 </div>
 
                 <div class="achievement-item">
-                    <div class="achievement-icon">📜</div>
+                    <div class="achievement-icon" aria-hidden="true">
+                        <span class="material-symbols-outlined">workspace_premium</span>
+                    </div>
                     <div>
                         <h4>Certificate of Excellence from Coding Ninjas</h4>
                         <p>Recognized for exceptional performance in coding challenges</p>
@@ -288,7 +304,9 @@
                 </div>
 
                 <div class="achievement-item">
-                    <div class="achievement-icon">🌟</div>
+                    <div class="achievement-icon" aria-hidden="true">
+                        <span class="material-symbols-outlined">star</span>
+                    </div>
                     <div>
                         <h4>Contributed to Open Source: React JS Library (DX-Mint)</h4>
                         <p>Active contributor to open-source React component library</p>
@@ -320,6 +338,8 @@
         </div>
     </footer>
 
+    <script src="theme.js"></script>
     <script src="script.js"></script>
+    <script src="newsletter.js"></script>
 </body>
 </html>
