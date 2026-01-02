@@ -17,6 +17,56 @@ window.addEventListener('scroll', () => {
 });
 
 // ==========================================
+// MOBILE HAMBURGER MENU
+// ==========================================
+const hamburger = document.getElementById('hamburger');
+const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+const mobileClose = document.getElementById('mobileClose');
+
+function openMobileMenu() {
+    if (mobileMenuOverlay) {
+        mobileMenuOverlay.classList.add('active');
+        hamburger.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeMobileMenu() {
+    if (mobileMenuOverlay) {
+        mobileMenuOverlay.classList.remove('active');
+        hamburger.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+if (hamburger && mobileMenuOverlay) {
+    hamburger.addEventListener('click', openMobileMenu);
+    
+    if (mobileClose) {
+        mobileClose.addEventListener('click', closeMobileMenu);
+    }
+
+    // Close menu when clicking a nav link
+    mobileMenuOverlay.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Close menu when clicking outside (on the overlay itself)
+    mobileMenuOverlay.addEventListener('click', (e) => {
+        if (e.target === mobileMenuOverlay) {
+            closeMobileMenu();
+        }
+    });
+
+    // Close menu on ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenuOverlay.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    });
+}
+
+// ==========================================
 // SMOOTH SCROLLING FOR NAVIGATION LINKS
 // ==========================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {

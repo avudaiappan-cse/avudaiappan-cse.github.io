@@ -14,6 +14,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 </head>
 <body class="blog-shell">
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+        <nav class="mobile-nav">
+            <a href="index.html#about" class="mobile-nav-link">About</a>
+            <a href="index.html#work" class="mobile-nav-link">Work</a>
+            <a href="blog.html" class="mobile-nav-link">Blog</a>
+            <a href="resume.html" class="mobile-nav-link">Resume</a>
+            <a href="index.html#contact" class="mobile-nav-link btn btn-primary" style="margin-top: 1rem;">Hire Me</a>
+        </nav>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
@@ -24,13 +36,18 @@
                     </span>
                     <span>Avudai<span class="logo-highlight">appan</span></span>
                 </a>
-                <ul class="nav-links">
+                <ul class="nav-links" id="navLinks">
                     <li><a href="index.html#about" class="nav-link">About</a></li>
                     <li><a href="index.html#work" class="nav-link">Work</a></li>
                     <li><a href="blog.html" class="nav-link active" aria-current="page">Blog</a></li>
                     <li><a href="resume.html" class="nav-link">Resume</a></li>
                 </ul>
                 <div class="nav-buttons">
+                    <button class="hamburger" id="hamburger" aria-label="Open menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                     <button class="theme-toggle" type="button" id="themeToggle" aria-label="Toggle theme">
                         <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
                     </button>
@@ -91,6 +108,7 @@
 
     <script src="blog-data.js"></script>
     <script src="theme.js"></script>
+    <script src="script.js"></script>
     <script src="blog.js"></script>
     <script src="newsletter.js"></script>
     <script src="cookie-consent.js"></script>

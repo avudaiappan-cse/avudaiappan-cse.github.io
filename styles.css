@@ -1015,6 +1015,21 @@ html[data-theme="light"] .theme-toggle {
     font-size: 20px;
 }
 
+/* Hamburger - hidden on desktop */
+.hamburger {
+    display: none;
+}
+
+/* Mobile close button - hidden on desktop */
+.mobile-close {
+    display: none;
+}
+
+/* Mobile Menu Overlay - hidden on desktop */
+.mobile-menu-overlay {
+    display: none;
+}
+
 /* ==========================================
    BUTTONS
    ========================================== */
@@ -2034,12 +2049,144 @@ html[data-theme="light"] .project-impact {
 }
 
 @media (max-width: 768px) {
-    .nav-links {
+    /* Mobile Menu Overlay */
+    .mobile-menu-overlay {
         display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(15, 15, 30, 0.98);
+        backdrop-filter: blur(20px);
+        z-index: 999999;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+    }
+
+    .mobile-menu-overlay.active {
+        display: flex;
+    }
+
+    html[data-theme="light"] .mobile-menu-overlay {
+        background: rgba(255, 255, 255, 0.98);
+    }
+
+    .mobile-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .mobile-nav-link {
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+        padding: 1rem 2rem;
+        border-radius: 12px;
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: background 0.2s ease;
+    }
+
+    .mobile-nav-link:hover {
+        background: rgba(139, 92, 246, 0.15);
+    }
+
+    /* Mobile Close Button */
+    .mobile-close {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        color: var(--text-primary);
+        cursor: pointer;
+        font-size: 1.5rem;
+        transition: all 0.2s;
+    }
+
+    html[data-theme="light"] .mobile-close {
+        background: rgba(15, 23, 42, 0.05);
+        border-color: rgba(15, 23, 42, 0.1);
+    }
+
+    .mobile-close:hover {
+        background: rgba(139, 92, 246, 0.2);
+    }
+
+    /* Hide desktop nav on mobile */
+    .nav-links {
+        display: none !important;
+    }
+
+    /* Hamburger Menu Button */
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--border-subtle);
+        border-radius: 10px;
+        cursor: pointer;
+        gap: 5px;
+        transition: all 0.3s ease;
+    }
+
+    html[data-theme="light"] .hamburger {
+        background: rgba(15, 23, 42, 0.03);
+        border-color: rgba(15, 23, 42, 0.08);
+    }
+
+    .hamburger:hover {
+        background: rgba(139, 92, 246, 0.15);
+        border-color: rgba(139, 92, 246, 0.3);
+    }
+
+    .hamburger span {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background: var(--text-primary);
+        border-radius: 2px;
+        transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
     }
     
     .nav-buttons {
         gap: 0.5rem;
+    }
+
+    .nav-buttons .btn-secondary {
+        display: none;
     }
     
     .btn {
