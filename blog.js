@@ -21,6 +21,7 @@
             .map((p) => {
                 const tag = p.category || 'Article';
                 const tags = (p.tags || []).slice(0, 2).map((t) => `<span class="blog-tag">${escapeHtml(t)}</span>`).join('');
+                const articleLink = p.link ? p.link : `article.html?slug=${encodeURIComponent(p.slug)}`;
 
                 return `
                 <article class="blog-card">
@@ -37,7 +38,7 @@
 
                     <div class="blog-card-footer">
                         <div class="blog-tags">${tags}</div>
-                        <a class="blog-read" href="article.html?slug=${encodeURIComponent(p.slug)}">
+                        <a class="blog-read" href="${articleLink}">
                             Read Article <span aria-hidden="true">→</span>
                         </a>
                     </div>
