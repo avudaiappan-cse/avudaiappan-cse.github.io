@@ -3,6 +3,151 @@
 
 window.__BLOG_POSTS__ = [
     {
+        slug: 'virtual-scroll-carousel-deep-dive',
+        title: 'Virtual Scroll for Multiple Media Images in Carousel (Deep Dive)',
+        excerpt:
+            'When we use a carousel with 50–100 images, the biggest mistake we make is: we render everything. Even though the user sees only one slide. That\'s wasted DOM, wasted memory, and unnecessary image downloads. Here\'s how to implement virtual scroll properly.',
+        date: 'Feb 17, 2026',
+        readTime: '10 min read',
+        category: 'Performance',
+        tags: ['Performance', 'Carousel', 'Virtual Scroll', 'Vue'],
+        heroKicker: ['Performance', 'Carousel', 'Virtual Scroll'],
+        author: {
+            name: 'Avudaiappan S',
+            role: 'Senior Frontend Developer'
+        },
+        link: 'article-virtual-scroll-carousel.html',
+        content: {
+            intro:
+                'When we use a carousel with 50–100 images (or image + video mix), the biggest mistake we make is: we render everything. Even though the user sees only one slide. That\'s wasted DOM, wasted memory, and unnecessary image downloads. Let\'s actually implement virtual scroll properly.',
+            sections: [
+                {
+                    heading: 'The Problem: Rendering Everything',
+                    paragraphs: [
+                        'Most carousel implementations render all slides into the DOM upfront. With 50–100 media items, that means dozens of unused DOM nodes consuming memory, images downloading in the background even if never viewed, re-render costs multiplied across every layout cycle, and mobile performance suffering under structural weight.',
+                        'The user sees one slide. Why should the browser pay the cost of a hundred?'
+                    ]
+                },
+                {
+                    quote: 'Instead of just saying "use virtual scroll", let\'s actually implement it properly — step by step.'
+                },
+                {
+                    heading: 'Core Idea',
+                    paragraphs: [
+                        'We maintain a currentIndex, a buffer size, and dynamically calculate the visible range. We translate the container instead of re-rendering the full list, and preload next/prev slides safely.'
+                    ]
+                },
+                {
+                    heading: 'Step 1 – Basic Structure',
+                    paragraphs: [
+                        'Assume we have 100 slides and the user is looking at the first one. Instead of rendering all slides, we compute only the required slides.'
+                    ],
+                    code: {
+                        language: 'js',
+                        fileName: 'setup.js',
+                        value: 'const slides = ref([...]) // 100 images\nconst currentIndex = ref(0)\nconst buffer = 2'
+                    }
+                },
+                {
+                    heading: 'Step 2 – Calculate Visible Window Properly',
+                    paragraphs: [
+                        'Instead of filter (which still loops the full array), use slice. Much more efficient. Now we\'re not looping the entire 100 items every time. We slice only the needed part.'
+                    ],
+                    code: {
+                        language: 'js',
+                        fileName: 'visibleWindow.js',
+                        value: 'const startIndex = computed(() => {\n  return Math.max(currentIndex.value - buffer, 0)\n})\n\nconst endIndex = computed(() => {\n  return Math.min(\n    currentIndex.value + buffer + 1,\n    slides.value.length\n  )\n})\n\nconst visibleSlides = computed(() => {\n  return slides.value.slice(\n    startIndex.value,\n    endIndex.value\n  )\n})'
+                    }
+                },
+                {
+                    heading: 'Step 3 – Offset Positioning (Important)',
+                    paragraphs: [
+                        'If we render only a subset, the layout breaks. We need to shift the container properly using transform. Only 3–5 slides exist in the DOM, position stays accurate, and animation remains smooth.'
+                    ],
+                    code: {
+                        language: 'vue',
+                        fileName: 'CarouselTrack.vue',
+                        value: '<div class="carousel-wrapper">\n  <div\n    class="carousel-track"\n    :style="{\n      transform: `translateX(-${offset}px)`\n    }"\n  >\n    <div\n      v-for="(slide, index) in visibleSlides"\n      :key="slide.id"\n      class="slide"\n      :style="{ width: slideWidth + \'px\' }"\n    >\n      <img\n        :src="slide.url"\n        loading="lazy"\n        decoding="async"\n      />\n    </div>\n  </div>\n</div>'
+                    }
+                },
+                {
+                    heading: 'Step 4 – Handle Swipe / Navigation',
+                    paragraphs: [
+                        'Because the visible window auto-recalculates, the DOM automatically updates. No manual re-render needed.'
+                    ],
+                    code: {
+                        language: 'js',
+                        fileName: 'navigation.js',
+                        value: 'function next() {\n  if (currentIndex.value < slides.value.length - 1) {\n    currentIndex.value++\n  }\n}\n\nfunction prev() {\n  if (currentIndex.value > 0) {\n    currentIndex.value--\n  }\n}'
+                    }
+                },
+                {
+                    heading: 'Step 5 – Preload Adjacent Images (Smart Optimization)',
+                    paragraphs: [
+                        'Sometimes when the user swipes fast, the next image loads late. We can manually preload the next slide to ensure smooth UX.'
+                    ],
+                    code: {
+                        language: 'js',
+                        fileName: 'preload.js',
+                        value: 'watch(currentIndex, (newIndex) => {\n  const nextSlide = slides.value[newIndex + 1]\n  if (nextSlide) {\n    const img = new Image()\n    img.src = nextSlide.url\n  }\n})'
+                    }
+                },
+                {
+                    heading: 'Step 6 – Handling Mixed Media (Image + Video)',
+                    paragraphs: [
+                        'If slides contain a mix of images and videos, render conditionally. Important: never preload a full video, use preload="metadata", otherwise memory explodes.'
+                    ],
+                    code: {
+                        language: 'vue',
+                        fileName: 'MixedMediaSlide.vue',
+                        value: '<div v-for="slide in visibleSlides" :key="slide.id">\n  <img\n    v-if="slide.type === \'image\'"\n    :src="slide.url"\n    loading="lazy"\n  />\n\n  <video\n    v-else\n    :src="slide.url"\n    preload="metadata"\n    controls\n  />\n</div>'
+                    }
+                },
+                {
+                    heading: 'Step 7 – Avoid Layout Shift',
+                    paragraphs: [
+                        'Always set explicit dimensions to prevent CLS (Cumulative Layout Shift) issues. Without this, virtualization won\'t save you from CLS issues.'
+                    ],
+                    code: {
+                        language: 'css',
+                        fileName: 'carousel.css',
+                        value: '.slide {\n  aspect-ratio: 16 / 9;\n  flex-shrink: 0;\n}'
+                    }
+                },
+                {
+                    heading: 'Why This Is Better Than Just Lazy Loading',
+                    paragraphs: [
+                        'Lazy loading only delays the network request. It does NOT reduce DOM nodes, memory footprint, or re-render cost.',
+                        'Virtualization reduces structural cost. Lazy loading reduces network cost. Both together = a scalable solution.'
+                    ]
+                },
+                {
+                    heading: 'Real-World Scenario',
+                    paragraphs: [
+                        'If we build product galleries, large portal media sections, CMS article galleries, or 100+ image dataset viewers — virtual scroll becomes mandatory. Especially when multiple carousels exist on the same page. Otherwise mobile performance will suffer.'
+                    ]
+                },
+                {
+                    heading: 'Advanced Improvement – Responsive + Virtualized',
+                    paragraphs: [
+                        'Instead of a fixed slideWidth, use ResizeObserver to detect container width dynamically. Then calculate slideWidth reactively. That makes your carousel responsive and virtualized — the best of both worlds.'
+                    ],
+                    code: {
+                        language: 'js',
+                        fileName: 'responsive.js',
+                        value: 'const containerRef = ref(null)\nconst slideWidth = ref(400)\n\nonMounted(() => {\n  const observer = new ResizeObserver((entries) => {\n    for (const entry of entries) {\n      slideWidth.value = entry.contentRect.width\n    }\n  })\n  if (containerRef.value) {\n    observer.observe(containerRef.value)\n  }\n})'
+                    }
+                },
+                {
+                    heading: 'Final Thought',
+                    paragraphs: [
+                        'A carousel is not just UI. It\'s memory management. If we control what we render, we control performance. That\'s proper frontend engineering.'
+                    ]
+                }
+            ]
+        }
+    },
+    {
         slug: 'ai-in-frontend-real-product',
         title: 'How We Can Use AI in Frontend (From a Real Product Perspective)',
         excerpt:

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Virtual Scroll for Multiple Media Images in Carousel (Deep Dive) • Avudaiappan S" />
+    <title>Virtual Scroll for Multiple Media Images in Carousel • Avudaiappan S</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+</head>
+<body class="blog-shell">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon" aria-hidden="true">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">developer_mode</span>
+                    </span>
+                    <span>Avudai<span class="logo-highlight">appan</span></span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html#work" class="nav-link">Work</a></li>
+                    <li><a href="blog.html" class="nav-link" aria-current="page">Blog</a></li>
+                    <li><a href="resume.html" class="nav-link">Resume</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button class="theme-toggle" type="button" id="themeToggle" aria-label="Toggle theme">
+                        <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
+                    </button>
+                    <a href="index.html#contact" class="btn btn-secondary">Contact</a>
+                    <a href="index.html#contact" class="btn btn-primary">Hire Me</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="article">
+        <div class="container article-container">
+            <a class="article-back" href="blog.html">
+                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
+                Back to Articles
+            </a>
+
+            <header class="article-hero">
+                <div class="article-kickers" id="articleKickers">
+                    <span class="article-kicker">Performance</span>
+                    <span class="article-kicker">Carousel</span>
+                    <span class="article-kicker">Virtual Scroll</span>
+                </div>
+                <h1 class="article-title" id="articleTitle">Virtual Scroll for Multiple Media Images in Carousel (Deep Dive)</h1>
+
+                <div class="article-meta">
+                    <div class="article-author">
+                        <div class="article-avatar" aria-hidden="true">AS</div>
+                        <div>
+                            <div class="article-author-name" id="articleAuthor">Avudaiappan S</div>
+                            <div class="article-author-role" id="articleRole">Senior Frontend Developer</div>
+                        </div>
+                    </div>
+                    <div class="article-meta-right">
+                        <div class="article-meta-item">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <span id="articleDate">February 17, 2026</span>
+                        </div>
+                        <div class="article-meta-item">
+                            <span class="material-symbols-outlined">schedule</span>
+                            <span id="articleReadTime">10 min read</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="article-intro" id="articleIntro">
+                    When we use a carousel with 50–100 images (or image + video mix), the biggest mistake we make is: we render everything. Even though the user sees only one slide. That's wasted DOM, wasted memory, and unnecessary image downloads. Let's actually implement virtual scroll properly.
+                </p>
+            </header>
+
+            <article class="article-body" id="articleBody">
+
+                <!-- The Problem -->
+                <h2>The Problem: Rendering Everything</h2>
+                <p>Most carousel implementations render all slides into the DOM upfront. With 50–100 media items, that means:</p>
+                <ul>
+                    <li>Dozens of unused DOM nodes consuming memory</li>
+                    <li>Images downloading in the background even if never viewed</li>
+                    <li>Re-render costs multiplied across every layout cycle</li>
+                    <li>Mobile performance suffering under structural weight</li>
+                </ul>
+                <p>The user sees <strong>one slide</strong>. Why should the browser pay the cost of a hundred?</p>
+
+                <blockquote class="article-quote">
+                    Instead of just saying "use virtual scroll", let's actually implement it properly — step by step.
+                </blockquote>
+
+                <!-- Core Idea -->
+                <h2>Core Idea</h2>
+                <p>We maintain a <code>currentIndex</code>, a <code>buffer</code> size, and dynamically calculate the visible range. We translate the container instead of re-rendering the full list, and preload next/prev slides safely.</p>
+
+                <!-- Step 1 -->
+                <h2>Step 1 – Basic Structure</h2>
+                <p>Assume we have 100 slides and the user is looking at the first one:</p>
+                <div class="article-code">
+                    <div class="article-code-header">
+                        <div class="code-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                        <div class="code-title">setup.js</div>
+                    </div>
+                    <pre><code>const slides = ref([...]) // 100 images
+const currentIndex = ref(0)
+const buffer = 2</code></pre>
+                </div>
+                <p>Instead of rendering all slides with <code>&lt;div v-for="slide in slides" /&gt;</code>, we compute only the required slides.</p>
+
+                <!-- Step 2 -->
+                <h2>Step 2 – Calculate Visible Window Properly</h2>
+                <p>Instead of <code>filter</code> (which still loops the full array), use <code>slice</code>. Much more efficient:</p>
+                <div class="article-code">
+                    <div class="article-code-header">
+                        <div class="code-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                        <div class="code-title">visibleWindow.js</div>
+                    </div>
+                    <pre><code>const startIndex = computed(() =&gt; {
+  return Math.max(currentIndex.value - buffer, 0)
+})
+
+const endIndex = computed(() =&gt; {
+  return Math.min(
+    currentIndex.value + buffer + 1,
+    slides.value.length
+  )
+})
+
+const visibleSlides = computed(() =&gt; {
+  return slides.value.slice(
+    startIndex.value,
+    endIndex.value
+  )
+})</code></pre>
+                </div>
+                <p>Now we're not looping the entire 100 items every time. We slice only the needed part.</p>
+
+                <!-- Step 3 -->
+                <h2>Step 3 – Offset Positioning (Important)</h2>
+                <p>If we render only a subset, the layout breaks. We need to shift the container properly using <code>transform</code>:</p>
+                <div class="article-code">
+                    <div class="article-code-header">
+                        <div class="code-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                        <div class="code-title">offset.js</div>
+                    </div>
+                    <pre><code>const slideWidth = 400 // example
+
+const offset = computed(() =&gt; {
+  return startIndex.value * slideWidth
+})</code></pre>
+                </div>
+                <p>Then in the template:</p>
+                <div class="article-code">
+                    <div class="article-code-header">
+                        <div class="code-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                        <div class="code-title">CarouselTrack.vue</div>
+                    </div>
+                    <pre><code>&lt;div class="carousel-wrapper"&gt;
+  &lt;div
+    class="carousel-track"
+    :style="{
+      transform: `translateX(-${offset}px)`
+    }"
+  &gt;
+    &lt;div
+      v-for="(slide, index) in visibleSlides"
+      :key="slide.id"
+      class="slide"
+      :style="{ width: slideWidth + 'px' }"
+    &gt;
+      &lt;img
+        :src="slide.url"
+        loading="lazy"
+        decoding="async"
+      /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                <p>Now:</p>
+                <ul>
+                    <li>Only 3–5 slides exist in the DOM</li>
+                    <li>Position stays accurate</li>
+                    <li>Animation remains smooth</li>
+                </ul>
+
+                <!-- Step 4 -->
+                <h2>Step 4 – Handle Swipe / Navigation</h2>
+                <p>When the user clicks next or previous:</p>
+                <div class="article-code">
+                    <div class="article-code-header">
+                        <div class="code-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                        <div class="code-title">navigation.js</div>
+                    </div>
+                    <pre><code>function next() {
+  if (currentIndex.value &lt; slides.value.length - 1) {
+    currentIndex.value++
+  }
+}
+
+function prev() {
+  if (currentIndex.value &gt; 0) {
+    currentIndex.value--
+  }
+}</code></pre>
+                </div>
+                <p>Because the visible window auto-recalculates, the DOM automatically updates. No manual re-render needed.</p>
+
+                <!-- Step 5 -->
+                <h2>Step 5 – Preload Adjacent Images (Smart Optimization)</h2>
+                <p>Sometimes when the user swipes fast, the next image loads late. We can manually preload the next slide:</p>
+                <div class="article-code">
+                    <div class="article-code-header">
+                        <div class="code-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                        <div class="code-title">preload.js</div>
+                    </div>
+                    <pre><code>watch(currentIndex, (newIndex) =&gt; {
+  const nextSlide = slides.value[newIndex + 1]
+  if (nextSlide) {
+    const img = new Image()
+    img.src = nextSlide.url
+  }
+})</code></pre>
+                </div>
+                <p>This ensures smooth UX even during fast navigation.</p>
+
+                <!-- Step 6 -->
+                <h2>Step 6 – Handling Mixed Media (Image + Video)</h2>
+                <p>If slides contain a mix of images and videos:</p>
+                <div class="article-code">
+                    <div class="article-code-header">
+                        <div class="code-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                        <div class="code-title">slideData.js</div>
+                    </div>
+                    <pre><code>{
+  type: 'image' | 'video',
+  url: '...'
+}</code></pre>
+                </div>
+                <p>Render conditionally:</p>
+                <div class="article-code">
+                    <div class="article-code-header">
+                        <div class="code-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                        <div class="code-title">MixedMediaSlide.vue</div>
+                    </div>
+                    <pre><code>&lt;div v-for="slide in visibleSlides" :key="slide.id"&gt;
+  &lt;img
+    v-if="slide.type === 'image'"
+    :src="slide.url"
+    loading="lazy"
+  /&gt;
+
+  &lt;video
+    v-else
+    :src="slide.url"
+    preload="metadata"
+    controls
+  /&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                <p><strong>Important:</strong></p>
+                <ul>
+                    <li>Never preload a full video</li>
+                    <li>Use <code>preload="metadata"</code></li>
+                    <li>Otherwise memory explodes</li>
+                </ul>
+
+                <!-- Step 7 -->
+                <h2>Step 7 – Avoid Layout Shift</h2>
+                <p>Always set explicit dimensions to prevent CLS (Cumulative Layout Shift) issues:</p>
+                <div class="article-code">
+                    <div class="article-code-header">
+                        <div class="code-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                        <div class="code-title">carousel.css</div>
+                    </div>
+                    <pre><code>.slide {
+  aspect-ratio: 16 / 9;
+  flex-shrink: 0;
+}</code></pre>
+                </div>
+                <p>Or explicitly set height. Without this, virtualization won't save you from CLS issues.</p>
+
+                <!-- Why Better Than Lazy Loading -->
+                <h2>Why This Is Better Than Just Lazy Loading</h2>
+                <p>Lazy loading only delays the network request. It does <strong>NOT</strong> reduce:</p>
+                <ul>
+                    <li>DOM nodes</li>
+                    <li>Memory footprint</li>
+                    <li>Re-render cost</li>
+                </ul>
+                <p><strong>Virtualization</strong> reduces structural cost. <strong>Lazy loading</strong> reduces network cost. Both together = a scalable solution.</p>
+
+                <!-- Real-World Scenario -->
+                <h2>Real-World Scenario</h2>
+                <p>If we build any of these, virtual scroll becomes mandatory:</p>
+                <ul>
+                    <li>Product gallery</li>
+                    <li>Large portal media section</li>
+                    <li>CMS article gallery</li>
+                    <li>100+ image dataset viewer</li>
+                </ul>
+                <p>Especially when multiple carousels exist on the same page. Otherwise mobile performance will suffer.</p>
+
+                <!-- Advanced Improvement -->
+                <h2>Advanced Improvement – Responsive + Virtualized</h2>
+                <p>Instead of a fixed <code>slideWidth</code>, use <code>ResizeObserver</code> to detect container width dynamically. Then calculate <code>slideWidth</code> reactively:</p>
+                <div class="article-code">
+                    <div class="article-code-header">
+                        <div class="code-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                        <div class="code-title">responsive.js</div>
+                    </div>
+                    <pre><code>const containerRef = ref(null)
+const slideWidth = ref(400)
+
+onMounted(() =&gt; {
+  const observer = new ResizeObserver((entries) =&gt; {
+    for (const entry of entries) {
+      slideWidth.value = entry.contentRect.width
+    }
+  })
+  if (containerRef.value) {
+    observer.observe(containerRef.value)
+  }
+})</code></pre>
+                </div>
+                <p>That makes your carousel responsive <strong>and</strong> virtualized — the best of both worlds.</p>
+
+                <!-- Final Thought -->
+                <h2>Final Thought</h2>
+                <p>A carousel is not just UI. It's <strong>memory management</strong>.</p>
+                <p>If we control what we render, we control performance. That's proper frontend engineering.</p>
+
+                <blockquote class="article-quote">
+                    Carousel is not just UI. It's memory management. If we control what we render, we control performance.
+                </blockquote>
+            </article>
+
+            <div class="article-share">
+                <div class="article-share-label">SHARE</div>
+                <div class="article-share-buttons">
+                    <button class="share-btn" type="button" data-share="twitter" aria-label="Share on X (Twitter)">
+                        <svg class="share-icon" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+                            <path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19 9.46 12.504h-7.404l-5.8-7.584-6.636 7.584H-.52l8.6-9.834L-1.0 1.153h7.59l5.243 6.93 6.068-6.93Zm-1.29 19.494h2.04L5.497 3.256H3.31L17.61 20.647Z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn" type="button" data-share="linkedin" aria-label="Share on LinkedIn">
+                        <svg class="share-icon" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+                            <path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.368-1.85 3.6 0 4.268 2.37 4.268 5.455v6.286ZM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124ZM7.114 20.452H3.56V9h3.554v11.452Z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <nav class="article-nav">
+                <a class="article-nav-link" id="prevArticle" href="#" aria-disabled="true">
+                    <div class="article-nav-kicker">PREVIOUS ARTICLE</div>
+                    <div class="article-nav-title">—</div>
+                </a>
+                <a class="article-nav-link" id="nextArticle" href="#" aria-disabled="true">
+                    <div class="article-nav-kicker">NEXT ARTICLE</div>
+                    <div class="article-nav-title">—</div>
+                </a>
+            </nav>
+
+            <section class="article-cta">
+                <div class="article-cta-icon" aria-hidden="true">
+                    <span class="material-symbols-outlined">mail</span>
+                </div>
+                <h2 class="article-cta-title">Enjoyed this article?</h2>
+                <p class="article-cta-subtitle">Get notified about new posts on frontend architecture and engineering leadership. No spam, ever.</p>
+                <div class="article-cta-form">
+                    <input class="article-input" type="email" placeholder="you@email.com" aria-label="Email address" />
+                    <button class="btn btn-primary" type="button" id="articleSubscribe">Subscribe</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer footer--tight">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Avudaiappan S. Built with HTML, CSS, and JavaScript.</p>
+                <div class="footer-links">
+                    <a href="index.html#work">Work</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="blog-data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script src="theme.js"></script>
+    <script src="article.js"></script>
+    <script src="newsletter.js"></script>
+</body>
+</html>
