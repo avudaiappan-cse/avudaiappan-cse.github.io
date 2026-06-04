@@ -43,6 +43,7 @@ textarea.inp{resize:vertical;min-height:70px;line-height:1.5}
 .live-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px #4ade80}
 .pw{width:500px;height:500px;position:relative;flex-shrink:0}
 .pc{width:1080px;height:1080px;transform:scale(0.4629);transform-origin:top left;position:absolute;top:0;left:0;overflow:hidden}
+.pc-export{width:1080px !important;height:1080px !important;transform:none !important;transform-origin:top left;position:relative !important;top:0 !important;left:0 !important;overflow:hidden !important;display:block;font-family:'Inter',sans-serif}
 
 /* ── CONTROLS ── */
 .cp{width:500px;margin-top:22px;background:#13121e;border:1.5px solid #2a2740;border-radius:14px;overflow:hidden}
@@ -648,6 +649,118 @@ textarea.ci{resize:vertical;min-height:62px;line-height:1.5}
 .D1-tags{display:flex;gap:10px}
 .D1-cta{font-family:'Fredoka One',cursive;font-size:24px;color:#fff;background:#ff3030;padding:8px 20px;border:4px solid #000;letter-spacing:1px;box-shadow:4px 4px 0 #000;transform:rotate(2deg)}
 
+/* ════════════════════════════════════════════
+   TEMPLATE 11 — TOKYO BROADCAST (TECH NEWS)
+   Manga news ticker, cyberpunk anchor vibes
+   For: tech news, announcements (NO code)
+════════════════════════════════════════════ */
+.TN{background:linear-gradient(180deg,#0a0a18 0%,#1a0f2e 50%,#0a0a18 100%);position:relative;overflow:hidden;font-family:'Nunito',sans-serif}
+.TN-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,40,90,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,200,255,.06) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;mask-image:radial-gradient(ellipse at center,#000,transparent 80%)}
+.TN-glow1{position:absolute;width:600px;height:300px;top:-100px;left:-150px;background:radial-gradient(ellipse,rgba(255,40,90,.35),transparent 70%);filter:blur(60px);pointer-events:none}
+.TN-glow2{position:absolute;width:500px;height:280px;bottom:-100px;right:-100px;background:radial-gradient(ellipse,rgba(0,200,255,.3),transparent 70%);filter:blur(60px);pointer-events:none}
+.TN-scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,.02) 3px,rgba(255,255,255,.02) 4px);pointer-events:none}
+.TN-jp{position:absolute;font-family:'Yomogi',cursive;writing-mode:vertical-rl;color:rgba(255,40,90,.4);text-shadow:0 0 20px rgba(255,40,90,.6);font-weight:700;pointer-events:none}
+.TN-jp1{top:60px;right:60px;font-size:36px}
+.TN-jp2{bottom:340px;left:60px;font-size:30px;color:rgba(0,200,255,.4);text-shadow:0 0 18px rgba(0,200,255,.6)}
+.TN-main{position:relative;z-index:5;padding:50px 64px;display:flex;flex-direction:column;height:100%}
+.TN-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:30px}
+.TN-handle{font-family:'Fredoka One',cursive;font-size:30px;color:#fff;letter-spacing:1px;text-shadow:0 0 24px rgba(0,200,255,.6)}
+.TN-handle span{color:#ff285a}
+.TN-meta{display:flex;align-items:center;gap:14px}
+.TN-date{font-family:'DM Mono',monospace;font-size:18px;color:rgba(255,255,255,.5);letter-spacing:1px}
+.TN-breaking{font-family:'Fredoka One',cursive;font-size:21px;color:#fff;background:#ff285a;padding:8px 20px;border-radius:4px;letter-spacing:3px;box-shadow:0 0 24px rgba(255,40,90,.6);animation:firefly 1.5s ease-in-out infinite}
+.TN-cat-row{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.TN-cat{font-family:'DM Mono',monospace;font-size:20px;color:#00c8ff;letter-spacing:4px;text-transform:uppercase;text-shadow:0 0 12px rgba(0,200,255,.6)}
+.TN-cat-line{flex:1;height:1px;background:linear-gradient(90deg,#00c8ff,transparent);box-shadow:0 0 8px rgba(0,200,255,.4)}
+.TN-headline{font-family:'Fredoka One',cursive;font-size:90px;line-height:.92;letter-spacing:-2px;background:linear-gradient(180deg,#fff 40%,#00c8ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 30px rgba(0,200,255,.3);filter:drop-shadow(0 0 12px rgba(255,255,255,.3));margin-bottom:24px}
+.TN-lead{font-size:30px;color:rgba(255,255,255,.85);line-height:1.45;font-weight:500;max-width:920px;margin-bottom:26px;text-shadow:0 0 12px rgba(0,200,255,.2)}
+.TN-quote{background:rgba(255,40,90,.08);border:1.5px solid rgba(255,40,90,.4);border-left:6px solid #ff285a;border-radius:0 14px 14px 0;padding:22px 28px;margin-bottom:auto;position:relative;backdrop-filter:blur(8px)}
+.TN-quote::before{content:'❝';position:absolute;top:-10px;left:18px;font-family:'Fraunces',serif;font-size:80px;color:#ff285a;line-height:1;text-shadow:0 0 16px rgba(255,40,90,.5);font-weight:900}
+.TN-quote-txt{font-family:'Fraunces',serif;font-style:italic;font-size:28px;color:#fff;line-height:1.4;padding-left:50px;font-weight:300}
+.TN-footer{padding-top:24px;border-top:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:space-between}
+.TN-source{display:flex;align-items:center;gap:10px;font-family:'DM Mono',monospace;font-size:19px;color:rgba(0,200,255,.6)}
+.TN-source::before{content:'';width:8px;height:8px;border-radius:50%;background:#00c8ff;box-shadow:0 0 12px #00c8ff}
+.TN-tags{display:flex;gap:8px}
+.TN-tag{font-family:'DM Mono',monospace;font-size:17px;color:#ff285a;background:rgba(255,40,90,.1);border:1px solid rgba(255,40,90,.3);padding:5px 14px;border-radius:4px;text-shadow:0 0 6px rgba(255,40,90,.4)}
+
+/* ════════════════════════════════════════════
+   TEMPLATE 12 — FOREST STORYBOOK (CONCEPT EXPLAINER)
+   Ghibli storybook page · for teaching concepts (NO code)
+   3-column "Why / How / Wow" layout
+════════════════════════════════════════════ */
+.EX{background:linear-gradient(180deg,#fef8e8 0%,#fef0d8 50%,#f5e8c8 100%);position:relative;overflow:hidden;font-family:'Nunito',sans-serif}
+.EX-paper{position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%,rgba(180,120,60,.05),transparent 50%),radial-gradient(circle at 80% 70%,rgba(120,80,40,.05),transparent 50%);pointer-events:none}
+.EX-blob{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none}
+.EX-b1{width:340px;height:340px;background:rgba(200,230,170,.5);top:-80px;right:-60px}
+.EX-b2{width:260px;height:260px;background:rgba(255,200,170,.5);bottom:60px;left:-60px}
+.EX-b3{width:180px;height:180px;background:rgba(255,180,200,.4);top:300px;left:300px}
+.EX-leaf{position:absolute;animation:float 4s ease-in-out infinite;filter:drop-shadow(2px 2px 4px rgba(100,80,40,.2))}
+.EX-l1{top:90px;right:120px;font-size:48px;animation-delay:.5s}
+.EX-l2{top:160px;left:80px;font-size:32px;animation-delay:1.2s}
+.EX-l3{bottom:240px;right:80px;font-size:38px;animation-delay:.3s}
+.EX-l4{bottom:300px;left:140px;font-size:26px;animation-delay:1.8s}
+.EX-main{position:relative;z-index:5;padding:60px 70px;display:flex;flex-direction:column;height:100%}
+.EX-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.EX-handle{font-family:'Fredoka One',cursive;font-size:26px;color:#5a3a20;letter-spacing:.5px}
+.EX-handle::before{content:'🌿 ';font-family:'Nunito'}
+.EX-chap{font-family:'Caveat',cursive;font-size:26px;color:#a07840;background:rgba(255,250,230,.7);border:1.5px solid rgba(180,140,80,.4);padding:6px 18px;border-radius:20px;font-weight:700}
+.EX-once{font-family:'Caveat',cursive;font-size:32px;color:#a07840;text-align:center;margin-bottom:14px;font-weight:600;font-style:italic}
+.EX-word{font-family:'Fraunces',serif;font-size:124px;font-weight:900;font-style:italic;color:#3a2810;text-align:center;line-height:.95;letter-spacing:-3px;margin-bottom:18px;text-shadow:3px 3px 0 rgba(255,250,230,.6)}
+.EX-def{font-family:'Fraunces',serif;font-size:30px;color:#5a3a20;text-align:center;line-height:1.5;font-weight:300;font-style:italic;max-width:880px;margin:0 auto 32px;padding:0 20px}
+.EX-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:24px}
+.EX-card{background:rgba(255,252,240,.85);border:2px solid rgba(180,140,80,.3);border-radius:18px;padding:24px 22px;text-align:center;box-shadow:0 6px 20px rgba(100,80,40,.1)}
+.EX-card-icon{font-size:48px;margin-bottom:10px;line-height:1}
+.EX-card-head{font-family:'Fredoka One',cursive;font-size:24px;color:#a05030;margin-bottom:8px;letter-spacing:.3px}
+.EX-card-body{font-size:22px;color:#5a3a20;line-height:1.5;font-weight:500}
+.EX-card:nth-child(2){background:rgba(240,250,235,.85);border-color:rgba(120,160,80,.3)}
+.EX-card:nth-child(2) .EX-card-head{color:#5a8030}
+.EX-card:nth-child(3){background:rgba(255,240,235,.85);border-color:rgba(200,130,110,.3)}
+.EX-card:nth-child(3) .EX-card-head{color:#c05050}
+.EX-takeaway{background:rgba(255,235,200,.85);border:2px dashed rgba(180,120,40,.5);border-radius:14px;padding:20px 28px;margin-top:auto;display:flex;align-items:center;gap:16px}
+.EX-take-icon{font-size:36px;flex-shrink:0}
+.EX-take-text{font-family:'Caveat',cursive;font-size:28px;color:#5a3a20;line-height:1.4;font-weight:700;font-style:italic;flex:1}
+.EX-footer{padding-top:18px;display:flex;align-items:center;justify-content:space-between}
+.EX-tags{display:flex;gap:8px}
+.EX-tag{font-family:'Caveat',cursive;font-size:22px;color:#7a5a30;background:rgba(255,252,240,.7);border:1.5px solid rgba(180,140,80,.3);padding:4px 14px;border-radius:18px;font-weight:600}
+.EX-cta{font-family:'Caveat',cursive;font-size:26px;color:#5a8030;font-weight:700}
+
+/* ════════════════════════════════════════════
+   TEMPLATE 13 — KAWAII FACT BOMB (DID YOU KNOW?)
+   Pastel info bubble · for fun facts, tips, trivia (NO code)
+════════════════════════════════════════════ */
+.FT{background:linear-gradient(135deg,#ffeaf2 0%,#e8f0ff 50%,#fff0e8 100%);position:relative;overflow:hidden;font-family:'Nunito',sans-serif}
+.FT-cloud{position:absolute;background:rgba(255,255,255,.6);border-radius:50%;filter:blur(8px);pointer-events:none}
+.FT-c1{width:280px;height:140px;top:-40px;left:80px}
+.FT-c2{width:200px;height:100px;top:120px;right:60px}
+.FT-c3{width:240px;height:120px;bottom:80px;left:-60px}
+.FT-c4{width:180px;height:90px;bottom:200px;right:120px}
+.FT-shape{position:absolute;border-radius:50%;filter:blur(2px);pointer-events:none}
+.FT-s1{width:120px;height:120px;background:#ffb8d4;top:60px;right:140px;opacity:.5;animation:float 4s ease-in-out infinite}
+.FT-s2{width:90px;height:90px;background:#b8c8ff;bottom:280px;left:80px;opacity:.5;animation:float 3.5s ease-in-out infinite;animation-delay:1s}
+.FT-s3{width:70px;height:70px;background:#ffe0a8;top:280px;left:60px;opacity:.5;animation:float 4.5s ease-in-out infinite;animation-delay:.7s}
+.FT-sprinkle{position:absolute;pointer-events:none;animation:twinkle 2.5s ease-in-out infinite}
+.FT-main{position:relative;z-index:5;padding:54px 64px;display:flex;flex-direction:column;height:100%}
+.FT-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.FT-handle-pill{background:linear-gradient(135deg,#ff7eb0,#ffa860);color:#fff;font-family:'Fredoka One',cursive;font-size:24px;padding:10px 24px;border-radius:30px;letter-spacing:.5px;box-shadow:0 6px 18px rgba(255,138,171,.35)}
+.FT-mascot{font-size:60px;animation:bounce 2.5s ease-in-out infinite;filter:drop-shadow(0 6px 12px rgba(0,0,0,.1))}
+.FT-banner{display:flex;align-items:center;gap:14px;margin-bottom:18px;justify-content:center}
+.FT-banner-line{flex:1;height:3px;background:linear-gradient(90deg,transparent,#ff7eb0,transparent);border-radius:2px}
+.FT-banner-tag{font-family:'Fredoka One',cursive;font-size:26px;color:#fff;background:linear-gradient(90deg,#ff7eb0,#a374ff);padding:8px 28px;border-radius:30px;letter-spacing:2px;box-shadow:0 6px 18px rgba(255,107,181,.4)}
+.FT-bubble{background:#fff;border:4px solid #fff;border-radius:40px;padding:38px 46px;box-shadow:0 16px 40px rgba(200,100,200,.18);position:relative;margin-bottom:20px}
+.FT-bubble::before{content:'';position:absolute;bottom:-26px;left:120px;width:48px;height:48px;background:#fff;border-radius:50%;box-shadow:0 8px 20px rgba(200,100,200,.1)}
+.FT-bubble::after{content:'';position:absolute;bottom:-46px;left:90px;width:22px;height:22px;background:#fff;border-radius:50%;box-shadow:0 4px 12px rgba(200,100,200,.1)}
+.FT-fact{font-family:'Fredoka One',cursive;font-size:78px;color:#a04080;line-height:.95;letter-spacing:-2px;text-align:center;text-shadow:3px 3px 0 rgba(255,200,230,.4);margin-bottom:18px}
+.FT-fact span.hi{background:linear-gradient(90deg,#ff5589,#a374ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.FT-explain{font-size:28px;color:#7a4a90;line-height:1.5;text-align:center;font-weight:600;max-width:780px;margin:0 auto}
+.FT-stats{display:flex;gap:14px;margin-bottom:auto}
+.FT-stat{flex:1;background:rgba(255,255,255,.75);border:2px solid rgba(255,180,210,.5);border-radius:18px;padding:18px 16px;text-align:center;backdrop-filter:blur(6px)}
+.FT-stat-num{font-family:'Fredoka One',cursive;font-size:42px;color:#ff5589;line-height:1;margin-bottom:4px;background:linear-gradient(135deg,#ff5589,#a374ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.FT-stat-label{font-size:18px;color:#7a4a90;font-weight:700;letter-spacing:.5px}
+.FT-footer{padding-top:22px;display:flex;align-items:center;justify-content:space-between;border-top:2px dashed rgba(255,150,180,.4)}
+.FT-tags{display:flex;gap:8px;flex-wrap:wrap}
+.FT-tag{font-family:'Caveat',cursive;font-size:22px;color:#a04080;background:rgba(255,255,255,.7);border:2px solid rgba(255,180,210,.5);padding:5px 16px;border-radius:20px;font-weight:700}
+.FT-cta{font-family:'Fredoka One',cursive;font-size:22px;color:#fff;background:linear-gradient(90deg,#ff7eb0,#a374ff);padding:8px 22px;border-radius:24px;box-shadow:0 6px 16px rgba(255,107,181,.35)}
+
 /* templates-scroll wrapper — vertical on desktop, horizontal on mobile */
 .templates-scroll{display:flex;flex-direction:column;gap:0}
 
@@ -942,6 +1055,18 @@ textarea.ci{resize:vertical;min-height:62px;line-height:1.5}
       <div class="tb-em" style="background:rgba(255,200,40,.15)">⚡</div>
       <div class="tb-info"><div class="tb-name">Saiyan Power</div><div class="tb-hint">Dragon Ball energy blast</div></div>
     </button>
+    <button class="tb" onclick="go('TN',this)">
+      <div class="tb-em" style="background:rgba(255,40,90,.15)">📡</div>
+      <div class="tb-info"><div class="tb-name">Tokyo Broadcast</div><div class="tb-hint">📰 News · no code needed</div></div>
+    </button>
+    <button class="tb" onclick="go('EX',this)">
+      <div class="tb-em" style="background:rgba(180,140,80,.18)">📖</div>
+      <div class="tb-info"><div class="tb-name">Forest Storybook</div><div class="tb-hint">🌿 Concept · explain ideas</div></div>
+    </button>
+    <button class="tb" onclick="go('FT',this)">
+      <div class="tb-em" style="background:rgba(255,138,171,.15)">💭</div>
+      <div class="tb-info"><div class="tb-name">Fact Bubble</div><div class="tb-hint">🍡 Did you know · trivia</div></div>
+    </button>
     </div>
   </div>
 
@@ -1082,7 +1207,10 @@ makeCake().then(console.log)`},
   };
 }
 const goku = powerUp(100);
-goku();  // 200 → goku();  // 400 ⚡`}
+goku();  // 200 → goku();  // 400 ⚡`},
+  TN:{cat:'AI · BREAKING',headline:'GPT-5 Crosses\n90% Reasoning\nBenchmark',lead:'OpenAI\'s newest model shows dramatic improvements in math, coding, and multi-step reasoning — outscoring all previous models on graduate-level tests.',quote:'It\'s the first model that genuinely feels like a research collaborator, not just an assistant.',source:'The Verge · 2 hrs ago'},
+  EX:{chap:'Lesson · 07',word:'Recursion',once:'~ today\'s tale of the code forest ~',def:'A function that calls itself — like mirrors reflecting mirrors, magical and infinite, until it reaches its base case.',c1head:'Why?',c1body:'Some problems are naturally nested — trees, files, math.',c2head:'How?',c2body:'Each call shrinks the problem until it hits a base case.',c3head:'Wow!',c3body:'A 4-line function can solve Tower of Hanoi or Fibonacci.',takeaway:'Recursion isn\'t scary — it\'s just trust. Trust the function to handle the smaller case 🌿'},
+  FT:{banner:'DID YOU KNOW?',fact:'Python is named after\n[Monty Python]',explain:'Guido van Rossum picked the name in 1991 — not the snake! He was reading the BBC comedy scripts and needed something \'short, unique, and slightly mysterious\'.',stat1num:'1991',stat1lbl:'Born',stat2num:'#1',stat2lbl:'AI Lang',stat3num:'8M+',stat3lbl:'Devs'}
 };
 
 /* ── SYNTAX ── */
@@ -1476,6 +1604,129 @@ D1:(d)=>{
     </div>
   </div>
 </div>`;
+},
+
+TN:(d)=>{
+  const today=new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}).toUpperCase();
+  return `<div class="pc TN" id="pc">
+  <div class="TN-grid"></div>
+  <div class="TN-glow1"></div>
+  <div class="TN-glow2"></div>
+  <div class="TN-scan"></div>
+  <div class="TN-jp TN-jp1">速報</div>
+  <div class="TN-jp TN-jp2">技術</div>
+  <div class="TN-main">
+    <div class="TN-top">
+      <div class="TN-handle">@codewith<span>her</span></div>
+      <div class="TN-meta">
+        <div class="TN-date">${today}</div>
+        <div class="TN-breaking">BREAKING</div>
+      </div>
+    </div>
+    <div class="TN-cat-row">
+      <div class="TN-cat">${d.cat}</div>
+      <div class="TN-cat-line"></div>
+    </div>
+    <div class="TN-headline">${d.headline.replace(/\n/g,'<br>')}</div>
+    <div class="TN-lead">${d.lead}</div>
+    <div class="TN-quote">
+      <div class="TN-quote-txt">${d.quote}</div>
+    </div>
+    <div class="TN-footer">
+      <div class="TN-source">${d.source}</div>
+      <div class="TN-tags">${htags('TN-tag')}</div>
+    </div>
+  </div>
+</div>`;
+},
+
+EX:(d)=>`<div class="pc EX" id="pc">
+  <div class="EX-paper"></div>
+  <div class="EX-blob EX-b1"></div>
+  <div class="EX-blob EX-b2"></div>
+  <div class="EX-blob EX-b3"></div>
+  <span class="EX-leaf EX-l1">🍃</span>
+  <span class="EX-leaf EX-l2">🌿</span>
+  <span class="EX-leaf EX-l3">🍂</span>
+  <span class="EX-leaf EX-l4">✨</span>
+  <div class="EX-main">
+    <div class="EX-top">
+      <div class="EX-handle">@codewithher</div>
+      <div class="EX-chap">${d.chap}</div>
+    </div>
+    <div class="EX-once">${d.once}</div>
+    <div class="EX-word">${d.word}</div>
+    <div class="EX-def">${d.def}</div>
+    <div class="EX-cards">
+      <div class="EX-card">
+        <div class="EX-card-icon">🤔</div>
+        <div class="EX-card-head">${d.c1head}</div>
+        <div class="EX-card-body">${d.c1body}</div>
+      </div>
+      <div class="EX-card">
+        <div class="EX-card-icon">🌱</div>
+        <div class="EX-card-head">${d.c2head}</div>
+        <div class="EX-card-body">${d.c2body}</div>
+      </div>
+      <div class="EX-card">
+        <div class="EX-card-icon">✨</div>
+        <div class="EX-card-head">${d.c3head}</div>
+        <div class="EX-card-body">${d.c3body}</div>
+      </div>
+    </div>
+    <div class="EX-takeaway">
+      <div class="EX-take-icon">🌳</div>
+      <div class="EX-take-text">${d.takeaway}</div>
+    </div>
+    <div class="EX-footer">
+      <div class="EX-tags">${htags('EX-tag')}</div>
+      <div class="EX-cta">~ end of chapter ~</div>
+    </div>
+  </div>
+</div>`,
+
+FT:(d)=>{
+  let sprinkles='';
+  const positions=[[8,18],[88,12],[15,82],[85,86],[5,50],[92,48],[45,8],[55,90]];
+  const items=['✨','💖','⭐','💫','🌟','♡','✨','💕'];
+  positions.forEach((p,i)=>{
+    const size=20+Math.random()*16;
+    sprinkles+=`<span class="FT-sprinkle" style="left:${p[0]}%;top:${p[1]}%;font-size:${size}px;animation-delay:${i*.3}s">${items[i]}</span>`;
+  });
+  return `<div class="pc FT" id="pc">
+  <div class="FT-cloud FT-c1"></div>
+  <div class="FT-cloud FT-c2"></div>
+  <div class="FT-cloud FT-c3"></div>
+  <div class="FT-cloud FT-c4"></div>
+  <div class="FT-shape FT-s1"></div>
+  <div class="FT-shape FT-s2"></div>
+  <div class="FT-shape FT-s3"></div>
+  ${sprinkles}
+  <div class="FT-main">
+    <div class="FT-top">
+      <div class="FT-handle-pill">@codewithher ♡</div>
+      <div class="FT-mascot">🍡</div>
+    </div>
+    <div class="FT-banner">
+      <div class="FT-banner-line"></div>
+      <div class="FT-banner-tag">${d.banner}</div>
+      <div class="FT-banner-line"></div>
+    </div>
+    <div class="FT-bubble">
+      <div class="FT-fact">${d.fact.replace(/\[([^\]]+)\]/g,'<span class="hi">$1</span>').replace(/\n/g,'<br>')}</div>
+      <div class="FT-explain">${d.explain}</div>
+    </div>
+    <div class="FT-stats">
+      <div class="FT-stat"><div class="FT-stat-num">${d.stat1num}</div><div class="FT-stat-label">${d.stat1lbl}</div></div>
+      <div class="FT-stat"><div class="FT-stat-num">${d.stat2num}</div><div class="FT-stat-label">${d.stat2lbl}</div></div>
+      <div class="FT-stat"><div class="FT-stat-num">${d.stat3num}</div><div class="FT-stat-label">${d.stat3lbl}</div></div>
+    </div>
+    <div class="FT-footer">
+      <div class="FT-tags">${htags('FT-tag')}</div>
+      <div class="FT-cta">save & share ♡</div>
+    </div>
+  </div>
+</div>`;
 }
 };
 
@@ -1564,7 +1815,38 @@ D1:`
 <div class="cf full"><div class="cl">BIG TITLE</div><input class="ci" id="f2" value="${D.D1.title}"></div>
 <div class="cf"><div class="cl">Filename</div><input class="ci" id="f3" value="${D.D1.filename}"></div>
 <div class="cf full"><div class="cl">Subtitle / Hook</div><textarea class="ci" id="f4">${D.D1.sub}</textarea></div>
-<div class="cf full"><div class="cl">Code</div><textarea class="ci" id="f5">${D.D1.code}</textarea></div>`
+<div class="cf full"><div class="cl">Code</div><textarea class="ci" id="f5">${D.D1.code}</textarea></div>`,
+
+TN:`
+<div class="cf full"><div class="cl">Category (e.g. AI · BREAKING)</div><input class="ci" id="f1" value="${D.TN.cat}"></div>
+<div class="cf full"><div class="cl">Headline (\\n for line break)</div><textarea class="ci" id="f2">${D.TN.headline}</textarea></div>
+<div class="cf full"><div class="cl">Lead Paragraph</div><textarea class="ci" id="f3">${D.TN.lead}</textarea></div>
+<div class="cf full"><div class="cl">Pull Quote</div><textarea class="ci" id="f4">${D.TN.quote}</textarea></div>
+<div class="cf full"><div class="cl">Source · Time</div><input class="ci" id="f5" value="${D.TN.source}"></div>`,
+
+EX:`
+<div class="cf"><div class="cl">Chapter Tag</div><input class="ci" id="f1" value="${D.EX.chap}"></div>
+<div class="cf"><div class="cl">Subtitle Hint</div><input class="ci" id="f2" value="${D.EX.once}"></div>
+<div class="cf full"><div class="cl">Concept Word</div><input class="ci" id="f3" value="${D.EX.word}"></div>
+<div class="cf full"><div class="cl">Definition</div><textarea class="ci" id="f4">${D.EX.def}</textarea></div>
+<div class="cf"><div class="cl">Card 1 Title (Why?)</div><input class="ci" id="f5" value="${D.EX.c1head}"></div>
+<div class="cf full"><div class="cl">Card 1 Body</div><textarea class="ci" id="f6">${D.EX.c1body}</textarea></div>
+<div class="cf"><div class="cl">Card 2 Title (How?)</div><input class="ci" id="f7" value="${D.EX.c2head}"></div>
+<div class="cf full"><div class="cl">Card 2 Body</div><textarea class="ci" id="f8">${D.EX.c2body}</textarea></div>
+<div class="cf"><div class="cl">Card 3 Title (Wow!)</div><input class="ci" id="f9" value="${D.EX.c3head}"></div>
+<div class="cf full"><div class="cl">Card 3 Body</div><textarea class="ci" id="f10">${D.EX.c3body}</textarea></div>
+<div class="cf full"><div class="cl">Takeaway / Key Lesson</div><textarea class="ci" id="f11">${D.EX.takeaway}</textarea></div>`,
+
+FT:`
+<div class="cf full"><div class="cl">Banner Tag (e.g. DID YOU KNOW?)</div><input class="ci" id="f1" value="${D.FT.banner}"></div>
+<div class="cf full"><div class="cl">Big Fact (use [brackets] for highlight, \\n for newline)</div><textarea class="ci" id="f2">${D.FT.fact}</textarea></div>
+<div class="cf full"><div class="cl">Explanation</div><textarea class="ci" id="f3">${D.FT.explain}</textarea></div>
+<div class="cf"><div class="cl">Stat 1 Number</div><input class="ci" id="f4" value="${D.FT.stat1num}"></div>
+<div class="cf"><div class="cl">Stat 1 Label</div><input class="ci" id="f5" value="${D.FT.stat1lbl}"></div>
+<div class="cf"><div class="cl">Stat 2 Number</div><input class="ci" id="f6" value="${D.FT.stat2num}"></div>
+<div class="cf"><div class="cl">Stat 2 Label</div><input class="ci" id="f7" value="${D.FT.stat2lbl}"></div>
+<div class="cf"><div class="cl">Stat 3 Number</div><input class="ci" id="f8" value="${D.FT.stat3num}"></div>
+<div class="cf"><div class="cl">Stat 3 Label</div><input class="ci" id="f9" value="${D.FT.stat3lbl}"></div>`
 };
 
 let cur='G1';
@@ -1589,6 +1871,9 @@ function applyAll(){
   if(cur==='K1'){d.eyebrow=g('f1');d.title=g('f2');d.filename=g('f3');d.sub=g('f4');d.code=g('f5')}
   if(cur==='H1'){d.class=g('f1');d.title=g('f2');d.filename=g('f3');d.sub=g('f4');d.code=g('f5')}
   if(cur==='D1'){d.eyebrow=g('f1');d.title=g('f2');d.filename=g('f3');d.sub=g('f4');d.code=g('f5')}
+  if(cur==='TN'){d.cat=g('f1');d.headline=g('f2');d.lead=g('f3');d.quote=g('f4');d.source=g('f5')}
+  if(cur==='EX'){d.chap=g('f1');d.once=g('f2');d.word=g('f3');d.def=g('f4');d.c1head=g('f5');d.c1body=g('f6');d.c2head=g('f7');d.c2body=g('f8');d.c3head=g('f9');d.c3body=g('f10');d.takeaway=g('f11')}
+  if(cur==='FT'){d.banner=g('f1');d.fact=g('f2');d.explain=g('f3');d.stat1num=g('f4');d.stat1lbl=g('f5');d.stat2num=g('f6');d.stat2lbl=g('f7');d.stat3num=g('f8');d.stat3lbl=g('f9')}
   render();
 }
 function doExport(){
@@ -1607,17 +1892,21 @@ async function exportToPng(pcEl){
     // wait for fonts to fully load
     if(document.fonts && document.fonts.ready) await document.fonts.ready;
 
-    // clone to offscreen container at full 1080x1080 size (transform stripped)
-    const offscreen=document.createElement('div');
-    offscreen.style.cssText='position:fixed;left:-99999px;top:0;width:1080px;height:1080px;pointer-events:none;z-index:-1;';
-    const clone=pcEl.cloneNode(true);
-    clone.id='pcExport';
-    clone.style.cssText='width:1080px;height:1080px;transform:none;position:relative;top:0;left:0;';
-    offscreen.appendChild(clone);
-    document.body.appendChild(offscreen);
+    // build offscreen container that's actually rendered (not far offscreen — iOS skips painting that)
+    const container=document.createElement('div');
+    container.id='exportContainer';
+    container.style.cssText='position:fixed;top:0;left:0;width:1080px;height:1080px;pointer-events:none;z-index:1;background:transparent;overflow:hidden;';
 
-    // give layout a tick to settle
-    await new Promise(r=>setTimeout(r,150));
+    const clone=pcEl.cloneNode(true);
+    clone.removeAttribute('id');
+    // ★ rename .pc → .pc-export so mobile media queries can't touch it
+    clone.className=clone.className.replace(/\bpc\b/g,'pc-export');
+
+    container.appendChild(clone);
+    document.body.appendChild(container);
+
+    // give layout + paint a tick to settle
+    await new Promise(r=>setTimeout(r,200));
 
     const canvas=await html2canvas(clone,{
       width:1080,
@@ -1629,19 +1918,32 @@ async function exportToPng(pcEl){
       useCORS:true,
       allowTaint:true,
       logging:false,
-      imageTimeout:15000
+      imageTimeout:15000,
+      foreignObjectRendering:false,
+      onclone:(doc)=>{
+        // belt-and-braces: force the cloned doc's element to full size
+        const el=doc.querySelector('.pc-export');
+        if(el){
+          el.style.setProperty('width','1080px','important');
+          el.style.setProperty('height','1080px','important');
+          el.style.setProperty('transform','none','important');
+          el.style.setProperty('position','relative','important');
+        }
+        // inject mobile-killing CSS into the cloned doc
+        const s=doc.createElement('style');
+        s.textContent='.pc-export,.pc-export *{transform:none}.pc-export{width:1080px!important;height:1080px!important}';
+        doc.head.appendChild(s);
+      }
     });
 
-    offscreen.remove();
+    container.remove();
 
     // convert to blob + data url
     currentDataUrl=canvas.toDataURL('image/png');
     canvas.toBlob(blob=>{
       currentBlob=blob;
-      // detect iOS — long-press fallback hint
       const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent);
       document.getElementById('iosTip').style.display=isIOS?'block':'none';
-      // show share button if Web Share API supports files
       if(navigator.canShare){
         try{
           const testFile=new File([blob],'test.png',{type:'image/png'});
@@ -1650,7 +1952,6 @@ async function exportToPng(pcEl){
           }
         }catch(e){}
       }
-      // show preview
       document.getElementById('modalPreview').src=currentDataUrl;
       document.getElementById('loadOverlay').classList.remove('show');
       document.getElementById('exportModal').classList.add('show');
@@ -1658,6 +1959,8 @@ async function exportToPng(pcEl){
 
   }catch(err){
     document.getElementById('loadOverlay').classList.remove('show');
+    const c=document.getElementById('exportContainer');
+    if(c) c.remove();
     alert('Export failed: '+err.message);
     console.error(err);
   }
