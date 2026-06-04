@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>codewithher · Anime Studio ✨</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;0,800;0,900;1,400&family=Caveat:wght@400;600;700&family=Fredoka+One&family=DM+Mono:wght@400;500&family=Yomogi&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:#1a1825;color:#e8e4f5;display:flex;min-height:100vh}
+
+/* ── SIDEBAR ── */
+.bar{width:276px;min-height:100vh;background:#13121e;border-right:1px solid #2a2740;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0}
+.bar-top{padding:20px 18px 14px;border-bottom:1px solid #2a2740;display:flex;align-items:center;gap:12px}
+.bar-mascot{font-size:28px;line-height:1}
+.bar-titles{}
+.bar-name{font-family:'Fredoka One',cursive;font-size:18px;color:#fff;letter-spacing:.5px}
+.bar-sub{font-family:'DM Mono',monospace;font-size:9px;color:#6a6580;letter-spacing:1.5px;margin-top:2px}
+.bar-sec{padding:12px 14px 6px}
+.bar-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#6a6580;margin-bottom:8px}
+.tb{display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;background:transparent;border:1.5px solid transparent;border-radius:12px;color:#8a86a0;font-family:'Nunito',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;text-align:left;margin-bottom:4px;transition:all .18s}
+.tb:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1);color:#e8e4f5}
+.tb.on{background:rgba(255,200,80,.08);border-color:rgba(255,200,80,.4);color:#ffc850}
+.tb-em{font-size:20px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px;flex-shrink:0}
+.tb-info{}
+.tb-name{font-weight:800;font-size:12.5px}
+.tb-hint{font-size:10px;color:#6a6580;font-weight:400;margin-top:1px}
+
+.inp{width:100%;background:#1e1d2c;border:1.5px solid #2a2740;border-radius:9px;color:#e8e4f5;font-family:'Nunito',sans-serif;font-size:12px;padding:7px 10px;outline:none;margin-bottom:10px;transition:border-color .15s}
+.inp:focus{border-color:#ffc850}
+textarea.inp{resize:vertical;min-height:70px;line-height:1.5}
+.lab{display:block;font-family:'DM Mono',monospace;font-size:9px;color:#6a6580;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:5px}
+.export-btn{margin:14px 14px 20px;padding:12px;background:linear-gradient(135deg,#ff6b9d,#ffc850);border:none;border-radius:12px;color:#1a0a00;font-family:'Fredoka One',cursive;font-size:15px;cursor:pointer;width:calc(100% - 28px);letter-spacing:.5px;transition:opacity .15s,transform .1s}
+.export-btn:hover{opacity:.88;transform:translateY(-1px)}
+
+/* ── MAIN ── */
+.main{flex:1;padding:34px 40px;display:flex;flex-direction:column;align-items:center;overflow-y:auto;
+  background:radial-gradient(ellipse at 20% 10%,rgba(255,107,157,.06),transparent 50%),
+             radial-gradient(ellipse at 80% 90%,rgba(107,207,255,.05),transparent 50%),
+             #1a1825}
+.live-tag{align-self:flex-start;font-family:'DM Mono',monospace;font-size:9px;color:#6a6580;letter-spacing:3px;text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.live-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px #4ade80}
+.pw{width:500px;height:500px;position:relative;flex-shrink:0}
+.pc{width:1080px;height:1080px;transform:scale(0.4629);transform-origin:top left;position:absolute;top:0;left:0;overflow:hidden}
+
+/* ── CONTROLS ── */
+.cp{width:500px;margin-top:22px;background:#13121e;border:1.5px solid #2a2740;border-radius:14px;overflow:hidden}
+.cp-head{padding:12px 16px;border-bottom:1px solid #2a2740;font-family:'DM Mono',monospace;font-size:9px;color:#6a6580;letter-spacing:2px;text-transform:uppercase}
+.cg{padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cf{display:flex;flex-direction:column;gap:4px}
+.cf.full{grid-column:1/-1}
+.cl{font-family:'DM Mono',monospace;font-size:9px;color:#6a6580;text-transform:uppercase;letter-spacing:1.5px}
+.ci{background:#1e1d2c;border:1.5px solid #2a2740;border-radius:8px;color:#e8e4f5;font-family:'Nunito',sans-serif;font-size:12px;padding:7px 9px;outline:none;width:100%;transition:border-color .15s}
+.ci:focus{border-color:#ffc850}
+textarea.ci{resize:vertical;min-height:62px;line-height:1.5}
+.ab{margin:0 16px 16px;padding:10px;background:rgba(255,200,80,.1);border:1.5px solid rgba(255,200,80,.3);border-radius:9px;color:#ffc850;font-family:'Nunito',sans-serif;font-size:12.5px;font-weight:800;cursor:pointer;width:calc(100% - 32px);transition:background .15s}
+.ab:hover{background:rgba(255,200,80,.18)}
+
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:#1a1825}
+::-webkit-scrollbar-thumb{background:#2a2740;border-radius:3px}
+
+/* ════════════════════════════════════════════
+   TEMPLATE 1 — GHIBLI FOREST SCROLL
+   Dreamy watercolor sky, floating totoro clouds,
+   hand-drawn border, soft parchment code card
+════════════════════════════════════════════ */
+.G1{
+  background:linear-gradient(180deg,#b8d4e8 0%,#c9e0f0 18%,#d4e8c2 50%,#c8ddb0 72%,#a8c88a 100%);
+  position:relative;overflow:hidden;display:flex;flex-direction:column;
+  font-family:'Nunito',sans-serif;
+}
+/* sky watercolor blobs */
+.G1-sky-blob{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none}
+.G1-sb1{width:500px;height:300px;top:-80px;left:-100px;background:rgba(200,225,255,.5)}
+.G1-sb2{width:400px;height:250px;top:50px;right:-80px;background:rgba(255,240,220,.4)}
+.G1-sb3{width:600px;height:200px;top:160px;left:100px;background:rgba(220,240,200,.4)}
+
+/* rolling hills */
+.G1-hills{position:absolute;bottom:0;left:0;right:0;height:380px;pointer-events:none}
+
+/* floating clouds (CSS only) */
+.G1-cloud{position:absolute;pointer-events:none}
+.G1-cloud::before,.G1-cloud::after{content:'';position:absolute;background:rgba(255,255,255,.75);border-radius:50%}
+.G1-c1{top:60px;left:80px;width:180px;height:60px;background:rgba(255,255,255,.7);border-radius:50px;filter:blur(2px)}
+.G1-c1::before{width:90px;height:80px;top:-40px;left:30px}
+.G1-c1::after{width:70px;height:60px;top:-28px;left:80px}
+.G1-c2{top:100px;right:120px;width:140px;height:50px;background:rgba(255,255,255,.65);border-radius:50px;filter:blur(2px)}
+.G1-c2::before{width:70px;height:70px;top:-36px;left:20px}
+.G1-c2::after{width:55px;height:50px;top:-24px;left:62px}
+.G1-c3{top:30px;left:420px;width:100px;height:38px;background:rgba(255,255,255,.6);border-radius:50px;filter:blur(1.5px)}
+.G1-c3::before{width:52px;height:52px;top:-28px;left:16px}
+
+/* sparkles */
+.G1-spark{position:absolute;font-size:28px;animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-18px) rotate(8deg)}}
+
+.G1-main{position:relative;z-index:2;padding:50px 64px 0;display:flex;flex-direction:column;height:100%}
+.G1-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+.G1-brand{display:flex;align-items:center;gap:14px}
+.G1-leaf{font-size:36px}
+.G1-brandtxt{}
+.G1-handle{font-family:'Fredoka One',cursive;font-size:28px;color:#2d5a27;letter-spacing:.5px}
+.G1-tagline{font-size:19px;color:#5a8a4f;margin-top:2px;font-style:italic}
+.G1-acorn{font-size:44px}
+
+.G1-title-scroll{
+  background:rgba(255,252,240,.88);
+  border:3px solid rgba(180,140,80,.4);
+  border-radius:20px;
+  padding:32px 40px;
+  position:relative;
+  margin-bottom:24px;
+  box-shadow:0 4px 30px rgba(100,80,40,.1),inset 0 0 40px rgba(255,240,180,.2);
+}
+.G1-title-scroll::before,.G1-title-scroll::after{
+  content:'~ ✦ ~';position:absolute;
+  font-family:'Caveat',cursive;font-size:24px;color:rgba(140,100,50,.4);
+}
+.G1-title-scroll::before{top:10px;left:50%;transform:translateX(-50%)}
+.G1-title-scroll::after{bottom:10px;left:50%;transform:translateX(-50%)}
+.G1-topic-label{font-family:'Caveat',cursive;font-size:26px;color:#8a6a30;margin-bottom:6px;text-align:center}
+.G1-topic-title{font-family:'Fredoka One',cursive;font-size:72px;color:#2d4a20;line-height:1;text-align:center;letter-spacing:-1px;margin-bottom:8px}
+.G1-topic-desc{font-size:26px;color:#5a6a40;text-align:center;line-height:1.5;font-style:italic}
+
+.G1-code-card{
+  background:rgba(255,252,235,.92);
+  border:2px solid rgba(160,130,70,.35);
+  border-radius:16px;overflow:hidden;flex:1;
+  box-shadow:0 6px 24px rgba(80,60,20,.12);
+}
+.G1-cc-bar{
+  background:rgba(240,230,200,.8);
+  padding:14px 20px;border-bottom:2px dashed rgba(160,130,70,.3);
+  display:flex;align-items:center;gap:10px;
+}
+.G1-cc-leaf{font-size:18px}
+.G1-cc-fname{font-family:'Caveat',cursive;font-size:24px;color:#8a6a30}
+.G1-cc-lang{font-family:'DM Mono',monospace;font-size:19px;color:#4a7a3a;background:rgba(100,160,60,.12);border:1px solid rgba(100,160,60,.3);padding:4px 14px;border-radius:20px}
+.G1-cc-code{padding:24px 28px;font-family:'DM Mono',monospace;font-size:25px;line-height:1.75;color:#3a4a20;white-space:pre}
+.G1-footer{padding:16px 0 40px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2}
+.G1-tags{display:flex;gap:10px}
+.G1-tag{font-family:'Caveat',cursive;font-size:22px;color:#5a7a40;background:rgba(255,255,255,.6);border:1.5px solid rgba(120,170,80,.35);padding:5px 16px;border-radius:20px}
+.G1-cta{font-family:'Caveat',cursive;font-size:24px;color:#2d5a27}
+
+/* syntax – earthy palette for Ghibli */
+.G1-kw{color:#7a3a80}.G1-fn{color:#2a6a8a}.G1-str{color:#6a8a2a}.G1-num{color:#c87a20}.G1-cm{color:#9a9a7a;font-style:italic}
+
+/* ════════════════════════════════════════════
+   TEMPLATE 2 — TOTORO NIGHT MAGIC
+   Deep indigo night, glowing soot sprites,
+   fireflies, magical script
+════════════════════════════════════════════ */
+.G2{
+  background:linear-gradient(180deg,#0a0820 0%,#1a1040 40%,#0f1a35 70%,#081020 100%);
+  position:relative;overflow:hidden;display:flex;flex-direction:column;
+  font-family:'Nunito',sans-serif;
+}
+.G2-stars{position:absolute;inset:0;pointer-events:none}
+.G2-moon{position:absolute;top:60px;right:100px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 38% 38%,#fff9e8,#ffd060 60%,#ffaa20);box-shadow:0 0 80px rgba(255,200,50,.5),0 0 200px rgba(255,180,30,.2);pointer-events:none}
+.G2-moon-face{position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);font-size:60px;line-height:1}
+/* firefly dots */
+.G2-fly{position:absolute;border-radius:50%;background:rgba(200,255,150,.9);box-shadow:0 0 12px rgba(180,255,100,.8);animation:firefly 3s ease-in-out infinite}
+@keyframes firefly{0%,100%{opacity:.2;transform:translateY(0)}50%{opacity:1;transform:translateY(-25px)}}
+.G2-hill-l{position:absolute;bottom:0;left:-60px;width:700px;height:350px;background:#0d1a28;border-radius:50% 50% 0 0/60% 60% 0 0}
+.G2-hill-r{position:absolute;bottom:0;right:-60px;width:600px;height:280px;background:#0a1520;border-radius:50% 50% 0 0/60% 60% 0 0}
+.G2-tree{position:absolute;bottom:200px;left:80px;font-size:100px;filter:drop-shadow(0 0 20px rgba(50,100,50,.5))}
+.G2-tree2{position:absolute;bottom:180px;right:60px;font-size:80px;filter:drop-shadow(0 0 15px rgba(50,100,50,.4))}
+.G2-main{position:relative;z-index:3;padding:52px 64px 0;display:flex;flex-direction:column;height:100%}
+.G2-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.G2-handle{font-family:'Fredoka One',cursive;font-size:28px;color:#ffd060;letter-spacing:.5px;text-shadow:0 0 30px rgba(255,200,50,.5)}
+.G2-num{font-family:'Caveat',cursive;font-size:26px;color:rgba(255,220,100,.5)}
+
+.G2-magic-card{
+  background:rgba(20,15,50,.7);
+  border:2px solid rgba(255,200,80,.2);
+  border-radius:24px;
+  padding:38px 44px;
+  backdrop-filter:blur(20px);
+  box-shadow:0 0 60px rgba(100,60,200,.3),inset 0 0 60px rgba(255,200,80,.04);
+  position:relative;margin-bottom:22px;
+}
+.G2-magic-card::before{
+  content:'✨';position:absolute;top:-18px;left:50%;transform:translateX(-50%);
+  font-size:36px;filter:drop-shadow(0 0 16px rgba(255,220,80,.8));
+}
+.G2-cat-label{font-family:'Caveat',cursive;font-size:24px;color:rgba(200,180,255,.6);text-align:center;margin-bottom:10px;letter-spacing:2px}
+.G2-big-title{font-family:'Fredoka One',cursive;font-size:88px;color:#fff;text-align:center;line-height:.95;letter-spacing:-1px;margin-bottom:14px;text-shadow:0 0 40px rgba(200,160,255,.5)}
+.G2-glow-desc{font-size:28px;color:rgba(200,220,255,.7);text-align:center;line-height:1.5;font-style:italic}
+
+.G2-code-lantern{
+  background:rgba(10,8,30,.8);
+  border:1.5px solid rgba(255,200,80,.15);
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 0 30px rgba(255,180,50,.08);
+}
+.G2-cl-bar{padding:14px 20px;background:rgba(255,200,80,.06);border-bottom:1px solid rgba(255,200,80,.1);display:flex;align-items:center;gap:8px}
+.G2-cl-d{width:12px;height:12px;border-radius:50%}
+.G2-cl-d1{background:#ff5f57}.G2-cl-d2{background:#febc2e}.G2-cl-d3{background:#28c840}
+.G2-cl-name{font-family:'Caveat',cursive;font-size:22px;color:rgba(255,200,80,.45);margin-left:8px}
+.G2-cl-code{padding:24px 28px;font-family:'DM Mono',monospace;font-size:24px;line-height:1.75;color:rgba(220,210,255,.8);white-space:pre}
+.G2-footer{padding:18px 0 40px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:3}
+.G2-tag{font-family:'Caveat',cursive;font-size:21px;color:rgba(200,180,255,.5);background:rgba(255,255,255,.04);border:1px solid rgba(200,180,255,.15);padding:5px 14px;border-radius:20px}
+.G2-tags{display:flex;gap:8px}
+.G2-cta{font-family:'Caveat',cursive;font-size:24px;color:#ffd060;text-shadow:0 0 20px rgba(255,200,50,.5)}
+
+/* ════════════════════════════════════════════
+   TEMPLATE 3 — SHIN-CHAN COMIC BLAST
+   Bold black outlines, halftone dots, speech bubble,
+   LOUD primary colors, action lines
+════════════════════════════════════════════ */
+.S1{
+  background:#fff700;
+  position:relative;overflow:hidden;
+  font-family:'Fredoka One',cursive;
+}
+/* halftone pattern */
+.S1-halftone{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,.07) 1.5px,transparent 1.5px);background-size:18px 18px;pointer-events:none}
+/* action lines (manga speed lines) */
+.S1-lines{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+/* thick black border frame */
+.S1-frame{position:absolute;inset:16px;border:8px solid #000;border-radius:6px;pointer-events:none;z-index:10}
+.S1-main{position:relative;z-index:5;padding:56px 64px;display:flex;flex-direction:column;height:100%}
+.S1-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
+.S1-handle-badge{
+  background:#000;color:#fff700;
+  font-size:22px;letter-spacing:1px;
+  padding:8px 20px;border-radius:4px;
+  transform:rotate(-1.5deg);
+  box-shadow:4px 4px 0 rgba(0,0,0,.2);
+}
+.S1-issue{
+  background:#ff3c3c;color:#fff;
+  font-size:21px;padding:8px 18px;border-radius:4px;
+  border:3px solid #000;transform:rotate(2deg);
+  box-shadow:4px 4px 0 #000;
+}
+
+/* SPEECH BUBBLE */
+.S1-bubble{
+  background:#fff;
+  border:5px solid #000;
+  border-radius:30px;
+  padding:28px 36px;
+  position:relative;
+  margin-bottom:20px;
+  box-shadow:6px 6px 0 #000;
+}
+.S1-bubble::after{
+  content:'';position:absolute;
+  bottom:-36px;left:80px;
+  width:0;height:0;
+  border-left:24px solid transparent;
+  border-right:8px solid transparent;
+  border-top:36px solid #fff;
+  z-index:1;
+}
+.S1-bubble::before{
+  content:'';position:absolute;
+  bottom:-44px;left:75px;
+  width:0;height:0;
+  border-left:28px solid transparent;
+  border-right:10px solid transparent;
+  border-top:42px solid #000;
+}
+.S1-b-label{font-size:22px;color:#ff3c3c;letter-spacing:2px;margin-bottom:6px}
+.S1-b-title{font-size:94px;line-height:.88;color:#000;letter-spacing:-3px}
+.S1-b-sub{font-size:28px;color:#333;margin-top:10px;font-family:'Nunito',sans-serif;font-weight:800}
+
+/* character emoji spot */
+.S1-char{position:absolute;right:48px;bottom:260px;z-index:6;font-size:110px;filter:drop-shadow(4px 4px 0 rgba(0,0,0,.3));animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-16px) rotate(3deg)}}
+
+/* PANEL CODE BOX */
+.S1-panel{
+  background:#1a1a2e;
+  border:5px solid #000;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:6px 6px 0 #000;
+  flex:1;
+}
+.S1-panel-bar{background:#ff3c3c;padding:12px 20px;display:flex;align-items:center;gap:10px;border-bottom:4px solid #000}
+.S1-pb-dots{display:flex;gap:6px}
+.S1-pb-d{width:14px;height:14px;border-radius:50%;border:2px solid rgba(0,0,0,.3)}
+.S1-pb-d1{background:#ff5f57}.S1-pb-d2{background:#febc2e}.S1-pb-d3{background:#28c840}
+.S1-pb-label{font-size:22px;color:#fff;margin-left:6px;letter-spacing:1px}
+.S1-pb-lang{font-size:20px;color:#fff700;background:rgba(0,0,0,.3);padding:4px 14px;border-radius:4px}
+.S1-code{padding:22px 28px;font-family:'DM Mono',monospace;font-size:24px;line-height:1.75;color:#e8e4f5;white-space:pre}
+.S1-footer{padding:16px 0 22px;display:flex;align-items:center;justify-content:space-between}
+.S1-tag{font-size:19px;color:#000;background:rgba(255,255,255,.7);border:3px solid #000;padding:5px 14px;border-radius:4px;font-family:'Nunito',sans-serif;font-weight:900;box-shadow:3px 3px 0 #000}
+.S1-tags{display:flex;gap:8px}
+.S1-cta{font-size:22px;color:#000;background:#fff;border:3px solid #000;padding:6px 18px;border-radius:4px;box-shadow:3px 3px 0 #000;transform:rotate(1deg)}
+
+/* ════════════════════════════════════════════
+   TEMPLATE 4 — SHIN-CHAN DOODLE NOTEBOOK
+   Cream notebook, crayon doodles, messy handwriting,
+   washi tape accents, sticker elements
+════════════════════════════════════════════ */
+.S2{
+  background:#faf6e8;
+  position:relative;overflow:hidden;
+  font-family:'Nunito',sans-serif;
+}
+/* ruled lines */
+.S2-rules{position:absolute;inset:0;background-image:repeating-linear-gradient(transparent,transparent 59px,rgba(100,140,200,.15) 59px,rgba(100,140,200,.15) 61px);background-position:0 72px;pointer-events:none}
+/* left margin red line */
+.S2-margin{position:absolute;left:120px;top:0;bottom:0;width:2px;background:rgba(255,100,100,.3);pointer-events:none}
+/* hole punches */
+.S2-holes{position:absolute;left:0;top:0;bottom:0;width:60px;display:flex;flex-direction:column;justify-content:space-evenly;align-items:center;pointer-events:none}
+.S2-hole{width:22px;height:22px;border-radius:50%;background:#e8e0d0;border:2px solid #c8c0b0}
+/* ring spiral */
+.S2-spiral{position:absolute;left:60px;top:0;bottom:0;width:30px;pointer-events:none;display:flex;flex-direction:column;justify-content:space-evenly;align-items:center}
+.S2-ring{width:28px;height:18px;border:3px solid #a0a0a0;border-radius:50%;background:transparent}
+
+.S2-main{position:relative;z-index:2;padding:40px 56px 36px 140px;display:flex;flex-direction:column;height:100%}
+.S2-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
+/* washi tape strips */
+.S2-tape{font-size:0;height:32px;position:absolute;transform-origin:center;opacity:.75}
+.S2-t1{background:#ff9eb5;width:180px;top:28px;left:200px;transform:rotate(-2deg);border-radius:2px}
+.S2-t2{background:#a8d8ea;width:140px;top:28px;right:140px;transform:rotate(1.5deg);border-radius:2px}
+.S2-title-area{position:relative}
+.S2-date-stamp{font-family:'Caveat',cursive;font-size:20px;color:rgba(150,120,80,.6);margin-bottom:8px}
+.S2-notebook-title{font-family:'Caveat',cursive;font-size:90px;color:#2a2030;line-height:.88;letter-spacing:-2px;margin-bottom:12px}
+.S2-underline{height:4px;background:linear-gradient(90deg,#ff6b9d,#ffc850,#ff6b9d);border-radius:2px;margin-bottom:14px;width:80%}
+.S2-desc{font-size:28px;color:#4a3a50;line-height:1.5;font-weight:600;max-width:800px}
+/* hand drawn decorations */
+.S2-doodle{position:absolute;font-size:40px;animation:wiggle 3s ease-in-out infinite}
+@keyframes wiggle{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.S2-d1{right:80px;top:80px;animation-delay:.5s}
+.S2-d2{right:160px;top:180px;font-size:32px;animation-delay:1s}
+.S2-d3{right:60px;top:220px;font-size:28px;animation-delay:1.5s}
+
+.S2-sticker-code{
+  background:#fff;
+  border:3px solid #d0c8b8;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:2px 4px 16px rgba(0,0,0,.1);
+  margin:16px 0;
+  position:relative;
+  transform:rotate(-.5deg);
+}
+.S2-sc-tape{position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:90px;height:28px;background:#ffc850;opacity:.7;border-radius:2px}
+.S2-sc-bar{background:#2a2030;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.S2-sc-title{font-family:'Caveat',cursive;font-size:24px;color:#ffc850}
+.S2-sc-lang{font-family:'DM Mono',monospace;font-size:19px;color:#a0a8c8;background:rgba(255,255,255,.1);padding:4px 14px;border-radius:4px}
+.S2-sc-code{padding:22px 26px;font-family:'DM Mono',monospace;font-size:24px;line-height:1.75;color:#2a2030;white-space:pre;background:#fafaf0}
+
+.S2-footer{margin-top:auto;padding-top:12px;display:flex;align-items:center;justify-content:space-between;border-top:2px dashed rgba(150,120,80,.2)}
+.S2-tag{font-family:'Caveat',cursive;font-size:22px;color:#8a6a90;background:rgba(200,150,200,.15);border:2px solid rgba(180,130,190,.3);padding:4px 14px;border-radius:20px}
+.S2-tags{display:flex;gap:8px}
+.S2-handle{font-family:'Caveat',cursive;font-size:26px;color:#6a5a30}
+
+/* ════════════════════════════════════════════
+   TEMPLATE 5 — GHIBLI × CODE (SPIRITED)
+   Moving train scene: watercolor landscape window,
+   code reflection on glass, magical atmosphere
+════════════════════════════════════════════ */
+.G3{
+  background:linear-gradient(180deg,#1a1535 0%,#2a1f60 30%,#3a2a7a 60%,#1a103a 100%);
+  position:relative;overflow:hidden;font-family:'Nunito',sans-serif;
+}
+/* aurora streaks */
+.G3-aurora{position:absolute;inset:0;pointer-events:none}
+.G3-a1{position:absolute;top:-100px;left:-200px;width:900px;height:400px;background:radial-gradient(ellipse,rgba(100,200,150,.15) 0%,transparent 70%);transform:rotate(-15deg)}
+.G3-a2{position:absolute;top:100px;right:-200px;width:700px;height:300px;background:radial-gradient(ellipse,rgba(180,100,255,.1) 0%,transparent 70%);transform:rotate(10deg)}
+/* train window frame */
+.G3-window-frame{
+  position:absolute;top:60px;left:60px;right:60px;
+  height:460px;
+  border:12px solid #3a3050;
+  border-radius:80px 80px 20px 20px;
+  box-shadow:inset 0 0 60px rgba(0,0,0,.4),0 0 40px rgba(100,80,200,.2);
+  overflow:hidden;
+  pointer-events:none;
+}
+.G3-window-inside{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,#8b6fb5 0%,#c4a0e8 25%,#e8c8f0 45%,#f0d8b8 60%,#d4a86a 75%,#8a6040 90%,#3a2010 100%);
+}
+/* reflection on glass */
+.G3-glass{position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.08) 0%,transparent 50%,rgba(255,255,255,.04) 100%)}
+/* window sill */
+.G3-sill{position:absolute;bottom:0;left:-8px;right:-8px;height:30px;background:#3a3050;border-radius:0 0 12px 12px}
+/* scenery elements in window */
+.G3-scenery-moon{position:absolute;top:30px;right:120px;width:70px;height:70px;border-radius:50%;background:radial-gradient(circle,#fff8e8,#ffd860);box-shadow:0 0 30px rgba(255,220,80,.5)}
+.G3-scenery-tree{position:absolute;bottom:40px}
+
+.G3-main{position:relative;z-index:4;padding:0 64px;display:flex;flex-direction:column;height:100%}
+.G3-topbar{padding:30px 0 20px;display:flex;align-items:center;justify-content:space-between}
+.G3-handle{font-family:'Fredoka One',cursive;font-size:28px;color:rgba(255,220,180,.8);letter-spacing:.5px}
+.G3-seat{font-family:'Caveat',cursive;font-size:22px;color:rgba(200,180,255,.5);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:6px 18px;border-radius:20px}
+
+/* the code card floats in lower half */
+.G3-code-float{
+  margin-top:auto;
+  margin-bottom:0;
+  background:rgba(10,8,30,.85);
+  border:2px solid rgba(200,180,255,.2);
+  border-radius:20px 20px 0 0;
+  overflow:hidden;
+  box-shadow:0 -10px 60px rgba(100,80,200,.3),inset 0 0 40px rgba(100,80,200,.05);
+  backdrop-filter:blur(12px);
+}
+.G3-cf-head{padding:28px 36px 16px;background:rgba(255,255,255,.03);border-bottom:1px solid rgba(200,180,255,.1)}
+.G3-cf-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.G3-cf-label{font-family:'Caveat',cursive;font-size:22px;color:rgba(200,180,255,.5);letter-spacing:2px}
+.G3-cf-lang{font-family:'DM Mono',monospace;font-size:19px;color:#c8a8ff;background:rgba(200,160,255,.1);border:1px solid rgba(200,160,255,.2);padding:5px 16px;border-radius:20px}
+.G3-cf-title{font-family:'Fredoka One',cursive;font-size:58px;color:#fff;letter-spacing:-1px;line-height:1;margin-bottom:6px}
+.G3-cf-sub{font-size:24px;color:rgba(200,180,255,.6);line-height:1.4;font-style:italic}
+.G3-cf-code{padding:22px 36px;font-family:'DM Mono',monospace;font-size:24px;line-height:1.7;color:rgba(220,210,255,.85);white-space:pre}
+.G3-cf-footer{padding:14px 36px 24px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(200,180,255,.08)}
+.G3-cf-tag{font-family:'Caveat',cursive;font-size:20px;color:rgba(200,180,255,.4);background:rgba(255,255,255,.04);border:1px solid rgba(200,180,255,.12);padding:5px 14px;border-radius:20px}
+.G3-cf-tags{display:flex;gap:8px}
+.G3-cf-cta{font-family:'Caveat',cursive;font-size:22px;color:#c8a8ff}
+
+/* ── SHARED SYNTAX COLORS ── */
+.kw{color:#c678dd}.fn{color:#61afef}.str{color:#98c379}.num{color:#d19a66}.cm{color:#5c6370;font-style:italic}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="bar">
+  <div class="bar-top">
+    <div class="bar-mascot">🌿</div>
+    <div class="bar-titles">
+      <div class="bar-name">Anime Studio</div>
+      <div class="bar-sub">@codewithher · magical edition</div>
+    </div>
+  </div>
+
+  <div class="bar-sec">
+    <div class="bar-lbl">Choose Your World</div>
+    <button class="tb on" onclick="go('G1',this)">
+      <div class="tb-em" style="background:rgba(100,180,80,.15)">🌳</div>
+      <div class="tb-info"><div class="tb-name">Ghibli Forest</div><div class="tb-hint">Totoro's sunny meadow</div></div>
+    </button>
+    <button class="tb" onclick="go('G2',this)">
+      <div class="tb-em" style="background:rgba(80,60,180,.15)">🌙</div>
+      <div class="tb-info"><div class="tb-name">Totoro Night</div><div class="tb-hint">Magical moonlit forest</div></div>
+    </button>
+    <button class="tb" onclick="go('S1',this)">
+      <div class="tb-em" style="background:rgba(255,220,0,.15)">💥</div>
+      <div class="tb-info"><div class="tb-name">Shin-chan Blast</div><div class="tb-hint">POW! Comic explosion</div></div>
+    </button>
+    <button class="tb" onclick="go('S2',this)">
+      <div class="tb-em" style="background:rgba(255,150,180,.15)">📓</div>
+      <div class="tb-info"><div class="tb-name">Doodle Notebook</div><div class="tb-hint">Shin-chan's homework</div></div>
+    </button>
+    <button class="tb" onclick="go('G3',this)">
+      <div class="tb-em" style="background:rgba(160,100,255,.15)">🚂</div>
+      <div class="tb-info"><div class="tb-name">Spirit Train</div><div class="tb-hint">Spirited Away night ride</div></div>
+    </button>
+  </div>
+
+  <div class="bar-sec" style="flex:1">
+    <div class="bar-lbl">Language</div>
+    <select class="inp" id="langSel">
+      <option>Python</option><option>JavaScript</option><option>TypeScript</option>
+      <option>React</option><option>CSS</option><option>SQL</option>
+      <option>Bash</option><option>Java</option><option>Go</option><option>Rust</option>
+    </select>
+    <div class="bar-lbl">Hashtags</div>
+    <input class="inp" id="hashTags" value="#coding #python #codewithher #womencode">
+  </div>
+
+  <button class="export-btn" onclick="doExport()">✨ Download 1080×1080</button>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="live-tag">magical preview · 1080 × 1080 px</div>
+  <div class="pw" id="pw"></div>
+  <div class="cp">
+    <div class="cp-head">🖊 edit your post</div>
+    <div class="cg" id="cg"></div>
+    <button class="ab" onclick="applyAll()">✨ Apply Changes</button>
+  </div>
+</main>
+
+<script>
+/* ── DATA ── */
+const D = {
+  G1:{topic:'List Comp',label:'Python Magic ✨',desc:"Filter & transform with one beautiful line — no for-loop needed",filename:'forest.py',
+    code:`# 🌿 gather all even acorns
+acorns = [x**2 for x in range(10)
+          if x % 2 == 0]
+
+# 🍃 transform names
+names = ['totoro','mei','satsuki']
+shout = [n.upper() for n in names]`},
+  G2:{title:'Closures',cat:'JavaScript Magic 🌙',desc:'Functions that remember the world where they were born — even after that world is gone.',filename:'magic.js',
+    code:`function makeSpell(power) {
+  return function cast() {
+    return power * 2;   // remembers!
+  };
+}
+const fireball = makeSpell(50);
+fireball(); // → 100 ✨`},
+  S1:{label:'PYTHON TIP!!!',bigTitle:'DECO\nRATORS',sub:"Put superpowers on your functions in ONE line!",filename:'shinnosuke.py',
+    code:`def shout(func):
+    def wrapper(*args):
+        print("🎉 CALLING:", func.__name__)
+        return func(*args)
+    return wrapper
+
+@shout
+def greet(name):
+    return f"Hi {name}!"`},
+  S2:{date:'Today in Code ✏️',title:'Promises',desc:"JavaScript's way of saying 'I'll get back to you' — and actually meaning it.",filename:'homework.js',
+    code:`const getData = () =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve('🎉 data arrived!')
+    }, 1000)
+  })
+
+getData().then(console.log)`},
+  G3:{label:'Tonight\'s Lesson',lang:'Python',title:'Generators',sub:"Like a magical train — conjures values one stop at a time, never all at once.",filename:'spirited.py',
+    code:`def infinite_worlds():
+    n = 0
+    while True:
+        yield f"world_{n}"
+        n += 1
+
+gen = infinite_worlds()
+next(gen)  # 'world_0' ✨
+next(gen)  # 'world_1' 🚂`}
+};
+
+/* ── SYNTAX ── */
+function hl(code,lang){
+  let h=code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const kws={Python:'def|class|return|import|from|if|else|elif|for|in|while|with|as|True|False|None|and|or|not|lambda|yield',JavaScript:'const|let|var|function|return|if|else|for|while|new|this|import|export|from|async|await|typeof|null|undefined|true|false',TypeScript:'const|let|function|return|if|else|interface|type|import|export|async|await|null|undefined|true|false',default:'function|return|if|else|for|while|const|let|var|import|null|true|false'};
+  const kl=(kws[lang]||kws.default).split('|');
+  const kr=new RegExp(`\\b(${kl.join('|')})\\b`,'g');
+  h=h.replace(/(\/\/[^\n]*|#[^\n]*)/g,'<span class="cm">$1</span>');
+  h=h.replace(/("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)/g,'<span class="str">$1</span>');
+  h=h.replace(/\b(\d+\.?\d*)\b/g,'<span class="num">$1</span>');
+  h=h.replace(kr,'<span class="kw">$1</span>');
+  h=h.replace(/\b([a-z_][a-z_0-9]*)(?=\s*[\(<])/gi,'<span class="fn">$1</span>');
+  return h;
+}
+
+function htags(cls){
+  return (document.getElementById('hashTags').value||'').split(' ').filter(t=>t.startsWith('#')).slice(0,4).map(t=>`<span class="${cls}">${t}</span>`).join('');
+}
+
+function stars(n){
+  let s='';
+  for(let i=0;i<n;i++){
+    const x=Math.random()*100,y=Math.random()*60,sz=Math.random()*2+1;
+    s+=`<div style="position:absolute;left:${x}%;top:${y}%;width:${sz}px;height:${sz}px;border-radius:50%;background:rgba(255,255,255,${.3+Math.random()*.7});animation:firefly ${2+Math.random()*3}s ease-in-out infinite;animation-delay:${Math.random()*3}s"></div>`;
+  }
+  return s;
+}
+
+function flies(n){
+  let s='';
+  const positions=[[10,70],[25,55],[40,65],[60,58],[78,72],[88,62],[15,80],[50,78],[70,68],[35,75]];
+  for(let i=0;i<n;i++){
+    const p=positions[i%positions.length];
+    s+=`<div class="G2-fly" style="left:${p[0]}%;top:${p[1]}%;width:${5+Math.random()*4}px;height:${5+Math.random()*4}px;animation-delay:${i*.4}s;animation-duration:${2+Math.random()*2}s"></div>`;
+  }
+  return s;
+}
+
+/* ── RENDERERS ── */
+const R = {
+G1:(d)=>`<div class="pc G1" id="pc">
+  <div class="G1-sky-blob G1-sb1"></div><div class="G1-sky-blob G1-sb2"></div><div class="G1-sky-blob G1-sb3"></div>
+  <div class="G1-cloud G1-c1"></div><div class="G1-cloud G1-c2"></div><div class="G1-cloud G1-c3"></div>
+  <span class="G1-spark" style="position:absolute;top:80px;right:200px;animation-delay:.8s">✨</span>
+  <span class="G1-spark" style="position:absolute;top:130px;left:180px;animation-delay:1.6s;font-size:20px">🌸</span>
+  <span class="G1-spark" style="position:absolute;top:50px;left:350px;animation-delay:.3s;font-size:16px">🍃</span>
+  <div class="G1-main">
+    <div class="G1-header">
+      <div class="G1-brand"><div class="G1-leaf">🌿</div><div class="G1-brandtxt"><div class="G1-handle">@codewithher</div><div class="G1-tagline">learning in the forest</div></div></div>
+      <div class="G1-acorn">🌰</div>
+    </div>
+    <div class="G1-title-scroll">
+      <div class="G1-topic-label">today we learn about</div>
+      <div class="G1-topic-title">${d.topic}</div>
+      <div class="G1-topic-desc">${d.desc}</div>
+    </div>
+    <div class="G1-code-card">
+      <div class="G1-cc-bar">
+        <div class="G1-cc-leaf">🍀</div>
+        <div class="G1-cc-fname">${d.filename}</div>
+        <div style="flex:1"></div>
+        <div class="G1-cc-lang">${document.getElementById('langSel').value}</div>
+      </div>
+      <div class="G1-cc-code">${hlGhibli(d.code)}</div>
+    </div>
+    <div class="G1-footer">
+      <div class="G1-tags">${htags('G1-tag')}</div>
+      <div class="G1-cta">saved by the forest 🌳</div>
+    </div>
+  </div>
+</div>`,
+
+G2:(d)=>`<div class="pc G2" id="pc">
+  <div class="G2-stars">${stars(60)}</div>
+  <div class="G2-moon"><div class="G2-moon-face">🌕</div></div>
+  ${flies(10)}
+  <div class="G2-hill-l"></div><div class="G2-hill-r"></div>
+  <div class="G2-tree">🌲</div><div class="G2-tree2">🌳</div>
+  <div class="G2-main">
+    <div class="G2-top">
+      <div class="G2-handle">@codewithher</div>
+      <div class="G2-num">✨ tonight's magic</div>
+    </div>
+    <div class="G2-magic-card">
+      <div class="G2-cat-label">${d.cat}</div>
+      <div class="G2-big-title">${d.title}</div>
+      <div class="G2-glow-desc">${d.desc}</div>
+    </div>
+    <div class="G2-code-lantern">
+      <div class="G2-cl-bar"><div class="G2-cl-d G2-cl-d1"></div><div class="G2-cl-d G2-cl-d2"></div><div class="G2-cl-d G2-cl-d3"></div><div class="G2-cl-name">${d.filename}</div></div>
+      <div class="G2-cl-code">${hl(d.code,'JavaScript')}</div>
+    </div>
+    <div class="G2-footer">
+      <div class="G2-tags">${htags('G2-tag')}</div>
+      <div class="G2-cta">🌙 follow the forest path</div>
+    </div>
+  </div>
+</div>`,
+
+S1:(d)=>`<div class="pc S1" id="pc">
+  <div class="S1-halftone"></div>
+  <svg class="S1-lines" style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 1080 1080" preserveAspectRatio="none">
+    ${Array.from({length:30},(_,i)=>{const cx=540,cy=540,angle=(i/30)*Math.PI*2;const ex=cx+Math.cos(angle)*900,ey=cy+Math.sin(angle)*900;return `<line x1="${cx}" y1="${cy}" x2="${ex}" y2="${ey}" stroke="rgba(0,0,0,0.04)" stroke-width="2"/>`}).join('')}
+  </svg>
+  <div class="S1-frame"></div>
+  <div class="S1-main">
+    <div class="S1-top">
+      <div class="S1-handle-badge">@CODEWITHHER</div>
+      <div class="S1-issue">${d.label}</div>
+    </div>
+    <div class="S1-bubble">
+      <div class="S1-b-label">⚡ TODAY WE LEARN ⚡</div>
+      <div class="S1-b-title">${d.bigTitle.replace(/\n/,'<br>')}</div>
+      <div class="S1-b-sub">${d.sub}</div>
+    </div>
+    <div class="S1-char">🧒</div>
+    <div style="height:36px"></div>
+    <div class="S1-panel">
+      <div class="S1-panel-bar">
+        <div class="S1-pb-dots"><div class="S1-pb-d S1-pb-d1"></div><div class="S1-pb-d S1-pb-d2"></div><div class="S1-pb-d S1-pb-d3"></div></div>
+        <div class="S1-pb-label">${d.filename}</div>
+        <div style="flex:1"></div>
+        <div class="S1-pb-lang">${document.getElementById('langSel').value}</div>
+      </div>
+      <div class="S1-code">${hl(d.code,'Python')}</div>
+    </div>
+    <div class="S1-footer">
+      <div class="S1-tags">${htags('S1-tag')}</div>
+      <div class="S1-cta">SAVE THIS!! 💥</div>
+    </div>
+  </div>
+</div>`,
+
+S2:(d)=>`<div class="pc S2" id="pc">
+  <div class="S2-rules"></div>
+  <div class="S2-margin"></div>
+  <div class="S2-holes">${Array(7).fill('<div class="S2-hole"></div>').join('')}</div>
+  <div class="S2-spiral">${Array(12).fill('<div class="S2-ring"></div>').join('')}</div>
+  <div class="S2-tape S2-t1"></div><div class="S2-tape S2-t2"></div>
+  <div class="S2-doodle S2-d1">⭐</div>
+  <div class="S2-doodle S2-d2">💫</div>
+  <div class="S2-doodle S2-d3">🌟</div>
+  <div class="S2-main">
+    <div class="S2-title-area">
+      <div class="S2-date-stamp">${d.date}</div>
+      <div class="S2-notebook-title">${d.title}</div>
+      <div class="S2-underline"></div>
+      <div class="S2-desc">${d.desc}</div>
+    </div>
+    <div class="S2-sticker-code">
+      <div class="S2-sc-tape"></div>
+      <div class="S2-sc-bar">
+        <div class="S2-sc-title">📝 ${d.filename}</div>
+        <div class="S2-sc-lang">${document.getElementById('langSel').value}</div>
+      </div>
+      <div class="S2-sc-code">${hl(d.code,'JavaScript')}</div>
+    </div>
+    <div class="S2-footer">
+      <div class="S2-tags">${htags('S2-tag')}</div>
+      <div class="S2-handle">~ @codewithher ✏️</div>
+    </div>
+  </div>
+</div>`,
+
+G3:(d)=>`<div class="pc G3" id="pc">
+  <div class="G3-aurora"><div class="G3-a1"></div><div class="G3-a2"></div></div>
+  <div class="G3-window-frame">
+    <div class="G3-window-inside"></div>
+    <div class="G3-glass"></div>
+    <div class="G3-scenery-moon"></div>
+    <span style="position:absolute;bottom:50px;left:80px;font-size:70px;filter:drop-shadow(0 0 10px rgba(0,100,0,.4))">🌲</span>
+    <span style="position:absolute;bottom:40px;left:200px;font-size:50px;filter:drop-shadow(0 0 8px rgba(0,80,0,.3))">🌳</span>
+    <span style="position:absolute;bottom:60px;right:100px;font-size:80px;filter:drop-shadow(0 0 12px rgba(0,100,0,.4))">🌲</span>
+    <div class="G3-sill"></div>
+  </div>
+  <div class="G3-main">
+    <div class="G3-topbar">
+      <div class="G3-handle">@codewithher</div>
+      <div class="G3-seat">🚂 spirit line · seat 7</div>
+    </div>
+    <div class="G3-code-float">
+      <div class="G3-cf-head">
+        <div class="G3-cf-top">
+          <div class="G3-cf-label">${d.label}</div>
+          <div class="G3-cf-lang">${d.lang}</div>
+        </div>
+        <div class="G3-cf-title">${d.title}</div>
+        <div class="G3-cf-sub">${d.sub}</div>
+      </div>
+      <div class="G3-cf-code">${hl(d.code,'Python')}</div>
+      <div class="G3-cf-footer">
+        <div class="G3-cf-tags">${htags('G3-cf-tag')}</div>
+        <div class="G3-cf-cta">✨ follow the magic</div>
+      </div>
+    </div>
+  </div>
+</div>`
+};
+
+/* Ghibli earthy syntax highlight */
+function hlGhibli(code){
+  let h=code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const kws='def|class|return|import|from|if|else|elif|for|in|while|with|as|True|False|None|and|or|not|lambda|yield';
+  const kr=new RegExp(`\\b(${kws.split('|').join('|')})\\b`,'g');
+  h=h.replace(/(#[^\n]*)/g,'<span class="G1-cm">$1</span>');
+  h=h.replace(/("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')/g,'<span class="G1-str">$1</span>');
+  h=h.replace(/\b(\d+\.?\d*)\b/g,'<span class="G1-num">$1</span>');
+  h=h.replace(kr,'<span class="G1-kw">$1</span>');
+  h=h.replace(/\b([a-z_][a-z_0-9]*)(?=\s*[\(<])/gi,'<span class="G1-fn">$1</span>');
+  return h;
+}
+
+/* ── CONTROLS ── */
+const C = {
+G1:`
+<div class="cf full"><div class="cl">Topic / Title</div><input class="ci" id="f1" value="${D.G1.topic}"></div>
+<div class="cf"><div class="cl">Label</div><input class="ci" id="f2" value="${D.G1.label}"></div>
+<div class="cf"><div class="cl">Filename</div><input class="ci" id="f3" value="${D.G1.filename}"></div>
+<div class="cf full"><div class="cl">Description</div><textarea class="ci" id="f4">${D.G1.desc}</textarea></div>
+<div class="cf full"><div class="cl">Code</div><textarea class="ci" id="f5">${D.G1.code}</textarea></div>`,
+
+G2:`
+<div class="cf full"><div class="cl">Title</div><input class="ci" id="f1" value="${D.G2.title}"></div>
+<div class="cf full"><div class="cl">Category Label</div><input class="ci" id="f2" value="${D.G2.cat}"></div>
+<div class="cf"><div class="cl">Filename</div><input class="ci" id="f3" value="${D.G2.filename}"></div>
+<div class="cf full"><div class="cl">Description</div><textarea class="ci" id="f4">${D.G2.desc}</textarea></div>
+<div class="cf full"><div class="cl">Code</div><textarea class="ci" id="f5">${D.G2.code}</textarea></div>`,
+
+S1:`
+<div class="cf full"><div class="cl">Issue Label</div><input class="ci" id="f1" value="${D.S1.label}"></div>
+<div class="cf full"><div class="cl">Big Title (\\n = new line)</div><input class="ci" id="f2" value="${D.S1.bigTitle}"></div>
+<div class="cf full"><div class="cl">Subtitle / Hook</div><input class="ci" id="f3" value="${D.S1.sub}"></div>
+<div class="cf"><div class="cl">Filename</div><input class="ci" id="f4" value="${D.S1.filename}"></div>
+<div class="cf full"><div class="cl">Code</div><textarea class="ci" id="f5">${D.S1.code}</textarea></div>`,
+
+S2:`
+<div class="cf full"><div class="cl">Date / Header</div><input class="ci" id="f1" value="${D.S2.date}"></div>
+<div class="cf full"><div class="cl">Title</div><input class="ci" id="f2" value="${D.S2.title}"></div>
+<div class="cf"><div class="cl">Filename</div><input class="ci" id="f3" value="${D.S2.filename}"></div>
+<div class="cf full"><div class="cl">Description</div><textarea class="ci" id="f4">${D.S2.desc}</textarea></div>
+<div class="cf full"><div class="cl">Code</div><textarea class="ci" id="f5">${D.S2.code}</textarea></div>`,
+
+G3:`
+<div class="cf full"><div class="cl">Title</div><input class="ci" id="f1" value="${D.G3.title}"></div>
+<div class="cf full"><div class="cl">Label / Category</div><input class="ci" id="f2" value="${D.G3.label}"></div>
+<div class="cf"><div class="cl">Language</div><input class="ci" id="f3" value="${D.G3.lang}"></div>
+<div class="cf full"><div class="cl">Subtitle / Description</div><textarea class="ci" id="f4">${D.G3.sub}</textarea></div>
+<div class="cf full"><div class="cl">Code</div><textarea class="ci" id="f5">${D.G3.code}</textarea></div>`
+};
+
+let cur='G1';
+function go(t,btn){
+  cur=t;
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('cg').innerHTML=C[t];
+  render();
+}
+function render(){document.getElementById('pw').innerHTML=R[cur](D[cur])}
+function applyAll(){
+  const g=id=>{const e=document.getElementById(id);return e?e.value:''};
+  const d=D[cur];
+  if(cur==='G1'){d.topic=g('f1');d.label=g('f2');d.filename=g('f3');d.desc=g('f4');d.code=g('f5')}
+  if(cur==='G2'){d.title=g('f1');d.cat=g('f2');d.filename=g('f3');d.desc=g('f4');d.code=g('f5')}
+  if(cur==='S1'){d.label=g('f1');d.bigTitle=g('f2');d.sub=g('f3');d.filename=g('f4');d.code=g('f5')}
+  if(cur==='S2'){d.date=g('f1');d.title=g('f2');d.filename=g('f3');d.desc=g('f4');d.code=g('f5')}
+  if(cur==='G3'){d.title=g('f1');d.label=g('f2');d.lang=g('f3');d.sub=g('f4');d.code=g('f5')}
+  render();
+}
+function doExport(){
+  const pc=document.getElementById('pc');if(!pc)return;
+  const css=Array.from(document.styleSheets).map(s=>{try{return Array.from(s.cssRules).map(r=>r.cssText).join('\n')}catch(e){return ''}}).join('\n');
+  const w=window.open('','_blank','width=1140,height:1200');
+  w.document.write(`<!DOCTYPE html><html><head>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;0,800;0,900;1,400&family=Caveat:wght@400;600;700&family=Fredoka+One&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;padding:28px;background:#111;display:flex;flex-direction:column;align-items:center;gap:20px}${css}.pc{width:1080px!important;height:1080px!important;transform:none!important;position:relative!important}</style>
+</head><body>${pc.outerHTML}
+<button onclick="window.print()" style="padding:14px 48px;background:linear-gradient(135deg,#ff6b9d,#ffc850);border:none;color:#fff;font-size:15px;border-radius:12px;cursor:pointer;font-family:sans-serif;font-weight:800">✨ Save as PNG</button>
+</body></html>`);
+  w.document.close();
+}
+document.getElementById('cg').innerHTML=C['G1'];
+document.getElementById('hashTags').addEventListener('input',render);
+document.getElementById('langSel').addEventListener('change',render);
+render();
+</script>
+</body>
+</html>
