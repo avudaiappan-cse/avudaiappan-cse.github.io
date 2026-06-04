@@ -417,6 +417,368 @@ textarea.ci{resize:vertical;min-height:62px;line-height:1.5}
 
 /* ── SHARED SYNTAX COLORS ── */
 .kw{color:#c678dd}.fn{color:#61afef}.str{color:#98c379}.num{color:#d19a66}.cm{color:#5c6370;font-style:italic}
+
+/* ════════════════════════════════════════════
+   TEMPLATE 6 — SAILOR MOON DREAM
+   Magical girl: pastel sky, sparkle hearts,
+   moon prism, holographic gradients
+════════════════════════════════════════════ */
+.M1{
+  background:linear-gradient(135deg,#ffd6e8 0%,#e8d4ff 35%,#d4e8ff 65%,#ffe4d4 100%);
+  position:relative;overflow:hidden;font-family:'Nunito',sans-serif;
+}
+.M1-holo{position:absolute;inset:0;background:conic-gradient(from 0deg at 30% 30%,rgba(255,220,255,.3),rgba(220,240,255,.3),rgba(255,240,220,.3),rgba(220,255,240,.3),rgba(255,220,255,.3));mix-blend-mode:overlay;opacity:.6}
+.M1-glitter{position:absolute;inset:0;pointer-events:none}
+.M1-star{position:absolute;animation:twinkle 2.5s ease-in-out infinite}
+@keyframes twinkle{0%,100%{transform:scale(.8) rotate(0);opacity:.4}50%{transform:scale(1.2) rotate(180deg);opacity:1}}
+.M1-bigmoon{position:absolute;top:-60px;right:-60px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#ffd6f0 50%,#e8b8ff);box-shadow:0 0 80px rgba(255,200,240,.6),inset -20px -30px 60px rgba(180,140,220,.3);pointer-events:none}
+.M1-bigmoon::after{content:'';position:absolute;top:60px;left:50px;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.5),transparent)}
+.M1-clouds-pink{position:absolute;bottom:0;left:0;right:0;height:240px;background:linear-gradient(180deg,transparent,rgba(255,210,235,.4) 60%,rgba(255,180,220,.7));pointer-events:none}
+.M1-ribbon{position:absolute;top:0;left:-40px;width:680px;height:24px;background:linear-gradient(90deg,#ff6bb5,#ffa3d8,#ff6bb5);transform:rotate(-8deg);transform-origin:left;box-shadow:0 4px 12px rgba(255,107,181,.4)}
+.M1-ribbon-2{position:absolute;top:140px;right:-100px;width:540px;height:18px;background:linear-gradient(90deg,#a3d8ff,#c8b3ff,#a3d8ff);transform:rotate(12deg);transform-origin:right;box-shadow:0 4px 12px rgba(163,179,255,.4)}
+.M1-main{position:relative;z-index:5;padding:64px 64px 0;display:flex;flex-direction:column;height:100%}
+.M1-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.M1-handle-pill{background:linear-gradient(90deg,#ff6bb5,#a374ff);color:#fff;font-family:'Fredoka One',cursive;font-size:26px;padding:10px 26px;border-radius:30px;box-shadow:0 6px 18px rgba(255,107,181,.4);letter-spacing:.5px}
+.M1-wand{font-size:48px;animation:float 3s ease-in-out infinite}
+.M1-prism{
+  background:linear-gradient(135deg,rgba(255,255,255,.85),rgba(255,230,250,.7));
+  border:3px solid #fff;
+  border-radius:32px;
+  padding:36px 44px;
+  box-shadow:0 16px 50px rgba(200,100,200,.25),inset 0 0 30px rgba(255,255,255,.5);
+  position:relative;margin-bottom:24px;
+}
+.M1-prism::before{content:'💖';position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-size:40px;filter:drop-shadow(0 4px 10px rgba(255,100,180,.4))}
+.M1-eyebrow{font-family:'Caveat',cursive;font-size:30px;background:linear-gradient(90deg,#ff6bb5,#a374ff,#6b9eff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:12px;font-weight:700}
+.M1-title{font-family:'Fredoka One',cursive;font-size:92px;color:#a374ff;text-align:center;line-height:.95;letter-spacing:-2px;text-shadow:0 4px 0 rgba(255,255,255,.7),0 8px 20px rgba(200,100,200,.3)}
+.M1-sub{font-size:28px;color:#7a4a90;text-align:center;line-height:1.5;margin-top:14px;font-weight:600}
+.M1-code-card{background:rgba(40,20,60,.92);border:3px solid #fff;border-radius:20px;overflow:hidden;box-shadow:0 12px 40px rgba(120,60,180,.3)}
+.M1-cc-bar{padding:14px 22px;background:linear-gradient(90deg,#ff6bb5,#a374ff);display:flex;align-items:center;gap:10px}
+.M1-cc-emoji{font-size:22px}
+.M1-cc-name{font-family:'Caveat',cursive;font-size:24px;color:#fff;letter-spacing:.5px}
+.M1-cc-lang{margin-left:auto;font-family:'DM Mono',monospace;font-size:18px;color:#fff;background:rgba(255,255,255,.25);padding:4px 14px;border-radius:20px}
+.M1-cc-code{padding:24px 28px;font-family:'DM Mono',monospace;font-size:24px;line-height:1.75;color:#f8e8ff;white-space:pre}
+.M1-footer{padding:18px 0 38px;display:flex;align-items:center;justify-content:space-between}
+.M1-tag{font-family:'Caveat',cursive;font-size:22px;color:#a374ff;background:rgba(255,255,255,.7);border:2px solid #ffb8e0;padding:5px 16px;border-radius:20px;font-weight:600}
+.M1-tags{display:flex;gap:8px}
+.M1-cta{font-family:'Fredoka One',cursive;font-size:24px;background:linear-gradient(90deg,#ff6bb5,#a374ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+/* ════════════════════════════════════════════
+   TEMPLATE 7 — CYBERPUNK NEON CITY
+   Akira/Ghost in the Shell vibes: dark rain,
+   neon signs, holographic Japanese characters
+════════════════════════════════════════════ */
+.N1{
+  background:#03020a;
+  position:relative;overflow:hidden;font-family:'Nunito',sans-serif;
+}
+.N1-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,20,147,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,255,.08) 1px,transparent 1px);background-size:60px 60px;perspective:200px;transform:rotateX(60deg) translateY(40%);transform-origin:center bottom;mask-image:linear-gradient(180deg,transparent,#000 60%,#000)}
+.N1-skyline{position:absolute;bottom:38%;left:0;right:0;height:140px;display:flex;align-items:flex-end;gap:6px;padding:0 20px;pointer-events:none}
+.N1-bldg{flex:1;background:linear-gradient(180deg,#0a0820,#000);border-top:2px solid rgba(255,20,147,.3);position:relative}
+.N1-bldg::before{content:'';position:absolute;inset:4px;background-image:radial-gradient(circle,rgba(0,255,255,.4) 2px,transparent 2px);background-size:10px 12px;opacity:.4}
+.N1-glow-pink{position:absolute;width:600px;height:300px;background:radial-gradient(ellipse,rgba(255,20,147,.4),transparent 70%);top:-100px;left:-100px;filter:blur(50px);pointer-events:none}
+.N1-glow-cyan{position:absolute;width:500px;height:280px;background:radial-gradient(ellipse,rgba(0,255,255,.3),transparent 70%);top:-50px;right:-100px;filter:blur(50px);pointer-events:none}
+.N1-jp{position:absolute;font-family:'Yomogi',cursive;color:rgba(255,20,147,.4);text-shadow:0 0 20px rgba(255,20,147,.6);pointer-events:none;writing-mode:vertical-rl;font-weight:700}
+.N1-jp1{top:60px;right:60px;font-size:42px;color:rgba(255,20,147,.5);text-shadow:0 0 24px rgba(255,20,147,.7)}
+.N1-jp2{top:160px;left:60px;font-size:32px;color:rgba(0,255,255,.4);text-shadow:0 0 20px rgba(0,255,255,.6)}
+.N1-main{position:relative;z-index:5;padding:50px 64px 0;display:flex;flex-direction:column;height:100%}
+.N1-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.N1-handle{font-family:'Fredoka One',cursive;font-size:32px;color:#fff;letter-spacing:1px;text-shadow:0 0 24px rgba(255,20,147,.8),0 0 40px rgba(255,20,147,.4)}
+.N1-handle span{color:#00ffff;text-shadow:0 0 24px rgba(0,255,255,.8)}
+.N1-status{display:flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:18px;color:#00ffff;letter-spacing:2px}
+.N1-status::before{content:'';width:8px;height:8px;border-radius:50%;background:#00ffff;box-shadow:0 0 12px #00ffff;animation:firefly 1.5s ease-in-out infinite}
+.N1-neon-sign{
+  background:linear-gradient(135deg,rgba(255,20,147,.1),rgba(0,255,255,.1));
+  border:2px solid rgba(255,20,147,.5);
+  border-radius:14px;
+  padding:36px 44px;
+  position:relative;margin-bottom:24px;
+  box-shadow:0 0 60px rgba(255,20,147,.3),inset 0 0 40px rgba(255,20,147,.08);
+}
+.N1-neon-sign::before,.N1-neon-sign::after{content:'';position:absolute;width:60px;height:60px;border:2px solid #00ffff;box-shadow:0 0 16px rgba(0,255,255,.6)}
+.N1-neon-sign::before{top:-2px;left:-2px;border-right:none;border-bottom:none;border-radius:14px 0 0 0}
+.N1-neon-sign::after{bottom:-2px;right:-2px;border-left:none;border-top:none;border-radius:0 0 14px 0}
+.N1-cat{font-family:'DM Mono',monospace;font-size:20px;color:#ff1493;text-shadow:0 0 12px rgba(255,20,147,.8);letter-spacing:4px;text-transform:uppercase;margin-bottom:12px}
+.N1-title{font-family:'Fredoka One',cursive;font-size:96px;line-height:.9;letter-spacing:-2px;background:linear-gradient(180deg,#fff 30%,#ff1493);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 40px rgba(255,20,147,.4);filter:drop-shadow(0 0 20px rgba(255,20,147,.3));margin-bottom:14px}
+.N1-sub{font-size:28px;color:#00ffff;line-height:1.4;text-shadow:0 0 16px rgba(0,255,255,.5);font-weight:600}
+.N1-terminal{background:rgba(0,0,0,.85);border:1.5px solid rgba(0,255,255,.3);border-radius:14px;overflow:hidden;box-shadow:0 0 40px rgba(0,255,255,.15)}
+.N1-tm-bar{padding:12px 20px;background:rgba(255,20,147,.15);border-bottom:1px solid rgba(255,20,147,.3);display:flex;align-items:center;gap:8px}
+.N1-tm-d{width:11px;height:11px;border-radius:50%;box-shadow:0 0 8px currentColor}
+.N1-tm-d1{background:#ff1493;color:#ff1493}.N1-tm-d2{background:#ffea00;color:#ffea00}.N1-tm-d3{background:#00ff88;color:#00ff88}
+.N1-tm-name{margin-left:8px;font-family:'DM Mono',monospace;font-size:18px;color:rgba(0,255,255,.6)}
+.N1-tm-lang{margin-left:auto;font-family:'DM Mono',monospace;font-size:18px;color:#ff1493;text-shadow:0 0 10px rgba(255,20,147,.5)}
+.N1-tm-code{padding:24px 28px;font-family:'DM Mono',monospace;font-size:24px;line-height:1.75;color:#00ffaa;white-space:pre;text-shadow:0 0 4px rgba(0,255,170,.4)}
+.N1-footer{padding:18px 0 38px;display:flex;align-items:center;justify-content:space-between}
+.N1-tag{font-family:'DM Mono',monospace;font-size:18px;color:#ff1493;background:rgba(255,20,147,.08);border:1px solid rgba(255,20,147,.3);padding:5px 14px;border-radius:4px;text-shadow:0 0 8px rgba(255,20,147,.4)}
+.N1-tags{display:flex;gap:8px}
+.N1-cta{font-family:'Fredoka One',cursive;font-size:22px;color:#00ffff;text-shadow:0 0 16px rgba(0,255,255,.6);letter-spacing:1px}
+
+/* ════════════════════════════════════════════
+   TEMPLATE 8 — KAWAII PASTEL
+   Soft pink/lavender, chubby rounded shapes,
+   blob characters, dreamy ultra-cute
+════════════════════════════════════════════ */
+.K1{
+  background:linear-gradient(160deg,#ffe8f0 0%,#fff0e8 40%,#e8f0ff 100%);
+  position:relative;overflow:hidden;font-family:'Nunito',sans-serif;
+}
+.K1-blob{position:absolute;border-radius:50%;filter:blur(0);pointer-events:none}
+.K1-b1{width:260px;height:260px;background:#ffc8d8;top:-80px;left:-60px;opacity:.7}
+.K1-b2{width:200px;height:200px;background:#c8d8ff;top:80px;right:-40px;opacity:.6}
+.K1-b3{width:180px;height:180px;background:#fff0c8;bottom:120px;left:60px;opacity:.6}
+.K1-b4{width:240px;height:240px;background:#d8c8ff;bottom:-80px;right:40px;opacity:.5}
+.K1-face{position:absolute;width:90px;height:80px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;box-shadow:0 8px 24px rgba(255,180,200,.3)}
+.K1-face::after{content:'';position:absolute;bottom:-8px;width:50px;height:14px;border-radius:50%;background:rgba(255,180,200,.4);filter:blur(4px)}
+.K1-f1{top:120px;right:80px;animation:float 3s ease-in-out infinite}
+.K1-f2{bottom:380px;left:80px;animation:float 3.5s ease-in-out infinite;animation-delay:1s;width:70px;height:62px;font-size:28px}
+.K1-cloud-soft{position:absolute;background:#fff;border-radius:50px;opacity:.75}
+.K1-cs1{width:140px;height:50px;top:80px;left:120px}
+.K1-cs1::before{content:'';position:absolute;width:60px;height:60px;border-radius:50%;background:#fff;top:-25px;left:20px}
+.K1-cs1::after{content:'';position:absolute;width:50px;height:50px;border-radius:50%;background:#fff;top:-18px;right:20px}
+.K1-main{position:relative;z-index:5;padding:60px 70px 0;display:flex;flex-direction:column;height:100%}
+.K1-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.K1-handle-tag{font-family:'Fredoka One',cursive;font-size:26px;color:#fff;background:#ff8aab;padding:10px 24px;border-radius:30px;box-shadow:0 6px 18px rgba(255,138,171,.4);letter-spacing:.3px}
+.K1-mascot{font-size:54px;filter:drop-shadow(0 6px 12px rgba(0,0,0,.1));animation:bounce 2.5s ease-in-out infinite}
+.K1-bubble-card{
+  background:#fff;
+  border-radius:40px;
+  padding:38px 44px;
+  box-shadow:0 14px 40px rgba(255,150,180,.2),0 6px 12px rgba(255,150,180,.1);
+  border:3px solid #ffd8e0;
+  position:relative;margin-bottom:24px;
+}
+.K1-bubble-card::before{content:'';position:absolute;top:-12px;left:60px;width:28px;height:28px;background:#fff;border:3px solid #ffd8e0;border-right:none;border-bottom:none;border-radius:14px 0 0 0;transform:rotate(45deg)}
+.K1-eyebrow{display:inline-block;font-family:'Caveat',cursive;font-size:26px;color:#fff;background:linear-gradient(90deg,#ff8aab,#ffaa50);padding:6px 22px;border-radius:24px;margin-bottom:14px;font-weight:700;box-shadow:0 4px 12px rgba(255,138,171,.3)}
+.K1-title{font-family:'Fredoka One',cursive;font-size:88px;color:#ff5589;line-height:.92;letter-spacing:-2px;text-shadow:3px 3px 0 rgba(255,255,255,.8),6px 6px 0 rgba(255,138,171,.2)}
+.K1-sub{font-size:28px;color:#7a5a6a;line-height:1.5;margin-top:14px;font-weight:600}
+.K1-code-card{background:#3a2540;border:3px solid #ffd8e0;border-radius:24px;overflow:hidden;box-shadow:0 12px 32px rgba(180,100,140,.3)}
+.K1-cc-bar{padding:14px 22px;background:linear-gradient(90deg,#ff8aab,#ffaa50);display:flex;align-items:center;gap:10px}
+.K1-cc-em{font-size:24px}
+.K1-cc-name{font-family:'Caveat',cursive;font-size:24px;color:#fff;letter-spacing:.5px}
+.K1-cc-lang{margin-left:auto;font-family:'DM Mono',monospace;font-size:18px;color:#fff;background:rgba(255,255,255,.3);padding:4px 14px;border-radius:20px}
+.K1-cc-code{padding:24px 28px;font-family:'DM Mono',monospace;font-size:24px;line-height:1.75;color:#ffdde8;white-space:pre}
+.K1-footer{padding:18px 0 38px;display:flex;align-items:center;justify-content:space-between}
+.K1-tag{font-family:'Caveat',cursive;font-size:22px;color:#ff5589;background:#fff;border:2.5px solid #ffd8e0;padding:5px 16px;border-radius:24px;font-weight:700}
+.K1-tags{display:flex;gap:8px}
+.K1-cta{font-family:'Fredoka One',cursive;font-size:24px;color:#ff5589}
+
+/* ════════════════════════════════════════════
+   TEMPLATE 9 — STAR WARS HOLOGRAM
+   Holocron transmission: deep space, blue scanlines,
+   wireframe galaxy, transmission warning
+════════════════════════════════════════════ */
+.H1{
+  background:radial-gradient(ellipse at center,#0a1428 0%,#020610 100%);
+  position:relative;overflow:hidden;font-family:'Nunito',sans-serif;
+}
+.H1-stars{position:absolute;inset:0;pointer-events:none}
+.H1-scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 4px,rgba(64,200,255,.04) 4px,rgba(64,200,255,.04) 5px);pointer-events:none;animation:scan 4s linear infinite}
+@keyframes scan{0%{background-position:0 0}100%{background-position:0 100px}}
+.H1-vign{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,.85) 100%);pointer-events:none}
+.H1-circle-big{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:920px;height:920px;border:1px solid rgba(64,200,255,.08);border-radius:50%;pointer-events:none}
+.H1-circle-mid{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:680px;height:680px;border:1px solid rgba(64,200,255,.12);border-radius:50%;pointer-events:none}
+.H1-circle-sm{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:440px;height:440px;border:1px dashed rgba(64,200,255,.15);border-radius:50%;pointer-events:none;animation:spin 30s linear infinite}
+@keyframes spin{0%{transform:translate(-50%,-50%) rotate(0deg)}100%{transform:translate(-50%,-50%) rotate(360deg)}}
+.H1-corner{position:absolute;width:80px;height:80px;border:2px solid #40c8ff;box-shadow:0 0 16px rgba(64,200,255,.5)}
+.H1-c-tl{top:40px;left:40px;border-right:none;border-bottom:none}
+.H1-c-tr{top:40px;right:40px;border-left:none;border-bottom:none}
+.H1-c-bl{bottom:40px;left:40px;border-right:none;border-top:none}
+.H1-c-br{bottom:40px;right:40px;border-left:none;border-top:none}
+.H1-top-bar{position:absolute;top:60px;left:140px;right:140px;display:flex;align-items:center;justify-content:space-between;z-index:5}
+.H1-tx{display:flex;align-items:center;gap:12px;font-family:'DM Mono',monospace;font-size:18px;color:#40c8ff;text-transform:uppercase;letter-spacing:3px;text-shadow:0 0 10px rgba(64,200,255,.6)}
+.H1-tx::before{content:'';width:10px;height:10px;border-radius:50%;background:#ff3030;box-shadow:0 0 14px #ff3030;animation:firefly 1s ease-in-out infinite}
+.H1-coord{font-family:'DM Mono',monospace;font-size:16px;color:rgba(64,200,255,.5);letter-spacing:2px}
+.H1-main{position:relative;z-index:5;padding:130px 100px 0;display:flex;flex-direction:column;height:100%;align-items:center}
+.H1-handle{font-family:'Fredoka One',cursive;font-size:28px;color:#40c8ff;letter-spacing:3px;text-shadow:0 0 20px rgba(64,200,255,.8),0 0 40px rgba(64,200,255,.4);margin-bottom:16px}
+.H1-divider{width:240px;height:1px;background:linear-gradient(90deg,transparent,#40c8ff,transparent);box-shadow:0 0 8px #40c8ff;margin-bottom:16px}
+.H1-classification{font-family:'DM Mono',monospace;font-size:18px;color:#ff8030;letter-spacing:4px;text-shadow:0 0 12px rgba(255,128,48,.6);margin-bottom:16px}
+.H1-title{font-family:'Fredoka One',cursive;font-size:104px;color:#fff;text-align:center;line-height:.9;letter-spacing:-2px;text-shadow:0 0 30px rgba(64,200,255,.7),0 0 60px rgba(64,200,255,.4);margin-bottom:18px}
+.H1-sub{font-size:28px;color:rgba(64,200,255,.8);text-align:center;line-height:1.4;text-shadow:0 0 12px rgba(64,200,255,.4);max-width:780px;margin-bottom:32px;font-weight:600}
+.H1-holo-code{width:100%;background:rgba(10,30,60,.6);border:1px solid rgba(64,200,255,.4);border-radius:8px;overflow:hidden;box-shadow:0 0 40px rgba(64,200,255,.2),inset 0 0 30px rgba(64,200,255,.05);backdrop-filter:blur(6px)}
+.H1-hc-bar{padding:12px 22px;background:rgba(64,200,255,.1);border-bottom:1px solid rgba(64,200,255,.25);display:flex;align-items:center;justify-content:space-between;font-family:'DM Mono',monospace;font-size:18px;color:#40c8ff;letter-spacing:2px;text-transform:uppercase;text-shadow:0 0 8px rgba(64,200,255,.6)}
+.H1-hc-code{padding:22px 28px;font-family:'DM Mono',monospace;font-size:24px;line-height:1.75;color:#aae8ff;white-space:pre;text-shadow:0 0 6px rgba(64,200,255,.4)}
+.H1-footer{position:absolute;bottom:60px;left:140px;right:140px;display:flex;align-items:center;justify-content:space-between;z-index:5}
+.H1-tag{font-family:'DM Mono',monospace;font-size:17px;color:#40c8ff;border:1px solid rgba(64,200,255,.4);padding:5px 14px;letter-spacing:2px;text-shadow:0 0 6px rgba(64,200,255,.4)}
+.H1-tags{display:flex;gap:8px}
+.H1-cta{font-family:'DM Mono',monospace;font-size:18px;color:#ff8030;letter-spacing:3px;text-shadow:0 0 10px rgba(255,128,48,.6)}
+
+/* ════════════════════════════════════════════
+   TEMPLATE 10 — DRAGON BALL POWER UP
+   Saiyan transformation: explosive yellow energy,
+   electric aura, manga ink action
+════════════════════════════════════════════ */
+.D1{
+  background:radial-gradient(circle at center,#ffea30 0%,#ff7e30 40%,#ff3030 70%,#3a0a0a 100%);
+  position:relative;overflow:hidden;font-family:'Nunito',sans-serif;
+}
+.D1-rays{position:absolute;inset:0;pointer-events:none;animation:rayspin 20s linear infinite}
+@keyframes rayspin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+.D1-lightning{position:absolute;inset:0;pointer-events:none}
+.D1-noise{position:absolute;inset:0;opacity:.1;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;mix-blend-mode:overlay}
+.D1-frame{position:absolute;inset:24px;border:10px solid #000;border-radius:8px;pointer-events:none;z-index:10;box-shadow:inset 0 0 30px rgba(0,0,0,.4)}
+.D1-main{position:relative;z-index:5;padding:60px 70px 0;display:flex;flex-direction:column;height:100%}
+.D1-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.D1-handle-badge{font-family:'Fredoka One',cursive;font-size:28px;color:#fff;background:#000;padding:10px 24px;border:4px solid #fff;transform:rotate(-2deg);box-shadow:6px 6px 0 rgba(0,0,0,.4);letter-spacing:1px}
+.D1-power-meter{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.D1-pm-label{font-family:'DM Mono',monospace;font-size:16px;color:#000;background:#fff;padding:4px 12px;border:3px solid #000;letter-spacing:2px;font-weight:700;box-shadow:3px 3px 0 rgba(0,0,0,.6)}
+.D1-pm-val{font-family:'Fredoka One',cursive;font-size:30px;color:#ff3030;-webkit-text-stroke:3px #000;letter-spacing:1px;text-shadow:4px 4px 0 #000}
+.D1-burst{
+  background:#000;
+  border:6px solid #fff;
+  padding:32px 40px;
+  margin-bottom:24px;
+  box-shadow:8px 8px 0 rgba(0,0,0,.5);
+  transform:rotate(-1deg);
+  position:relative;
+}
+.D1-burst::before{content:'⚡';position:absolute;top:-30px;right:30px;font-size:60px;filter:drop-shadow(4px 4px 0 #000)}
+.D1-burst::after{content:'💥';position:absolute;bottom:-26px;left:30px;font-size:48px;filter:drop-shadow(3px 3px 0 #000)}
+.D1-eyebrow{font-family:'DM Mono',monospace;font-size:22px;color:#ffea30;letter-spacing:4px;margin-bottom:8px;text-transform:uppercase;font-weight:700;text-shadow:2px 2px 0 #000}
+.D1-title{font-family:'Fredoka One',cursive;font-size:108px;color:#ffea30;line-height:.88;letter-spacing:-3px;-webkit-text-stroke:5px #000;text-shadow:8px 8px 0 #000,12px 12px 0 #ff3030}
+.D1-sub{font-size:30px;color:#fff;line-height:1.4;margin-top:14px;font-weight:900;letter-spacing:.5px;text-shadow:3px 3px 0 #000}
+.D1-code-scroll{background:#000;border:5px solid #fff;box-shadow:6px 6px 0 rgba(0,0,0,.5);overflow:hidden;transform:rotate(.5deg)}
+.D1-cs-bar{padding:14px 22px;background:#ff3030;border-bottom:4px solid #000;display:flex;align-items:center;gap:10px}
+.D1-cs-icon{font-size:22px}
+.D1-cs-name{font-family:'Fredoka One',cursive;font-size:22px;color:#fff;letter-spacing:1px}
+.D1-cs-lang{margin-left:auto;font-family:'DM Mono',monospace;font-size:19px;color:#000;background:#ffea30;padding:4px 14px;border:2px solid #000;letter-spacing:1px;font-weight:700}
+.D1-cs-code{padding:24px 28px;font-family:'DM Mono',monospace;font-size:24px;line-height:1.75;color:#ffea30;white-space:pre}
+.D1-footer{padding:18px 0 32px;display:flex;align-items:center;justify-content:space-between}
+.D1-tag{font-family:'Fredoka One',cursive;font-size:20px;color:#000;background:#ffea30;padding:5px 16px;border:3px solid #000;letter-spacing:1px;box-shadow:3px 3px 0 #000;transform:rotate(-1deg)}
+.D1-tags{display:flex;gap:10px}
+.D1-cta{font-family:'Fredoka One',cursive;font-size:24px;color:#fff;background:#ff3030;padding:8px 20px;border:4px solid #000;letter-spacing:1px;box-shadow:4px 4px 0 #000;transform:rotate(2deg)}
+
+/* templates-scroll wrapper — vertical on desktop, horizontal on mobile */
+.templates-scroll{display:flex;flex-direction:column;gap:0}
+
+/* bar-options — single column inputs on desktop */
+.bar-options > div{margin-bottom:8px}
+
+/* ════════════════════════════════════════════
+   MOBILE RESPONSIVE
+═══════════════════════════════════════════════ */
+
+/* TABLET — sidebar narrower */
+@media (max-width: 900px){
+  .bar{width:240px}
+  .main{padding:28px 24px}
+}
+
+/* MOBILE — stack vertically */
+@media (max-width: 720px){
+  body{flex-direction:column}
+
+  /* Sidebar becomes top header bar */
+  .bar{
+    width:100%;
+    min-height:auto;
+    height:auto;
+    position:relative;
+    top:auto;
+    border-right:none;
+    border-bottom:1px solid #2a2740;
+    overflow-y:visible;
+  }
+  .bar-top{padding:14px 16px;display:flex;align-items:center;gap:10px}
+  .bar-name{font-size:16px}
+  .bar-sub{font-size:8px}
+
+  /* Templates: horizontal scroll strip */
+  .bar-sec{padding:10px 0 8px}
+  .bar-sec:first-of-type{padding:10px 16px 8px}
+  .bar-sec > .bar-lbl{padding:0 16px;margin-bottom:6px}
+
+  /* When sidebar has templates list, lay them out horizontally */
+  .templates-scroll{
+    display:flex;
+    flex-direction:row !important;
+    gap:8px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    padding:4px 12px 8px;
+    -webkit-overflow-scrolling:touch;
+  }
+  .templates-scroll::-webkit-scrollbar{height:4px}
+  .templates-scroll::-webkit-scrollbar-thumb{background:#2a2740;border-radius:2px}
+  .templates-scroll .tb{
+    flex-shrink:0;
+    width:170px;
+    margin-bottom:0;
+    padding:8px;
+  }
+  .templates-scroll .tb-name{font-size:11.5px}
+  .templates-scroll .tb-hint{font-size:9.5px}
+  .templates-scroll .tb-em{width:28px;height:28px;font-size:16px}
+
+  /* Bottom section: language/hashtag inline */
+  .bar-options{
+    display:grid !important;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    padding:8px 16px 4px;
+  }
+  .bar-options > div{margin-bottom:0}
+  .bar-options .bar-lbl{margin-bottom:4px}
+  .bar-options .inp{margin-bottom:0}
+
+  .export-btn{
+    margin:8px 16px 14px;
+    padding:11px;
+    font-size:13.5px;
+    width:calc(100% - 32px);
+  }
+
+  /* MAIN AREA — full width */
+  .main{
+    padding:18px 16px 32px;
+  }
+  .live-tag{font-size:8px;letter-spacing:2px;margin-bottom:14px}
+
+  /* CANVAS — scales to viewport */
+  .pw{
+    width:calc(100vw - 32px);
+    height:calc(100vw - 32px);
+    max-width:500px;
+    max-height:500px;
+  }
+  .pc{
+    transform:scale(calc((100vw - 32px) / 1080));
+  }
+
+  /* CONTROL PANEL — single column on mobile */
+  .cp{
+    width:calc(100vw - 32px);
+    max-width:500px;
+    margin-top:18px;
+  }
+  .cg{
+    grid-template-columns:1fr;
+    gap:10px;
+    padding:14px;
+  }
+  .cf.full{grid-column:1}
+  .ci{font-size:13px;padding:9px 11px}
+  textarea.ci{min-height:80px;font-size:13px}
+  .ab{margin:0 14px 14px;padding:12px;font-size:13.5px;width:calc(100% - 28px)}
+}
+
+/* TINY MOBILE — narrow phones */
+@media (max-width: 420px){
+  .pw{
+    width:calc(100vw - 24px);
+    height:calc(100vw - 24px);
+  }
+  .pc{
+    transform:scale(calc((100vw - 24px) / 1080));
+  }
+  .cp{width:calc(100vw - 24px)}
+  .main{padding:14px 12px 28px}
+  .templates-scroll .tb{width:160px}
+}
+
+/* When using max canvas at 500px, scale stays at 0.4629 */
+@media (min-width: 720px) and (max-width: 1080px){
+  /* Already handled by default desktop styles */
+}
 </style>
 </head>
 <body>
@@ -433,6 +795,7 @@ textarea.ci{resize:vertical;min-height:62px;line-height:1.5}
 
   <div class="bar-sec">
     <div class="bar-lbl">Choose Your World</div>
+    <div class="templates-scroll">
     <button class="tb on" onclick="go('G1',this)">
       <div class="tb-em" style="background:rgba(100,180,80,.15)">🌳</div>
       <div class="tb-info"><div class="tb-name">Ghibli Forest</div><div class="tb-hint">Totoro's sunny meadow</div></div>
@@ -453,17 +816,43 @@ textarea.ci{resize:vertical;min-height:62px;line-height:1.5}
       <div class="tb-em" style="background:rgba(160,100,255,.15)">🚂</div>
       <div class="tb-info"><div class="tb-name">Spirit Train</div><div class="tb-hint">Spirited Away night ride</div></div>
     </button>
+    <button class="tb" onclick="go('M1',this)">
+      <div class="tb-em" style="background:rgba(255,107,181,.15)">🌙</div>
+      <div class="tb-info"><div class="tb-name">Sailor Moon</div><div class="tb-hint">Magical girl holographic</div></div>
+    </button>
+    <button class="tb" onclick="go('N1',this)">
+      <div class="tb-em" style="background:rgba(255,20,147,.15)">🌃</div>
+      <div class="tb-info"><div class="tb-name">Cyberpunk Tokyo</div><div class="tb-hint">Neon city · Akira vibes</div></div>
+    </button>
+    <button class="tb" onclick="go('K1',this)">
+      <div class="tb-em" style="background:rgba(255,180,200,.2)">🍡</div>
+      <div class="tb-info"><div class="tb-name">Kawaii Pastel</div><div class="tb-hint">Soft cute · blob world</div></div>
+    </button>
+    <button class="tb" onclick="go('H1',this)">
+      <div class="tb-em" style="background:rgba(64,200,255,.15)">🛸</div>
+      <div class="tb-info"><div class="tb-name">Holocron</div><div class="tb-hint">Sci-fi blue hologram</div></div>
+    </button>
+    <button class="tb" onclick="go('D1',this)">
+      <div class="tb-em" style="background:rgba(255,200,40,.15)">⚡</div>
+      <div class="tb-info"><div class="tb-name">Saiyan Power</div><div class="tb-hint">Dragon Ball energy blast</div></div>
+    </button>
+    </div>
   </div>
 
-  <div class="bar-sec" style="flex:1">
-    <div class="bar-lbl">Language</div>
-    <select class="inp" id="langSel">
-      <option>Python</option><option>JavaScript</option><option>TypeScript</option>
-      <option>React</option><option>CSS</option><option>SQL</option>
-      <option>Bash</option><option>Java</option><option>Go</option><option>Rust</option>
-    </select>
-    <div class="bar-lbl">Hashtags</div>
-    <input class="inp" id="hashTags" value="#coding #python #codewithher #womencode">
+  <div class="bar-sec bar-options" style="flex:1">
+    <div>
+      <div class="bar-lbl">Language</div>
+      <select class="inp" id="langSel">
+        <option>Python</option><option>JavaScript</option><option>TypeScript</option>
+        <option>React</option><option>CSS</option><option>SQL</option>
+        <option>Bash</option><option>Java</option><option>Go</option><option>Rust</option>
+        <option>Scala</option><option>Kotlin</option><option>Swift</option><option>C++</option>
+      </select>
+    </div>
+    <div>
+      <div class="bar-lbl">Hashtags</div>
+      <input class="inp" id="hashTags" value="#coding #python #codewithher #womencode">
+    </div>
   </div>
 
   <button class="export-btn" onclick="doExport()">✨ Download 1080×1080</button>
@@ -527,13 +916,50 @@ getData().then(console.log)`},
 
 gen = infinite_worlds()
 next(gen)  # 'world_0' ✨
-next(gen)  # 'world_1' 🚂`}
+next(gen)  # 'world_1' 🚂`},
+  M1:{eyebrow:'in the name of code',title:'Recursion',sub:"A function that calls itself — like a mirror reflecting a mirror, magical and infinite.",filename:'moon.py',
+    code:`def factorial(n):
+    if n <= 1:        # 🌙 base case
+        return 1
+    return n * factorial(n-1)
+
+factorial(5)  # → 120 ✨`},
+  N1:{cat:'NEURAL UPLINK · TOKYO 2099',title:'async/await',sub:'> jack into the future of JavaScript. wait for promises like a hacker waits for the perfect zero-day.',filename:'~/code/neon.js',
+    code:`async function hackTheMatrix() {
+  const access = await connect('matrix');
+  const data   = await access.decrypt();
+  return data;  // > transmission complete
+}`},
+  K1:{eyebrow:'today\'s lesson ♡',title:'Promises',sub:"Pinky promise — your code says 'I'll get back to you' and actually means it!",filename:'sweet.js',
+    code:`const makeCake = () =>
+  new Promise((yay) => {
+    setTimeout(() => {
+      yay('🍰 cake is ready!')
+    }, 1000)
+  })
+
+makeCake().then(console.log)`},
+  H1:{class:'CLASSIFIED · CODE ARCHIVE',title:'Big O',sub:'A long time ago, in a codebase far far away... your loops were O(n²). Learn the way of the Jedi optimizer.',filename:'archive_07.py',
+    code:`# O(1)  → constant   ⚡ instant
+# O(n)  → linear     ➜ scales
+# O(n²) → quadratic  ⚠ slow
+# O(log n) → BEST    ✨ jedi`},
+  D1:{eyebrow:'POWER LEVEL: OVER 9000',title:'CLOSURES',sub:'UNLEASH THE TRUE POWER OF JAVASCRIPT! Functions that REMEMBER!! 💥',filename:'kamehameha.js',
+    code:`function powerUp(level) {
+  let energy = level;
+  return () => {
+    energy *= 2;          // 🔥 transform!
+    return energy;
+  };
+}
+const goku = powerUp(100);
+goku();  // 200 → goku();  // 400 ⚡`}
 };
 
 /* ── SYNTAX ── */
 function hl(code,lang){
   let h=code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  const kws={Python:'def|class|return|import|from|if|else|elif|for|in|while|with|as|True|False|None|and|or|not|lambda|yield',JavaScript:'const|let|var|function|return|if|else|for|while|new|this|import|export|from|async|await|typeof|null|undefined|true|false',TypeScript:'const|let|function|return|if|else|interface|type|import|export|async|await|null|undefined|true|false',default:'function|return|if|else|for|while|const|let|var|import|null|true|false'};
+  const kws={Python:'def|class|return|import|from|if|else|elif|for|in|while|with|as|True|False|None|and|or|not|lambda|yield',JavaScript:'const|let|var|function|return|if|else|for|while|new|this|import|export|from|async|await|typeof|null|undefined|true|false',TypeScript:'const|let|function|return|if|else|interface|type|import|export|async|await|null|undefined|true|false',Scala:'def|val|var|class|object|trait|case|match|extends|with|override|return|if|else|for|while|do|yield|import|package|new|this|super|type|implicit|lazy|sealed|final|abstract|private|protected|true|false|null|throw|try|catch|finally|Some|None|Option|List|Map|Seq|Future',Kotlin:'fun|val|var|class|object|interface|return|if|else|when|for|while|in|out|by|import|package|null|true|false|is|as|this|super|companion|data|sealed|open|override|private|public|protected|internal|abstract|suspend',Swift:'func|var|let|class|struct|enum|protocol|extension|return|if|else|for|while|in|switch|case|import|guard|defer|true|false|nil|self|super|init|private|public|internal|static|final|override',default:'function|return|if|else|for|while|const|let|var|import|null|true|false'};
   const kl=(kws[lang]||kws.default).split('|');
   const kr=new RegExp(`\\b(${kl.join('|')})\\b`,'g');
   h=h.replace(/(\/\/[^\n]*|#[^\n]*)/g,'<span class="cm">$1</span>');
@@ -725,15 +1151,213 @@ G3:(d)=>`<div class="pc G3" id="pc">
       </div>
     </div>
   </div>
-</div>`
+</div>`,
+
+M1:(d)=>{
+  let glitter='';
+  const positions=[[10,15],[20,80],[35,25],[45,85],[60,40],[75,15],[85,75],[15,55],[88,40],[50,8]];
+  positions.forEach((p,i)=>{
+    const size=14+Math.random()*16;
+    const emojis=['✨','💖','⭐','💫','🌟','♡'];
+    glitter+=`<span class="M1-star" style="left:${p[0]}%;top:${p[1]}%;font-size:${size}px;animation-delay:${i*.3}s">${emojis[i%emojis.length]}</span>`;
+  });
+  return `<div class="pc M1" id="pc">
+  <div class="M1-holo"></div>
+  <div class="M1-bigmoon"></div>
+  <div class="M1-ribbon"></div>
+  <div class="M1-ribbon-2"></div>
+  <div class="M1-glitter">${glitter}</div>
+  <div class="M1-clouds-pink"></div>
+  <div class="M1-main">
+    <div class="M1-top">
+      <div class="M1-handle-pill">@codewithher ♡</div>
+      <div class="M1-wand">🪄</div>
+    </div>
+    <div class="M1-prism">
+      <div class="M1-eyebrow">${d.eyebrow} ✨</div>
+      <div class="M1-title">${d.title}</div>
+      <div class="M1-sub">${d.sub}</div>
+    </div>
+    <div class="M1-code-card">
+      <div class="M1-cc-bar">
+        <div class="M1-cc-emoji">🌙</div>
+        <div class="M1-cc-name">${d.filename}</div>
+        <div class="M1-cc-lang">${document.getElementById('langSel').value}</div>
+      </div>
+      <div class="M1-cc-code">${hl(d.code,document.getElementById('langSel').value)}</div>
+    </div>
+    <div class="M1-footer">
+      <div class="M1-tags">${htags('M1-tag')}</div>
+      <div class="M1-cta">moon power ✨</div>
+    </div>
+  </div>
+</div>`;
+},
+
+N1:(d)=>{
+  let bldgs='';
+  for(let i=0;i<22;i++){bldgs+=`<div class="N1-bldg" style="height:${40+Math.random()*100}px"></div>`}
+  return `<div class="pc N1" id="pc">
+  <div class="N1-glow-pink"></div>
+  <div class="N1-glow-cyan"></div>
+  <div class="N1-grid"></div>
+  <div class="N1-skyline">${bldgs}</div>
+  <div class="N1-jp N1-jp1">未来</div>
+  <div class="N1-jp N1-jp2">東京</div>
+  <div class="N1-main">
+    <div class="N1-top">
+      <div class="N1-handle">@codewith<span>her</span></div>
+      <div class="N1-status">LIVE TRANSMISSION</div>
+    </div>
+    <div class="N1-neon-sign">
+      <div class="N1-cat">${d.cat}</div>
+      <div class="N1-title">${d.title}</div>
+      <div class="N1-sub">${d.sub}</div>
+    </div>
+    <div class="N1-terminal">
+      <div class="N1-tm-bar">
+        <div class="N1-tm-d N1-tm-d1"></div><div class="N1-tm-d N1-tm-d2"></div><div class="N1-tm-d N1-tm-d3"></div>
+        <div class="N1-tm-name">${d.filename}</div>
+        <div class="N1-tm-lang">${document.getElementById('langSel').value}</div>
+      </div>
+      <div class="N1-tm-code">${hl(d.code,document.getElementById('langSel').value)}</div>
+    </div>
+    <div class="N1-footer">
+      <div class="N1-tags">${htags('N1-tag')}</div>
+      <div class="N1-cta">// JACK_IN.NOW</div>
+    </div>
+  </div>
+</div>`;
+},
+
+K1:(d)=>`<div class="pc K1" id="pc">
+  <div class="K1-blob K1-b1"></div>
+  <div class="K1-blob K1-b2"></div>
+  <div class="K1-blob K1-b3"></div>
+  <div class="K1-blob K1-b4"></div>
+  <div class="K1-cloud-soft K1-cs1"></div>
+  <div class="K1-face K1-f1">(◕ᴗ◕)</div>
+  <div class="K1-face K1-f2">(˶ᵔ ᵕ ᵔ˶)</div>
+  <div class="K1-main">
+    <div class="K1-top">
+      <div class="K1-handle-tag">@codewithher ♡</div>
+      <div class="K1-mascot">🍡</div>
+    </div>
+    <div class="K1-bubble-card">
+      <div class="K1-eyebrow">${d.eyebrow}</div>
+      <div class="K1-title">${d.title}</div>
+      <div class="K1-sub">${d.sub}</div>
+    </div>
+    <div class="K1-code-card">
+      <div class="K1-cc-bar">
+        <div class="K1-cc-em">🌸</div>
+        <div class="K1-cc-name">${d.filename}</div>
+        <div class="K1-cc-lang">${document.getElementById('langSel').value}</div>
+      </div>
+      <div class="K1-cc-code">${hl(d.code,document.getElementById('langSel').value)}</div>
+    </div>
+    <div class="K1-footer">
+      <div class="K1-tags">${htags('K1-tag')}</div>
+      <div class="K1-cta">stay cute, stay coding ♡</div>
+    </div>
+  </div>
+</div>`,
+
+H1:(d)=>{
+  let starsHTML='';
+  for(let i=0;i<80;i++){
+    const x=Math.random()*100,y=Math.random()*100,sz=Math.random()*1.5+.5;
+    starsHTML+=`<div style="position:absolute;left:${x}%;top:${y}%;width:${sz}px;height:${sz}px;border-radius:50%;background:rgba(255,255,255,${.4+Math.random()*.5});box-shadow:0 0 4px rgba(150,200,255,.6);animation:firefly ${3+Math.random()*3}s ease-in-out infinite;animation-delay:${Math.random()*3}s"></div>`;
+  }
+  return `<div class="pc H1" id="pc">
+  <div class="H1-stars">${starsHTML}</div>
+  <div class="H1-circle-big"></div>
+  <div class="H1-circle-mid"></div>
+  <div class="H1-circle-sm"></div>
+  <div class="H1-scan"></div>
+  <div class="H1-vign"></div>
+  <div class="H1-corner H1-c-tl"></div>
+  <div class="H1-corner H1-c-tr"></div>
+  <div class="H1-corner H1-c-bl"></div>
+  <div class="H1-corner H1-c-br"></div>
+  <div class="H1-top-bar">
+    <div class="H1-tx">REC · TRANSMISSION</div>
+    <div class="H1-coord">SECTOR 7-G · ${new Date().getFullYear()}</div>
+  </div>
+  <div class="H1-main">
+    <div class="H1-handle">@CODEWITHHER</div>
+    <div class="H1-divider"></div>
+    <div class="H1-classification">▲ ${d.class} ▲</div>
+    <div class="H1-title">${d.title}</div>
+    <div class="H1-sub">${d.sub}</div>
+    <div class="H1-holo-code">
+      <div class="H1-hc-bar">
+        <span>◆ ${d.filename}</span>
+        <span>${document.getElementById('langSel').value}</span>
+      </div>
+      <div class="H1-hc-code">${hl(d.code,document.getElementById('langSel').value)}</div>
+    </div>
+  </div>
+  <div class="H1-footer">
+    <div class="H1-tags">${htags('H1-tag')}</div>
+    <div class="H1-cta">▸ END TRANSMISSION</div>
+  </div>
+</div>`;
+},
+
+D1:(d)=>{
+  let rays='';
+  for(let i=0;i<24;i++){
+    const rot=i*15;
+    rays+=`<div style="position:absolute;top:50%;left:50%;width:2px;height:1200px;background:linear-gradient(180deg,transparent,rgba(255,255,255,.4),transparent);transform:translate(-50%,-50%) rotate(${rot}deg);transform-origin:center"></div>`;
+  }
+  return `<div class="pc D1" id="pc">
+  <div class="D1-rays">${rays}</div>
+  <div class="D1-noise"></div>
+  <svg class="D1-lightning" viewBox="0 0 1080 1080" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">
+    <path d="M 100 200 L 180 320 L 140 340 L 220 480 L 170 500 L 260 640" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" filter="drop-shadow(0 0 8px #fff)"/>
+    <path d="M 900 180 L 820 280 L 870 310 L 780 450 L 830 480 L 740 620" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" filter="drop-shadow(0 0 8px #fff)"/>
+    <path d="M 540 80 L 480 180 L 530 200 L 470 320" stroke="#ffea30" stroke-width="4" fill="none" stroke-linecap="round" filter="drop-shadow(0 0 10px #ffea30)"/>
+  </svg>
+  <div class="D1-frame"></div>
+  <div class="D1-main">
+    <div class="D1-top">
+      <div class="D1-handle-badge">@CODEWITHHER</div>
+      <div class="D1-power-meter">
+        <div class="D1-pm-label">POWER LEVEL</div>
+        <div class="D1-pm-val">9001+</div>
+      </div>
+    </div>
+    <div class="D1-burst">
+      <div class="D1-eyebrow">${d.eyebrow}</div>
+      <div class="D1-title">${d.title}</div>
+      <div class="D1-sub">${d.sub}</div>
+    </div>
+    <div class="D1-code-scroll">
+      <div class="D1-cs-bar">
+        <div class="D1-cs-icon">⚡</div>
+        <div class="D1-cs-name">${d.filename}</div>
+        <div class="D1-cs-lang">${document.getElementById('langSel').value}</div>
+      </div>
+      <div class="D1-cs-code">${hl(d.code,document.getElementById('langSel').value)}</div>
+    </div>
+    <div class="D1-footer">
+      <div class="D1-tags">${htags('D1-tag')}</div>
+      <div class="D1-cta">POWER UP! ⚡</div>
+    </div>
+  </div>
+</div>`;
+}
 };
 
-/* Ghibli earthy syntax highlight */
+/* Ghibli earthy syntax highlight — uses current language */
 function hlGhibli(code){
   let h=code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  const kws='def|class|return|import|from|if|else|elif|for|in|while|with|as|True|False|None|and|or|not|lambda|yield';
-  const kr=new RegExp(`\\b(${kws.split('|').join('|')})\\b`,'g');
-  h=h.replace(/(#[^\n]*)/g,'<span class="G1-cm">$1</span>');
+  const lang=document.getElementById('langSel').value;
+  const kws={Python:'def|class|return|import|from|if|else|elif|for|in|while|with|as|True|False|None|and|or|not|lambda|yield',JavaScript:'const|let|var|function|return|if|else|for|while|new|this|import|export|from|async|await|typeof|null|undefined|true|false',TypeScript:'const|let|function|return|if|else|interface|type|import|export|async|await|null|undefined|true|false',Scala:'def|val|var|class|object|trait|case|match|extends|with|override|return|if|else|for|while|do|yield|import|package|new|this|super|type|implicit|lazy|sealed|final|abstract|private|protected|true|false|null|Some|None|Option|List|Map|Seq|Future',Kotlin:'fun|val|var|class|object|interface|return|if|else|when|for|while|in|out|by|import|package|null|true|false|is|as|this|super|data|sealed|open|override|private|public|abstract|suspend',Swift:'func|var|let|class|struct|enum|protocol|extension|return|if|else|for|while|in|switch|case|import|guard|true|false|nil|self|init|private|public|static|final|override',default:'function|return|if|else|for|while|const|let|var|import|null|true|false'};
+  const kl=(kws[lang]||kws.default).split('|');
+  const kr=new RegExp(`\\b(${kl.join('|')})\\b`,'g');
+  h=h.replace(/(\/\/[^\n]*|#[^\n]*)/g,'<span class="G1-cm">$1</span>');
   h=h.replace(/("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')/g,'<span class="G1-str">$1</span>');
   h=h.replace(/\b(\d+\.?\d*)\b/g,'<span class="G1-num">$1</span>');
   h=h.replace(kr,'<span class="G1-kw">$1</span>');
@@ -776,7 +1400,42 @@ G3:`
 <div class="cf full"><div class="cl">Label / Category</div><input class="ci" id="f2" value="${D.G3.label}"></div>
 <div class="cf"><div class="cl">Language</div><input class="ci" id="f3" value="${D.G3.lang}"></div>
 <div class="cf full"><div class="cl">Subtitle / Description</div><textarea class="ci" id="f4">${D.G3.sub}</textarea></div>
-<div class="cf full"><div class="cl">Code</div><textarea class="ci" id="f5">${D.G3.code}</textarea></div>`
+<div class="cf full"><div class="cl">Code</div><textarea class="ci" id="f5">${D.G3.code}</textarea></div>`,
+
+M1:`
+<div class="cf full"><div class="cl">Eyebrow Label</div><input class="ci" id="f1" value="${D.M1.eyebrow}"></div>
+<div class="cf full"><div class="cl">Title</div><input class="ci" id="f2" value="${D.M1.title}"></div>
+<div class="cf"><div class="cl">Filename</div><input class="ci" id="f3" value="${D.M1.filename}"></div>
+<div class="cf full"><div class="cl">Subtitle / Description</div><textarea class="ci" id="f4">${D.M1.sub}</textarea></div>
+<div class="cf full"><div class="cl">Code</div><textarea class="ci" id="f5">${D.M1.code}</textarea></div>`,
+
+N1:`
+<div class="cf full"><div class="cl">Category / Tagline</div><input class="ci" id="f1" value="${D.N1.cat}"></div>
+<div class="cf full"><div class="cl">Title</div><input class="ci" id="f2" value="${D.N1.title}"></div>
+<div class="cf"><div class="cl">Filename / Path</div><input class="ci" id="f3" value="${D.N1.filename}"></div>
+<div class="cf full"><div class="cl">Subtitle / Hook</div><textarea class="ci" id="f4">${D.N1.sub}</textarea></div>
+<div class="cf full"><div class="cl">Code</div><textarea class="ci" id="f5">${D.N1.code}</textarea></div>`,
+
+K1:`
+<div class="cf full"><div class="cl">Eyebrow</div><input class="ci" id="f1" value="${D.K1.eyebrow}"></div>
+<div class="cf full"><div class="cl">Title</div><input class="ci" id="f2" value="${D.K1.title}"></div>
+<div class="cf"><div class="cl">Filename</div><input class="ci" id="f3" value="${D.K1.filename}"></div>
+<div class="cf full"><div class="cl">Subtitle / Description</div><textarea class="ci" id="f4">${D.K1.sub}</textarea></div>
+<div class="cf full"><div class="cl">Code</div><textarea class="ci" id="f5">${D.K1.code}</textarea></div>`,
+
+H1:`
+<div class="cf full"><div class="cl">Classification Label</div><input class="ci" id="f1" value="${D.H1.class}"></div>
+<div class="cf full"><div class="cl">Title</div><input class="ci" id="f2" value="${D.H1.title}"></div>
+<div class="cf"><div class="cl">Filename</div><input class="ci" id="f3" value="${D.H1.filename}"></div>
+<div class="cf full"><div class="cl">Subtitle / Description</div><textarea class="ci" id="f4">${D.H1.sub}</textarea></div>
+<div class="cf full"><div class="cl">Code</div><textarea class="ci" id="f5">${D.H1.code}</textarea></div>`,
+
+D1:`
+<div class="cf full"><div class="cl">Eyebrow / Power Label</div><input class="ci" id="f1" value="${D.D1.eyebrow}"></div>
+<div class="cf full"><div class="cl">BIG TITLE</div><input class="ci" id="f2" value="${D.D1.title}"></div>
+<div class="cf"><div class="cl">Filename</div><input class="ci" id="f3" value="${D.D1.filename}"></div>
+<div class="cf full"><div class="cl">Subtitle / Hook</div><textarea class="ci" id="f4">${D.D1.sub}</textarea></div>
+<div class="cf full"><div class="cl">Code</div><textarea class="ci" id="f5">${D.D1.code}</textarea></div>`
 };
 
 let cur='G1';
@@ -796,6 +1455,11 @@ function applyAll(){
   if(cur==='S1'){d.label=g('f1');d.bigTitle=g('f2');d.sub=g('f3');d.filename=g('f4');d.code=g('f5')}
   if(cur==='S2'){d.date=g('f1');d.title=g('f2');d.filename=g('f3');d.desc=g('f4');d.code=g('f5')}
   if(cur==='G3'){d.title=g('f1');d.label=g('f2');d.lang=g('f3');d.sub=g('f4');d.code=g('f5')}
+  if(cur==='M1'){d.eyebrow=g('f1');d.title=g('f2');d.filename=g('f3');d.sub=g('f4');d.code=g('f5')}
+  if(cur==='N1'){d.cat=g('f1');d.title=g('f2');d.filename=g('f3');d.sub=g('f4');d.code=g('f5')}
+  if(cur==='K1'){d.eyebrow=g('f1');d.title=g('f2');d.filename=g('f3');d.sub=g('f4');d.code=g('f5')}
+  if(cur==='H1'){d.class=g('f1');d.title=g('f2');d.filename=g('f3');d.sub=g('f4');d.code=g('f5')}
+  if(cur==='D1'){d.eyebrow=g('f1');d.title=g('f2');d.filename=g('f3');d.sub=g('f4');d.code=g('f5')}
   render();
 }
 function doExport(){
